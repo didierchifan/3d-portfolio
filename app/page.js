@@ -7,13 +7,13 @@ export default function Home() {
       <div class="h-5"></div>
       <div>
         <h1>
-          <Link href="/shaders/shader-patterns">SHADER PATTERNS</Link>
+          <Link href="/shaders-library/shader-patterns">SHADER PATTERNS</Link>
         </h1>
         <h1>
-          <Link href="/shaders/animated-galaxy">ANIMATED GALAXY</Link>
+          <Link href="/shaders-library/animated-galaxy">ANIMATED GALAXY</Link>
         </h1>
         <h1>
-          <Link href="/shaders/coffee-smoke">COFFEE SMOKE</Link>
+          <Link href="/shaders-library/coffee-smoke">COFFEE SMOKE</Link>
         </h1>
         <h1>HOLOGRAM</h1>
         <h1>FIREWORKS</h1>
