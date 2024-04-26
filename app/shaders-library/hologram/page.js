@@ -6,7 +6,7 @@ import Experience from "./Experience";
 export default function Shader() {
   return (
     <>
-      <div className="text-7xl text-center pt-10">COFFEE SMOKE</div>
+      <div className="text-7xl text-center pt-10">HOLOGRAM</div>
       <Canvas
         style={{
           position: "fixed",
