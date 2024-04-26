@@ -3,19 +3,18 @@ import Link from "next/link";
 export default function Home() {
   return (
     <div class="ml-5 mt-5">
-      <div class="text-sky-400">SHADER LIBRARY</div>
-      <div class="h-5"></div>
+      <div className="text-sky-400">SHADER LIBRARY</div>
+      <div className="h-5"></div>
       <div>
-        <h1>
-          <Link href="/shaders-library/shader-patterns">SHADER PATTERNS</Link>
-        </h1>
         <h1>
           <Link href="/shaders-library/animated-galaxy">ANIMATED GALAXY</Link>
         </h1>
-        <h1>
+        <h1 className="text-orange-500">
           <Link href="/shaders-library/coffee-smoke">COFFEE SMOKE</Link>
         </h1>
-        <h1>HOLOGRAM</h1>
+        <h1 className="text-orange-500">
+          <Link href="/shaders-library/hologram"> HOLOGRAM </Link>
+        </h1>
         <h1>FIREWORKS</h1>
         <h1>LIGHTS SHADING</h1>
         <h1>RAGING SEA SHADING</h1>
