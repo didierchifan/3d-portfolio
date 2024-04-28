@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <div class="ml-5 mt-5">
+    <div className="ml-5 mt-5">
       <div className="text-sky-400">SHADER LIBRARY</div>
       <div className="h-5"></div>
       <div>
@@ -15,7 +15,9 @@ export default function Home() {
         <h1 className="text-orange-500">
           <Link href="/shaders-library/hologram"> HOLOGRAM </Link>
         </h1>
-        <h1>FIREWORKS</h1>
+        <h1 className="text-orange-500">
+          <Link href="/shaders-library/fireworks"> FIREWORKS</Link>
+        </h1>
         <h1>LIGHTS SHADING</h1>
         <h1>RAGING SEA SHADING</h1>
         <h1>HALFTONE SHADING</h1>

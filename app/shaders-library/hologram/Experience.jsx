@@ -44,7 +44,7 @@ export function Model(props) {
 
   const { color } = useControls({
     color: {
-      value: "#fcc5c5",
+      value: "#618916",
     },
   });
 
