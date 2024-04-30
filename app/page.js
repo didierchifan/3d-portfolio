@@ -34,7 +34,7 @@ export default function Home() {
   }, []);
 
   // Change message index every 1.25 seconds
-  // there is a change I randomly pick the same message twice from the array => need an extra condition
+  // there is a chance I randomly pick the same message twice from the array => needs an extra condition
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentMessageIndex(
@@ -70,11 +70,15 @@ export default function Home() {
               <Link href="/shaders-library/hologram">HOLOGRAM</Link>
             </h1>
             <h1 className="text-orange-500">
+              <Link href="/shaders-library/light-shading">LIGHTS SHADING</Link>
+            </h1>
+
+            <h1 className="text-orange-500">
               <Link href="/shaders-library/fireworks">FIREWORKS</Link>
             </h1>
-            <h1>LIGHTS SHADING</h1>
+
             <h1>RAGING SEA SHADING</h1>
-            <h1 className="text-orange-500">
+            <h1>
               <Link href="/shaders-library/halftone-shading">
                 HALFTONE SHADING
               </Link>

@@ -14,6 +14,8 @@ import { useControls } from "leva";
 import hologramVertexShader from "../../shaders-glsl/hologram/vertex.glsl";
 import hologramFragmentShader from "../../shaders-glsl/hologram/fragment.glsl";
 
+// the cool thing about this technique is that you can use the <hologramMaterial> wherever you want in the project
+// i should make a component folder => materials
 const HologramMaterial = shaderMaterial(
   //the functions receives 3 parameters
   //uniforms, vertex shader, fragment shader
@@ -28,7 +30,7 @@ const HologramMaterial = shaderMaterial(
 extend({ HologramMaterial: HologramMaterial });
 
 export function Model(props) {
-  const { nodes, materials } = useGLTF("../3dModels/suzanne.glb");
+  const { nodes } = useGLTF("../3dModels/suzanne.glb");
 
   const monkeyMaterial = useRef();
   const monkeyModel = useRef();
