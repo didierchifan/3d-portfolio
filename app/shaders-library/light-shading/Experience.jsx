@@ -11,8 +11,8 @@ import { useRef } from "react";
 
 import { useControls } from "leva";
 
-import materialVertexShader from "../../shaders-glsl/lightsShading/shading/vertex.glsl";
-import materialFragmentShader from "../../shaders-glsl/lightsShading/shading/fragment.glsl";
+import materialVertexShader from "../../shaders-glsl/lightsShading/vertex.glsl";
+import materialFragmentShader from "../../shaders-glsl/lightsShading/fragment.glsl";
 
 const ShadingMaterial = shaderMaterial(
   //the order of the parameters is important: uniforms, vertex, fragment

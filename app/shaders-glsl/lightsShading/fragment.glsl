@@ -14,7 +14,6 @@ vec3 ambientLight (vec3 lightColor, float lightIntensity)
 
 }
 
-
 vec3 directionalLight (vec3 lightColor, float lightIntensity, vec3 normal, vec3 lightPosition, vec3 viewDirection, float specularPower)
 {
 
