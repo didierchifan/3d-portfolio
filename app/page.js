@@ -59,8 +59,12 @@ export default function Home() {
           <div className="text-sky-400">SHADER LIBRARY</div>
           <div className="h-5"></div>
           <div>
-            <h1>MODIFIED MATERIALS</h1>
-            <h1>
+            <h1 className="text-orange-500">
+              <Link href="/shaders-library/modified-materials">
+                MODIFIED MATERIALS
+              </Link>
+            </h1>
+            <h1 className="text-orange-500">
               <Link href="/shaders-library/animated-galaxy">
                 ANIMATED GALAXY
               </Link>
