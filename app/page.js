@@ -2,7 +2,12 @@
 
 import Link from "next/link";
 import { useState, useEffect } from "react";
-import { roomObjects } from "./isometric-room/data";
+import { roomObjects } from "./isometric-room/tooltipData";
+
+import ShaderCard from "./shaders-library/components/ShaderCard";
+import { shadersData } from "./shaders-library/shaderCardsData";
+
+import HorizontalCarousel from "./shaders-library/components/HorizontalCarousel";
 
 export default function Home() {
   //******LOADING SCREEN *****//
@@ -55,53 +60,57 @@ export default function Home() {
           {welcomeMessages[currentMessageIndex]}
         </h1>
       ) : (
-        <div className="ml-5 mt-5">
-          <div className="text-sky-400">SHADER LIBRARY</div>
-          <div className="h-5"></div>
-          <div>
-            <h1 className="text-orange-500">
-              <Link href="/shaders-library/modified-materials">
-                MODIFIED MATERIALS
-              </Link>
-            </h1>
-            <h1 className="text-orange-500">
-              <Link href="/shaders-library/animated-galaxy">
-                ANIMATED GALAXY
-              </Link>
-            </h1>
-            <h1 className="text-orange-500">
-              <Link href="/shaders-library/coffee-smoke">COFFEE SMOKE</Link>
-            </h1>
-            <h1 className="text-orange-500">
-              <Link href="/shaders-library/hologram">HOLOGRAM</Link>
-            </h1>
-            <h1 className="text-orange-500">
-              <Link href="/shaders-library/light-shading">LIGHTS SHADING</Link>
-            </h1>
+        <>
+          {/* top-nav */}
+          <div className="ml-10 mt-5 mr-10 mb-10 flex items-center justify-center">
+            {/* <div className="text-sky-400">SHADER LIBRARY</div>
+          <div className="h-5"></div> */}
+            <div className="flex w-1/3">
+              <div className="ml-20 w-20 h-20 rounded-full bg-orange-500 self-start"></div>
+            </div>
+            {/* top right shaders menu */}
+            <div className="flex 2/3 flex-wrap justify-end gap-7 items-center">
+              <h1 className="text-orange-500">
+                <Link href="/shaders-library/modified-materials">
+                  Modified Materials
+                </Link>
+              </h1>
+              <h1 className="text-orange-500">
+                <Link href="/shaders-library/animated-galaxy">
+                  Animated Galaxy
+                </Link>
+              </h1>
+              <h1 className="text-orange-500">
+                <Link href="/shaders-library/coffee-smoke">Coffee Smoke</Link>
+              </h1>
+              <h1 className="text-orange-500">
+                <Link href="/shaders-library/hologram">Hologram</Link>
+              </h1>
+              <h1 className="text-orange-500">
+                <Link href="/shaders-library/light-shading">Custom Lights</Link>
+              </h1>
 
-            <h1 className="text-orange-500">
-              <Link href="/shaders-library/fireworks">FIREWORKS</Link>
-            </h1>
+              <h1 className="text-orange-500">
+                <Link href="/shaders-library/fireworks">Fireworks</Link>
+              </h1>
 
-            <h1 className="text-orange-500">
-              <Link href="/shaders-library/raging-sea">RAGING SEA SHADING</Link>
-            </h1>
-            <h1>
-              <Link href="/shaders-library/halftone-shading">
-                HALFTONE SHADING
-              </Link>
-            </h1>
-            <h1>EARTH</h1>
-            <h1>PARTICLES CURSOR ANIMATION</h1>
-            <h1>PARTICLES MORPHING</h1>
-            <h1>GPGPU FLOW FIELD PARTICLES</h1>
-            <h1>WOBBLE SPHERE</h1>
-            <h1>SLICED MODEL</h1>
-            <h1>PROCEDURAL TERRAIN</h1>
+              <h1 className="text-orange-500">
+                <Link href="/shaders-library/raging-sea">Brain Simulator</Link>
+              </h1>
+              <h1>
+                <Link href="/shaders-library/halftone-shading">Halftone</Link>
+              </h1>
+              <h1>Earth</h1>
+              <h1>Particles Cursor Animation</h1>
+              <h1>Morphing Particles</h1>
+              <h1>Flow Field Particles</h1>
+              <h1>Wobble Sphere</h1>
+              <h1>Sliced Model</h1>
+              <h1>Procedural Terrain</h1>
 
-            {/* tooltip data teste below => delete later */}
+              {/* tooltip data teste below => delete later */}
 
-            <h1>
+              {/* <h1>
               <span>
                 <br />
                 <br />
@@ -120,9 +129,27 @@ export default function Home() {
                   </div>
                 </h1>
               ))}
+            </div> */}
+
+              {/* tooltip test up */}
             </div>
           </div>
-        </div>
+          <div>
+            <h1 className="ml-10 mt-20 text-6xl">Shaders:</h1>
+            <h1 className="ml-10 text-6xl">Pixels sorcery in code</h1>
+
+            <HorizontalCarousel />
+            {/* <div className="flex mt-10">
+              {shadersData.map((item, index) => (
+                <ShaderCard
+                  key={index}
+                  name={item.name}
+                  description={item.description}
+                />
+              ))}
+            </div> */}
+          </div>
+        </>
       )}
     </>
   );
