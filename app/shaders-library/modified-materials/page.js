@@ -15,12 +15,14 @@ export default function Shader() {
     <>
       <div className="text-7xl text-center pt-10">MODIFIED MATERIALS</div>
       <Canvas
-        flat
+        shadows
+        gl={{ toneMapping: ACESFilmicToneMapping }}
         camera={{
           fov: 45,
           near: 0.1,
           far: 100,
           zoom: 0.3,
+          position: [4, 1, -4],
         }}
         style={{
           position: "fixed",
