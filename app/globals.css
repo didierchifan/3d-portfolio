@@ -43,3 +43,14 @@ body {
   width: 410px;
   height: 502px;
 }
+
+#word {
+  margin-right: 0.8rem;
+  margin-top: 0.5rem;
+  position: relative;
+}
+
+#shadow {
+  position: absolute;
+  opacity: 0.1;
+}

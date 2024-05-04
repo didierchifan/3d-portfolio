@@ -8,11 +8,11 @@ export default function HorizontalCarousel() {
 
   const { scrollYProgress } = useScroll();
 
-  const x = useTransform(scrollYProgress, [0, 1], ["1%", "-95%"]);
+  const x = useTransform(scrollYProgress, [0, 1], ["1%", "-90%"]);
 
   return (
     <section ref={targetRef} className="relative h-[600vh]">
-      <div className="sticky top-0  flex  h-screen items-center overflow-hidden">
+      <div className="sticky top-0 flex h-screen items-center overflow-hidden">
         <div>
           <div>
             <h1 className="ml-20 text-6xl font-bold">Shaders</h1>

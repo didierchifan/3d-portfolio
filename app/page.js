@@ -8,6 +8,7 @@ import ShaderCard from "./shaders-library/components/ShaderCard";
 import { shadersData } from "./shaders-library/shaderCardsData";
 
 import HorizontalCarousel from "./shaders-library/components/HorizontalCarousel";
+import TextReveal from "./shaders-library/components/TextRevealWord";
 
 export default function Home() {
   //******LOADING SCREEN *****//
@@ -119,17 +120,7 @@ export default function Home() {
             </div>
           </div>
           <div>
-            <h1 className="ml-20 mr-20 text-7xl">
-              A GLSL shader, written in the OpenGL Shading Language (GLSL), is a
-              specialized program executed on the GPU (Graphics Processing Unit)
-              to process vertices and fragments. These shaders manipulate
-              geometric data and pixel properties to generate visual effects and
-              render lifelike graphics in real-time applications. By defining
-              how light interacts with surfaces and determining the color and
-              appearance of pixels on the screen, GLSL shaders are fundamental
-              to modern graphics programming, enabling the creation of immersive
-              and realistic virtual environments.
-            </h1>
+            <TextReveal />
           </div>
         </div>
       )}
