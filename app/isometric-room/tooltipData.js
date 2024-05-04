@@ -245,3 +245,34 @@ export const roomObjects = [
     tooltipPosition: [0, 0.55, -0.22],
   },
 ];
+
+{
+  /* tooltip data teste below => delete later */
+}
+
+{
+  /* <h1>
+              <span>
+                <br />
+                <br />
+                <p className="text-orange-500">tooltip data test below:</p>
+                <br />
+              </span>
+            </h1>
+            <div>
+              {roomObjects.map((item, index) => (
+                <h1 key={index} className="flex flex-col">
+                  {roomObjects[index].description.map((item, index) => (
+                    <div key={index}>{item}</div>
+                  ))}
+                  <div>
+                    <span>-------------------</span>
+                  </div>
+                </h1>
+              ))}
+            </div> */
+}
+
+{
+  /* tooltip test up */
+}
