@@ -11,13 +11,13 @@ export default function ShaderCard({ name, description }) {
   const rotateX = useTransform(
     mouseYSpring,
     [-0.5, 0.5],
-    ["17.5deg", "-17.5deg"]
+    ["10.5deg", "-10.5deg"]
   );
 
   const rotateY = useTransform(
     mouseXSpring,
     [-0.5, 0.5],
-    ["-17.5deg", "17.5deg"]
+    ["-10.5deg", "10.5deg"]
   );
 
   const handleMouseMove = (e) => {
@@ -36,9 +36,15 @@ export default function ShaderCard({ name, description }) {
     y.set(yPercentage);
   };
 
+  const handleMouseLeave = () => {
+    x.set(0);
+    y.set(0);
+  };
+
   return (
     <motion.div
       onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
       style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
       id="shader--card"
       className="relative bg-orange-500 self-start rounded-3xl flex-shrink-0 gap-5 "
