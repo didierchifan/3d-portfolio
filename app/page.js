@@ -64,9 +64,7 @@ export default function Home() {
         <div>
           <div id="hero-section">
             {/* top-nav */}
-            <div className="ml-10 mt-5 mr-10 mb-10 flex items-center justify-center">
-              {/* <div className="text-sky-400">SHADER LIBRARY</div>
-          <div className="h-5"></div> */}
+            <div className="ml-10 mt-5 mr-10 flex items-center justify-center">
               <div className="flex w-1/3">
                 <div className="ml-20 w-20 h-20 rounded-full bg-orange-500 self-start"></div>
               </div>
@@ -122,6 +120,7 @@ export default function Home() {
           <div>
             <TextReveal />
           </div>
+          <div className="h-96 bg-purple-500"></div>
         </div>
       )}
     </>

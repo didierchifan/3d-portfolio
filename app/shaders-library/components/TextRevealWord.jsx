@@ -7,18 +7,18 @@ export default function TextReveal() {
 
   const { scrollYProgress } = useScroll({
     target: element,
-    offset: ["start 0.9", "start 0.25"],
+    offset: ["start 0.7", "start 0.25"],
   });
 
   const paragraph =
-    "A GLSL shader, written in the OpenGL Shading Language (GLSL), is a specialized program executed on the GPU (Graphics Processing Unit) to process vertices and fragments. These shaders manipulate geometric data and pixel properties to generate visual effects and render lifelike graphics in real-time applications. By defining how light interacts with surfaces and determining the color and appearance of pixels on the screen, GLSL shaders are fundamental to modern graphics programming, enabling the creation of immersive and realistic virtual environments.";
+    "A GLSL shader, is a specialized program executed on the GPU to process vertices and fragments. These shaders manipulate geometric data and pixel properties to generate visual effects and render lifelike graphics in real-time applications. By defining how light interacts with surfaces and determining the color and appearance of pixels on the screen, GLSL shaders are fundamental to modern graphics programming, enabling the creation of immersive and realistic virtual environments.";
 
   const words = paragraph.split(" ");
 
   return (
     <p
       ref={element}
-      className="ml-20 mr-20 mb-20 mt-20 text-5xl font-bold flex flex-wrap leading-none"
+      className="ml-20 mr-20 mb-36 text-5xl font-bold flex flex-wrap leading-none"
     >
       {words.map((word, i) => {
         const start = i / words.length;
