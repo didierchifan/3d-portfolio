@@ -9,6 +9,7 @@ import { shadersData } from "./shaders-library/shaderCardsData";
 
 import HorizontalCarousel from "./shaders-library/components/HorizontalCarousel";
 import TextReveal from "./shaders-library/components/TextRevealWord";
+import Footer from "./shaders-library/components/Footer";
 
 export default function Home() {
   //******LOADING SCREEN *****//
@@ -61,57 +62,24 @@ export default function Home() {
           {welcomeMessages[currentMessageIndex]}
         </h1>
       ) : (
-        <div>
+        <div style={{ backgroundColor: "#F5F5F7" }}>
           <div id="hero-section">
             {/* top-nav */}
-            <div className="ml-10 mt-5 mr-10 flex items-center justify-center">
+            <div className="ml-10 pt-5 mr-10 flex items-center justify-center">
               <div className="flex w-1/3">
                 <div className="ml-20 w-20 h-20 rounded-full bg-orange-500 self-start"></div>
               </div>
               {/* top right shaders menu */}
-              <div className="flex 2/3 flex-wrap justify-end gap-7 items-center">
-                <h1 className="text-orange-500">
-                  <Link href="/shaders-library/modified-materials">
-                    Modified Materials
-                  </Link>
-                </h1>
-                <h1 className="text-orange-500">
-                  <Link href="/shaders-library/animated-galaxy">
-                    Animated Galaxy
-                  </Link>
-                </h1>
-                <h1 className="text-orange-500">
-                  <Link href="/shaders-library/coffee-smoke">Coffee Smoke</Link>
-                </h1>
-                <h1 className="text-orange-500">
-                  <Link href="/shaders-library/hologram">Hologram</Link>
-                </h1>
-                <h1 className="text-orange-500">
-                  <Link href="/shaders-library/light-shading">
-                    Custom Lights
-                  </Link>
-                </h1>
-
-                <h1 className="text-orange-500">
-                  <Link href="/shaders-library/fireworks">Fireworks</Link>
-                </h1>
-
-                <h1 className="text-orange-500">
-                  <Link href="/shaders-library/raging-sea">
-                    Brain Simulator
-                  </Link>
-                </h1>
-                <h1>
-                  <Link href="/shaders-library/halftone-shading">Halftone</Link>
-                </h1>
-                <h1>Earth</h1>
-                <h1>Particles Cursor Animation</h1>
-                <h1>Morphing Particles</h1>
-                <h1>Flow Field Particles</h1>
-                <h1>Wobble Sphere</h1>
-                <h1>Sliced Model</h1>
-                <h1>Procedural Terrain</h1>
+              <div className="flex 2/3 flex-wrap justify-end gap-7 ">
+                {shadersData.map((item, index) => (
+                  <div key={index} className="max-h-full">
+                    <h1 className="text-black font-medium">
+                      <Link href={item.link}>{item.name}</Link>
+                    </h1>
+                  </div>
+                ))}
               </div>
+              {/* topbar */}
             </div>
             <div>
               <HorizontalCarousel />
@@ -120,7 +88,7 @@ export default function Home() {
           <div>
             <TextReveal />
           </div>
-          <div className="h-96 bg-purple-500"></div>
+          <Footer />
         </div>
       )}
     </>

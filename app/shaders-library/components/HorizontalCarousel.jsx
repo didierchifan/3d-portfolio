@@ -15,8 +15,10 @@ export default function HorizontalCarousel() {
       <div className="sticky top-0 flex h-screen items-center overflow-hidden">
         <div>
           <div>
-            <h1 className="ml-20 text-6xl font-bold">Shaders</h1>
-            <h1 className="ml-20 mb-10 text-3xl">pixels sorcery in code</h1>
+            <h1 className="ml-20 text-black text-6xl font-bold">Shaders</h1>
+            <h1 className="ml-20 text-black mb-10 text-3xl">
+              pixels sorcery in code
+            </h1>
           </div>
           <motion.div style={{ x }} className="flex gap-10">
             {shadersData.map((item, index) => (
