@@ -11,7 +11,7 @@ export default function HorizontalCarousel() {
   const x = useTransform(scrollYProgress, [0, 1], ["1%", "-90%"]);
 
   return (
-    <section ref={targetRef} className="relative h-[600vh]">
+    <section ref={targetRef} className="relative h-[600vh] border-b-2">
       <div className="sticky top-0 flex h-screen items-center overflow-hidden">
         <div>
           <div>

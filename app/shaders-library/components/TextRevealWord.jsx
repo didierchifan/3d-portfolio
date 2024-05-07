@@ -16,20 +16,22 @@ export default function TextReveal() {
   const words = paragraph.split(" ");
 
   return (
-    <p
-      ref={element}
-      className="ml-20 mr-20 mb-36 text-black text-5xl font-bold flex flex-wrap leading-none"
-    >
-      {words.map((word, i) => {
-        const start = i / words.length;
-        const end = start + 1 / words.length;
-        return (
-          <Word key={i} range={[start, end]} progress={scrollYProgress}>
-            {word}
-          </Word>
-        );
-      })}
-    </p>
+    <div className="flex justify-center items-center h-screen">
+      <p
+        ref={element}
+        className="w-3/4 text-black text-5xl font-bold flex flex-wrap leading-none"
+      >
+        {words.map((word, i) => {
+          const start = i / words.length;
+          const end = start + 1 / words.length;
+          return (
+            <Word key={i} range={[start, end]} progress={scrollYProgress}>
+              {word}
+            </Word>
+          );
+        })}
+      </p>
+    </div>
   );
 }
 

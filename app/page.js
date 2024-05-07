@@ -66,11 +66,11 @@ export default function Home() {
           <div id="hero-section">
             {/* top-nav */}
             <div className="ml-10 pt-5 mr-10 flex items-center justify-center">
-              <div className="flex w-1/3">
+              <div className="flex w-1/2">
                 <div className="ml-20 w-20 h-20 rounded-full bg-orange-500 self-start"></div>
               </div>
               {/* top right shaders menu */}
-              <div className="flex 2/3 flex-wrap justify-end gap-7 ">
+              <div className="flex 1/2 flex-wrap justify-end gap-7 ">
                 {shadersData.map((item, index) => (
                   <div key={index} className="max-h-full">
                     <h1 className="text-black font-medium">
