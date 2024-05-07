@@ -39,10 +39,6 @@ body {
   width: 100%;
   overflow: hidden;
 }
-#shader--card {
-  width: 410px;
-  height: 502px;
-}
 
 #word {
   margin-right: 0.8rem;

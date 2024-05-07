@@ -8,7 +8,7 @@ export default function HorizontalCarousel() {
 
   const { scrollYProgress } = useScroll();
 
-  const x = useTransform(scrollYProgress, [0, 1], ["1%", "-90%"]);
+  const x = useTransform(scrollYProgress, [0, 1], ["1%", "-95%"]);
 
   return (
     <section ref={targetRef} className="relative h-[600vh] border-b-2">
@@ -26,6 +26,8 @@ export default function HorizontalCarousel() {
                 key={index}
                 name={item.name}
                 description={item.description}
+                image={item.image}
+                link={item.link}
               />
             ))}
           </motion.div>
