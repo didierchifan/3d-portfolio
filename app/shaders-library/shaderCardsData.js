@@ -24,7 +24,7 @@ export const shadersData = [
     name: "Smoke",
     description: "good morning",
     link: "/shaders-library/coffee-smoke",
-    image: "",
+    image: "/shaders-cards/smoke.webp",
   },
 
   {

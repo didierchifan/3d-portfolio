@@ -1,6 +1,11 @@
 import { useState, useEffect } from "react";
 
-export default function CustomCanvas({ canvasWidth, canvasHeight }) {
+export default function CustomCanvas({
+  canvasWidth,
+  canvasHeight,
+  cursorPosition,
+  context,
+}) {
   useEffect(() => {
     // Create the canvas element
     const canvas = document.createElement("canvas");
@@ -33,7 +38,7 @@ export default function CustomCanvas({ canvasWidth, canvasHeight }) {
 
     glowImage.src = "../textures/particleCursorAnimation/glow.png";
 
-    // context.drawImage(glowImage, canvasCursorX, canvasCursorY, 32, 32);
+    context.drawImage(glowImage, cursorPosition.x, cursorPosition.y, 32, 32);
 
     // Return a cleanup function to remove the canvas when the component unmounts
     return () => {
