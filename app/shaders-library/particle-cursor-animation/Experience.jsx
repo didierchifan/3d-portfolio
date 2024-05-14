@@ -37,23 +37,51 @@ extend({ ParticlesMaterial: ParticlesMaterial });
 export default function Experience() {
   //store all the canvas information in an object that will persist across renderings
   const canvasInfo = useRef({
+    displacementTexture: null,
     canvas: null,
     context: null,
-    canvasCursorX: 0,
-    canvasCursorY: 0,
-    displacementTexture: null,
+    canvasCursor: new THREE.Vector2(9999, 9999),
+    canvaCursorPrevious: new THREE.Vector2(9999, 9999),
   });
+  const materialRef = useRef();
+  const particlesGeometry = useRef();
 
   const pictureTexture = useTexture(
     "../textures/particleCursorAnimation/picture-1.png"
   );
 
-  const materialRef = useRef();
-
   /**
    * 2D CANVAS -> CANVAS TEXTURE
    */
   useEffect(() => {
+    //particles geometry attributes that are sent to the shader
+    particlesGeometry.current.setIndex(null);
+    particlesGeometry.current.deleteAttribute("normal");
+
+    const intensitiesArray = new Float32Array(
+      particlesGeometry.current.attributes.position.count
+    );
+    const anglesArray = new Float32Array(
+      particlesGeometry.current.attributes.position.count
+    );
+
+    for (
+      let i = 1;
+      i < particlesGeometry.current.attributes.position.count;
+      i++
+    ) {
+      intensitiesArray[i] = Math.random();
+      anglesArray[i] = Math.random() * Math.PI * 2;
+    }
+    particlesGeometry.current.setAttribute(
+      "aIntensity",
+      new THREE.BufferAttribute(intensitiesArray, 1)
+    );
+    particlesGeometry.current.setAttribute(
+      "aAngle",
+      new THREE.BufferAttribute(anglesArray, 1)
+    );
+
     // Create the 2D canvas
     const newCanvas = document.createElement("canvas");
     newCanvas.width = 128;
@@ -82,6 +110,7 @@ export default function Experience() {
       canvasInfo.current.canvas
     );
 
+    //update the displacement texture directly in the shader material
     materialRef.current.uniforms.uDisplacementTexture.value =
       canvasInfo.current.displacementTexture;
 
@@ -102,8 +131,8 @@ export default function Experience() {
     const newCanvasCursorY = (1 - uv.y) * canvasInfo.current.canvas.height;
 
     //save the canvas cursor position inside the canvas Info ref object
-    canvasInfo.current.canvasCursorX = newCanvasCursorX;
-    canvasInfo.current.canvasCursorY = newCanvasCursorY;
+    canvasInfo.current.canvasCursor.x = newCanvasCursorX;
+    canvasInfo.current.canvasCursor.y = newCanvasCursorY;
   };
 
   const brushTexture = new Image();
@@ -123,14 +152,24 @@ export default function Experience() {
       canvasInfo.current.canvas.height
     );
 
+    //speed alpha
+    //we calculate the distance the previous and the present cursor position
+    const cursorDistance = canvasInfo.current.canvaCursorPrevious.distanceTo(
+      canvasInfo.current.canvasCursor
+    );
+    const alpha = Math.min(cursorDistance * 0.1, 1);
+    canvasInfo.current.canvaCursorPrevious.copy(
+      canvasInfo.current.canvasCursor
+    );
+
     //draw glow
     const glowSize = canvasInfo.current.canvas.width * 0.25;
     canvasInfo.current.context.globalCompositeOperation = "lighten";
-    canvasInfo.current.context.globalAlpha = 1;
+    canvasInfo.current.context.globalAlpha = alpha;
     canvasInfo.current.context.drawImage(
       brushTexture,
-      canvasInfo.current.canvasCursorX - glowSize * 0.5,
-      canvasInfo.current.canvasCursorY - glowSize * 0.5,
+      canvasInfo.current.canvasCursor.x - glowSize * 0.5,
+      canvasInfo.current.canvasCursor.y - glowSize * 0.5,
       glowSize,
       glowSize
     );
@@ -145,7 +184,7 @@ export default function Experience() {
       <ambientLight intensity={10} />
       <Center>
         <points>
-          <planeGeometry args={[10, 10, 128, 128]} />
+          <planeGeometry ref={particlesGeometry} args={[10, 10, 256, 256]} />
           <particlesMaterial
             ref={materialRef}
             uPictureTexture={pictureTexture}
@@ -155,7 +194,11 @@ export default function Experience() {
 
         <mesh onPointerMove={drawOnMove}>
           <planeGeometry args={[10, 10]} />
-          <meshBasicMaterial wireframe={true} side={THREE.DoubleSide} />
+          <meshBasicMaterial
+            wireframe={true}
+            side={THREE.DoubleSide}
+            visible={false}
+          />
         </mesh>
       </Center>
     </>
