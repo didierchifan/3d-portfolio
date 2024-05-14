@@ -97,13 +97,13 @@ export default function ShaderCard({ name, description, image, link }) {
         {/* the link doesn't work; it would be logic that the component wrapped inside link component to be clickable */}
         <Link href={link}>
           <div className="absolute bottom-4 right-4">
-            <div className="w-10 h-10 rounded-full bg-white flex justify-center">
+            <div className="w-10 h-10 rounded-full bg-white z-50 flex justify-center">
               <Image
                 src="./icons/play.svg"
                 width={18}
                 height={18}
                 alt="play button"
-                style={{ fill: "white" }}
+                stroke="orange"
               />
             </div>
           </div>
