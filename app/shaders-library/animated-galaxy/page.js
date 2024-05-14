@@ -23,13 +23,6 @@ export default function Shader() {
           width: "100%",
           height: "100%",
         }}
-        camera={{
-          fov: 45,
-          near: 0.1,
-          far: 100,
-          position: [0, 1, 0],
-          zoom: 0.01,
-        }}
       >
         <Experience />
       </Canvas>

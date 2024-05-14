@@ -62,7 +62,7 @@ export const shadersData = [
   {
     name: "Particles cursor animation",
     description: "move the mouse",
-    link: "/shaders-library/particles-cursor-animation",
+    link: "/shaders-library/particle-cursor-animation",
     image: "",
   },
   {

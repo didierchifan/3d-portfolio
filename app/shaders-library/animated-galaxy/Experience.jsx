@@ -4,21 +4,17 @@ import {
   useGLTF,
   Center,
 } from "@react-three/drei";
-import * as THREE from "three";
-
-import { extend, useFrame } from "@react-three/fiber";
-import { useRef } from "react";
-
-import { useControls } from "leva";
-
-import GalaxyGenerator from "./GalaxyGenerator";
+import { BoxGeometry } from "three";
 
 export default function Experience() {
   return (
     <>
       <CameraControls />
       <Center>
-        <GalaxyGenerator />
+        <mesh>
+          <boxGeometry />
+          <meshBasicMaterial />
+        </mesh>
       </Center>
     </>
   );
