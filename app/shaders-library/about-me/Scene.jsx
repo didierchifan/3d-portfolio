@@ -13,7 +13,7 @@ export default function Scene() {
 
   const init = () => {
     const ctx = canvas.current.getContext("2d");
-    ctx.fillStyle = "black";
+    ctx.fillStyle = "#181818";
     ctx.fillRect(0, 0, dimension.width, dimension.height);
     ctx.globalCompositeOperation = "destination-out";
   };

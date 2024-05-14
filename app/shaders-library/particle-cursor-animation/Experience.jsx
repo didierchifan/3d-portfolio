@@ -35,6 +35,7 @@ const ParticlesMaterial = shaderMaterial(
 extend({ ParticlesMaterial: ParticlesMaterial });
 
 export default function Experience() {
+  console.log(window.innerWidth, window.innerHeight, window.devicePixelRatio);
   //store all the canvas information in an object that will persist across renderings
   const canvasInfo = useRef({
     displacementTexture: null,
@@ -184,7 +185,7 @@ export default function Experience() {
       <ambientLight intensity={10} />
       <Center>
         <points>
-          <planeGeometry ref={particlesGeometry} args={[10, 10, 256, 256]} />
+          <planeGeometry ref={particlesGeometry} args={[10, 10, 128, 128]} />
           <particlesMaterial
             ref={materialRef}
             uPictureTexture={pictureTexture}

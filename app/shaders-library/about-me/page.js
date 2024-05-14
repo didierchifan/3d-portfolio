@@ -9,7 +9,10 @@ export default function AboutMe() {
   return (
     <div className="flex">
       {/* 2d canvas api */}
-      <div className="bg-white flex w-1/2 h-screen items-center justify-center">
+      <div
+        style={{ backgroundColor: "#181818" }}
+        className=" flex w-1/2 h-screen items-center justify-center"
+      >
         <Text />
         <Scene />
       </div>

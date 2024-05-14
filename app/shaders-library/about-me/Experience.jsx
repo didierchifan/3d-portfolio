@@ -1,16 +1,14 @@
 import {
+  shaderMaterial,
   CameraControls,
   Center,
-  shaderMaterial,
   useTexture,
 } from "@react-three/drei";
-
 import * as THREE from "three";
 
-import { useFrame, extend, useLoader } from "@react-three/fiber";
-import { TextureLoader } from "three/src/loaders/TextureLoader";
+import { useEffect, useRef, useState } from "react";
 
-import { useEffect, useRef } from "react";
+import { extend, useFrame } from "@react-three/fiber";
 
 import particlesVertexShader from "../../shaders-glsl/particleCursorAnimation/vertex.glsl";
 import particlesFragmentShader from "../../shaders-glsl/particleCursorAnimation/fragment.glsl";
@@ -21,15 +19,14 @@ const sizes = {
   pixelRatio: Math.min(window.devicePixelRatio, 2),
 };
 
-//shader material with drei helper
 const ParticlesMaterial = shaderMaterial(
   {
     uResolution: new THREE.Vector2(
       sizes.width * sizes.pixelRatio,
       sizes.height * sizes.pixelRatio
     ),
-    // uPictureTexture: null,
-    // uDisplacementTexture: null,
+    uPictureTexture: null,
+    uDisplacementTexture: null,
   },
   particlesVertexShader,
   particlesFragmentShader
@@ -37,29 +34,55 @@ const ParticlesMaterial = shaderMaterial(
 
 extend({ ParticlesMaterial: ParticlesMaterial });
 
-/**
- *
- * MAIN FUNCTION
- */
-
 export default function Experience() {
-  //load the image and brush texture with the drei helper
-  const imageTexture = useTexture(
-    "../textures/particleCursorAnimation/picture-1.png"
-  );
-
+  console.log(window.innerWidth, window.innerHeight, window.devicePixelRatio);
   //store all the canvas information in an object that will persist across renderings
   const canvasInfo = useRef({
+    displacementTexture: null,
     canvas: null,
     context: null,
-    canvasCursorX: 0,
-    canvasCursorY: 0,
+    canvasCursor: new THREE.Vector2(9999, 9999),
+    canvaCursorPrevious: new THREE.Vector2(9999, 9999),
   });
+  const materialRef = useRef();
+  const particlesGeometry = useRef();
+
+  const pictureTexture = useTexture(
+    "../textures/particleCursorAnimation/didier.png"
+  );
 
   /**
    * 2D CANVAS -> CANVAS TEXTURE
    */
   useEffect(() => {
+    //particles geometry attributes that are sent to the shader
+    particlesGeometry.current.setIndex(null);
+    particlesGeometry.current.deleteAttribute("normal");
+
+    const intensitiesArray = new Float32Array(
+      particlesGeometry.current.attributes.position.count
+    );
+    const anglesArray = new Float32Array(
+      particlesGeometry.current.attributes.position.count
+    );
+
+    for (
+      let i = 1;
+      i < particlesGeometry.current.attributes.position.count;
+      i++
+    ) {
+      intensitiesArray[i] = Math.random();
+      anglesArray[i] = Math.random() * Math.PI * 2;
+    }
+    particlesGeometry.current.setAttribute(
+      "aIntensity",
+      new THREE.BufferAttribute(intensitiesArray, 1)
+    );
+    particlesGeometry.current.setAttribute(
+      "aAngle",
+      new THREE.BufferAttribute(anglesArray, 1)
+    );
+
     // Create the 2D canvas
     const newCanvas = document.createElement("canvas");
     newCanvas.width = 128;
@@ -76,12 +99,24 @@ export default function Experience() {
     // Add the canvas to the DOM
     document.body.append(newCanvas);
 
+    //hide the canvas
+    newCanvas.style.display = "none";
+
     // Initialize canvas with black background and blend mode
     const canvasContext = newCanvas.getContext("2d");
     canvasContext.fillRect(0, 0, newCanvas.width, newCanvas.height);
 
     canvasInfo.current.canvas = newCanvas;
     canvasInfo.current.context = canvasContext;
+
+    // create the displacement texture that it is sent to the shader
+    canvasInfo.current.displacementTexture = new THREE.CanvasTexture(
+      canvasInfo.current.canvas
+    );
+
+    //update the displacement texture directly in the shader material
+    materialRef.current.uniforms.uDisplacementTexture.value =
+      canvasInfo.current.displacementTexture;
 
     return () => {
       // remove the canvas from the DOM
@@ -93,24 +128,21 @@ export default function Experience() {
   const drawOnMove = function (e) {
     // Ensure canvas and context are available
     if (!canvasInfo.current.canvas || !canvasInfo.current.context) return;
+
     //calculate the canvas coordoninates from onPointerMove function
     const uv = e.intersections[0].uv;
     const newCanvasCursorX = uv.x * canvasInfo.current.canvas.width;
     const newCanvasCursorY = (1 - uv.y) * canvasInfo.current.canvas.height;
 
     //save the canvas cursor position inside the canvas Info ref object
-    canvasInfo.current.canvasCursorX = newCanvasCursorX;
-    canvasInfo.current.canvasCursorY = newCanvasCursorY;
+    canvasInfo.current.canvasCursor.x = newCanvasCursorX;
+    canvasInfo.current.canvasCursor.y = newCanvasCursorY;
   };
-
-  const displacementTexture = new THREE.CanvasTexture(
-    canvasInfo.current.canvas
-  );
 
   const brushTexture = new Image();
   brushTexture.src = "../textures/particleCursorAnimation/glow.png";
 
-  useFrame(() => {
+  useFrame((state, delta) => {
     // Check if context and canvas are available
     if (!canvasInfo.current.context || !canvasInfo.current.canvas) return;
 
@@ -124,36 +156,53 @@ export default function Experience() {
       canvasInfo.current.canvas.height
     );
 
-    //speed alpha -> when the cursor stays, the particles remain exploded -> there is a fix in the lesson
+    //speed alpha
+    //we calculate the distance the previous and the present cursor position
+    const cursorDistance = canvasInfo.current.canvaCursorPrevious.distanceTo(
+      canvasInfo.current.canvasCursor
+    );
+    const alpha = Math.min(cursorDistance * 0.1, 1);
+    canvasInfo.current.canvaCursorPrevious.copy(
+      canvasInfo.current.canvasCursor
+    );
 
     //draw glow
     const glowSize = canvasInfo.current.canvas.width * 0.25;
     canvasInfo.current.context.globalCompositeOperation = "lighten";
-    canvasInfo.current.context.globalAlpha = 1;
+    canvasInfo.current.context.globalAlpha = alpha;
     canvasInfo.current.context.drawImage(
       brushTexture,
-      canvasInfo.current.canvasCursorX - glowSize * 0.5,
-      canvasInfo.current.canvasCursorY - glowSize * 0.5,
+      canvasInfo.current.canvasCursor.x - glowSize * 0.5,
+      canvasInfo.current.canvasCursor.y - glowSize * 0.5,
       glowSize,
       glowSize
     );
-    // Update displacement texture -> nu cred ca e nevoie
-    displacementTexture.needsUpdate = true;
-    // console.log(displacementTexture);
+
+    // update the canvas texture that it is sent to the shader
+    canvasInfo.current.displacementTexture.needsUpdate = true;
   });
 
   return (
     <>
-      <CameraControls />
+      {/* <CameraControls /> */}
+      <ambientLight intensity={10} />
       <Center>
         <points>
-          <planeGeometry args={[10, 10, 128, 128]} />
-          <particlesMaterial />
+          <planeGeometry ref={particlesGeometry} args={[10, 10, 128, 128]} />
+          <particlesMaterial
+            ref={materialRef}
+            uPictureTexture={pictureTexture}
+            uDisplacementTexture={canvasInfo.current.displacementTexture}
+          />
         </points>
 
         <mesh onPointerMove={drawOnMove}>
           <planeGeometry args={[10, 10]} />
-          <meshBasicMaterial wireframe={true} side={THREE.DoubleSide} />
+          <meshBasicMaterial
+            wireframe={true}
+            side={THREE.DoubleSide}
+            visible={false}
+          />
         </mesh>
       </Center>
     </>
