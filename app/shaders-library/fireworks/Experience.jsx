@@ -1,3 +1,4 @@
+"use client";
 import { CameraControls, Center } from "@react-three/drei";
 import { useEffect } from "react";
 import Firework from "./Firework";

@@ -1,3 +1,4 @@
+"use client";
 export default function Text() {
   return (
     <div className="absolute flex flex-col uppercase w-[35vw] text-[1.8vw] items-start leading-tight text-white font-bold">
