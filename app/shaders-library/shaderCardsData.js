@@ -37,7 +37,7 @@ export const shadersData = [
     name: "Galaxy",
     description: "wait for the universe",
     link: "/shaders-library/animated-galaxy",
-    image: "",
+    image: "/shaders-cards/galaxy.webp",
   },
 
   {
@@ -58,7 +58,7 @@ export const shadersData = [
     name: "Earth",
     description: "Beautiful sphere, brimming with life",
     link: "/shaders-library/earth",
-    image: "",
+    image: "/shaders-cards/earth.webp",
   },
   {
     name: "Particles cursor animation",
@@ -70,30 +70,24 @@ export const shadersData = [
     name: "Morphing particles",
     description: "dynamic, fluid, transformative",
     link: "/shaders-library/morphing-particles",
-    image: "",
-  },
-  {
-    name: "Flow field particles",
-    description: "fluidic, harmonious, mesmerizing",
-    link: "/shaders-library/flow-field-particles",
-    image: "",
+    image: "/shaders-cards/morphing-particles.webp",
   },
   {
     name: "Wobble Sphere",
     description: "not your regular sphere",
     link: "/shaders-library/wobble-sphere",
-    image: "",
+    image: "/shaders-cards/wobble-sphere.webp",
   },
   {
     name: "Sliced Model",
     description: "dissected, revealing, intricate",
     link: "/shaders-library/sliced-model",
-    image: "",
+    image: "/shaders-cards/sliced-model.webp",
   },
   {
     name: "Procedural Terrain",
     description: "dynamic, immersive, endlessly varied",
     link: "/shaders-library/procedural-terrain",
-    image: "",
+    image: "/shaders-cards/procedural-terrain.webp",
   },
 ];
