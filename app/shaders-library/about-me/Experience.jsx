@@ -16,10 +16,7 @@ import particlesFragmentShader from "../../shaders-glsl/particleCursorAnimation/
 
 const ParticlesMaterial = shaderMaterial(
   {
-    uResolution: new THREE.Vector2(
-      window.innerWidth * Math.min(window.devicePixelRatio, 2),
-      window.innerHeight * Math.min(window.devicePixelRatio, 2)
-    ),
+    uResolution: new THREE.Vector2(),
     uPictureTexture: null,
     uDisplacementTexture: null,
   },
@@ -204,6 +201,10 @@ export default function Experience() {
             ref={materialRef}
             uPictureTexture={pictureTexture}
             uDisplacementTexture={canvasInfo.current.displacementTexture}
+            uResolution={
+              (window.innerWidth * Math.min(window.devicePixelRatio, 2),
+              window.innerHeight * Math.min(window.devicePixelRatio, 2))
+            }
           />
         </points>
 
