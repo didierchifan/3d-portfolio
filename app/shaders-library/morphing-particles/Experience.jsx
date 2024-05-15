@@ -1,3 +1,6 @@
+import { useMemo, useRef, useEffect } from "react";
+import * as THREE from "three";
+import { extend } from "@react-three/fiber";
 import {
   shaderMaterial,
   CameraControls,
@@ -5,17 +8,12 @@ import {
   useTexture,
   useGLTF,
 } from "@react-three/drei";
+import { useControls, button } from "leva";
 
-import { extend } from "@react-three/fiber";
-
-import { useMemo, useRef } from "react";
-
-import * as THREE from "three";
+import gsap from "gsap";
 
 import morphingParticlesVertexShader from "../../shaders-glsl/morphing-particles/vertex.glsl";
 import morphingParticlesFragmentShader from "../../shaders-glsl/morphing-particles/fragment.glsl";
-import { useControls } from "leva";
-import { useEffect } from "react";
 
 const MorphingParticlesMaterial = shaderMaterial(
   {
@@ -25,6 +23,7 @@ const MorphingParticlesMaterial = shaderMaterial(
       window.innerWidth * Math.min(window.devicePixelRatio, 2),
       window.innerHeight * Math.min(window.devicePixelRatio, 2)
     ),
+    uProgress: 0,
   },
   morphingParticlesVertexShader,
   morphingParticlesFragmentShader
@@ -34,8 +33,27 @@ extend({ MorphingParticlesMaterial: MorphingParticlesMaterial });
 
 export default function Experience() {
   //leva gui
-  const { color } = useControls({
+  const { color, progress, morph0, morph1, morph2, morph3 } = useControls({
     color: { value: "#FFFFFF" },
+    progress: { value: 0, min: 0, max: 1, step: 0.01 },
+    morph0: button(() => {
+      // Animate uProgress
+      gsap.fromTo(
+        progress,
+        { value: 0 },
+        {
+          value: 1,
+          duration: 3,
+          ease: "linear",
+          onUpdate: () => {
+            console.log(progress);
+          },
+        }
+      );
+    }),
+    morph1: button(() => morph.current()),
+    morph2: button(() => console.log("morph2")),
+    morph3: button(() => console.log("morph3")),
   });
 
   // load the 3d models
@@ -44,6 +62,8 @@ export default function Experience() {
   //references
   const materialRef = useRef();
   const particlesGeometry = useRef();
+  const particlesIndex = useRef(0);
+  const morph = useRef();
 
   useEffect(() => {
     //very important to do this => particles size scale when viewport scaled on y
@@ -89,15 +109,51 @@ export default function Experience() {
 
       particlesPositions.push(new THREE.Float32BufferAttribute(newArray, 3));
     }
-    // solve the particles index problem
 
-    particlesGeometry.current.setAttribute("position", particlesPositions[1]);
+    particlesGeometry.current.setAttribute(
+      "position",
+      particlesPositions[particlesIndex.current]
+    );
+    particlesGeometry.current.setAttribute(
+      "aPositionTarget",
+      particlesPositions[3]
+    );
+
+    // morphing function to be sent to
+    const particlesMorph = (index) => {
+      // Update attributes
+      particlesGeometry.current.attributes.position =
+        particlesPositions[particlesIndex.current];
+      particlesGeometry.current.attributes.aPositionTarget =
+        particlesPositions[index];
+
+      // Animate uProgress
+      gsap.fromTo(
+        progress,
+        { value: 0 },
+        {
+          value: 1,
+          duration: 3,
+          ease: "linear",
+          onUpdate: () => {
+            console.log(progress);
+          },
+        }
+      );
+
+      // Save index
+      particlesIndex.current = index;
+    };
+
+    morph.current = () => {
+      particlesMorph(3);
+    };
 
     // cleanup function to remove the event listener when component is unmounted
     return () => {
       window.removeEventListener("resize", handleResize);
     };
-  }, []);
+  }, [models.scene.children, particlesIndex, progress]);
 
   return (
     <>
@@ -110,6 +166,7 @@ export default function Experience() {
             ref={materialRef}
             blending={THREE.AdditiveBlending}
             depthWrite={false}
+            uProgress={progress}
           />
         </points>
       </Center>
