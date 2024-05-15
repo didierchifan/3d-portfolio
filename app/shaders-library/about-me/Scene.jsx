@@ -9,7 +9,7 @@ export default function Scene() {
 
   useEffect(() => {
     dimension.width > 0 && init();
-  }, [dimension]);
+  });
 
   const init = () => {
     const ctx = canvas.current.getContext("2d");

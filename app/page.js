@@ -51,7 +51,7 @@ export default function Home() {
     }, 500);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [welcomeMessages.length]);
 
   //******LOADING SCREEN *****//
 
