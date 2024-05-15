@@ -1,96 +1,45 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useEffect } from "react";
-import { roomObjects } from "./isometric-room/tooltipData";
 
-import ShaderCard from "./shaders-library/components/ShaderCard";
-import { shadersData } from "./shaders-library/shaderCardsData";
+import { Canvas } from "@react-three/fiber";
+import {
+  ACESFilmicToneMapping,
+  CineonToneMapping,
+  NoToneMapping,
+  ReinhardToneMapping,
+} from "three";
 
-import HorizontalCarousel from "./shaders-library/components/HorizontalCarousel";
-import TextReveal from "./shaders-library/components/TextRevealWord";
-import Footer from "./shaders-library/components/Footer";
+import Experience from "./isometric-room/Experience";
 
-export default function Home() {
-  //******LOADING SCREEN *****//
-  //the "fake" landing screen should appear on the first render of the landing page only => if i come back from an already visited page there should be no loading screen
-  //separate component for the landing screen
-  const welcomeMessages = [
-    "Setting the scene",
-    "Cleaning the room",
-    "Feeding the cat",
-    "Preparing the stage",
-    "Brewing some coffee",
-    "Warming up the engines",
-    "Opening the curtains",
-    "Tuning the instruments",
-    "Greeting the guests",
-    "Polishing the silverware",
-    "Checking the sound system",
-    "Arranging the flowers",
-  ];
-
-  const [isLoading, setIsLoading] = useState(true);
-  const [currentMessageIndex, setCurrentMessageIndex] = useState(0);
-  // tried to set the useState( Math.floor(Math.random() * welcomeMessages.length)) so the first message would be random as well => strange Next.js error => check
-
-  // Set is loading to false after 3.75 seconds
-  useEffect(() => {
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 1500);
-  }, []);
-
-  // Change message index every 1.25 seconds
-  // there is a chance I randomly pick the same message twice from the array => needs an extra condition
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentMessageIndex(
-        Math.floor(Math.random() * welcomeMessages.length)
-      );
-    }, 500);
-
-    return () => clearInterval(interval);
-  }, [welcomeMessages.length]);
-
-  //******LOADING SCREEN *****//
-
+export default function Homepage() {
   return (
     <>
-      {isLoading ? (
-        <h1 className="text-2xl text-orange-700 text-center flex justify-center items-center h-screen">
-          {welcomeMessages[currentMessageIndex]}
-        </h1>
-      ) : (
-        <div style={{ backgroundColor: "#F5F5F7" }}>
-          <div id="hero-section">
-            {/* top-nav */}
-            <div className="ml-10 pt-5 mr-10 flex items-center justify-center">
-              <div className="flex w-1/2">
-                <div className="ml-20 w-20 h-20 rounded-full bg-orange-500 self-start"></div>
-              </div>
-              {/* top right shaders menu */}
-              <div className="flex 1/2 flex-wrap justify-end gap-7 ">
-                {shadersData.map((item, index) => (
-                  <div key={index} className="max-h-full">
-                    <h1 className="text-black font-medium">
-                      <Link href={item.link}>{item.name}</Link>
-                    </h1>
-                  </div>
-                ))}
-              </div>
-              {/* topbar */}
-            </div>
-            <div>
-              <HorizontalCarousel />
-            </div>
-          </div>
-          <div>
-            <TextReveal />
-          </div>
-          <Footer />
-        </div>
-      )}
+      <h1 className="text-2xl text-left">
+        <Link href="./shaders-library">SHADER WIZARDRY</Link>
+      </h1>
+
+      <Canvas
+        gl={{ toneMapping: NoToneMapping }}
+        shadows
+        orthographic
+        style={{
+          position: "fixed",
+          top: 50,
+          left: 0,
+          width: "100%",
+          height: "100%",
+        }}
+        camera={{
+          fov: 45,
+          near: 0.1,
+          far: 100,
+          position: [-2.5, 1, 2.5],
+          zoom: 200,
+        }}
+      >
+        <Experience />
+      </Canvas>
     </>
   );
 }
