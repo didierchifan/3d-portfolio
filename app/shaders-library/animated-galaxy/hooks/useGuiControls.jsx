@@ -1,3 +1,4 @@
+"use client";
 import { useControls } from "leva";
 
 export default function useGuiControls() {

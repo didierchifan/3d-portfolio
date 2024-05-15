@@ -1,3 +1,4 @@
+"use client";
 import { CameraControls, useGLTF, Center, useTexture } from "@react-three/drei";
 
 import { useFrame } from "@react-three/fiber";

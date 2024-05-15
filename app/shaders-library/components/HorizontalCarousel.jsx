@@ -1,3 +1,4 @@
+"use client";
 import ShaderCard from "./ShaderCard";
 import { shadersData } from "../shaderCardsData";
 import { motion, useTransform, useScroll } from "framer-motion";
