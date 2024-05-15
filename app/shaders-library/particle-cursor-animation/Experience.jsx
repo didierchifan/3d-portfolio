@@ -14,18 +14,9 @@ import { extend, useFrame } from "@react-three/fiber";
 import particlesVertexShader from "../../shaders-glsl/particleCursorAnimation/vertex.glsl";
 import particlesFragmentShader from "../../shaders-glsl/particleCursorAnimation/fragment.glsl";
 
-const sizes = {
-  width: window.innerWidth,
-  height: window.innerHeight,
-  pixelRatio: Math.min(window.devicePixelRatio, 2),
-};
-
 const ParticlesMaterial = shaderMaterial(
   {
-    uResolution: new THREE.Vector2(
-      sizes.width * sizes.pixelRatio,
-      sizes.height * sizes.pixelRatio
-    ),
+    uResolution: new THREE.Vector2(),
     uPictureTexture: null,
     uDisplacementTexture: null,
   },
@@ -36,7 +27,6 @@ const ParticlesMaterial = shaderMaterial(
 extend({ ParticlesMaterial: ParticlesMaterial });
 
 export default function Experience() {
-  console.log(window.innerWidth, window.innerHeight, window.devicePixelRatio);
   //store all the canvas information in an object that will persist across renderings
   const canvasInfo = useRef({
     displacementTexture: null,
@@ -191,6 +181,10 @@ export default function Experience() {
             ref={materialRef}
             uPictureTexture={pictureTexture}
             uDisplacementTexture={canvasInfo.current.displacementTexture}
+            uResolution={
+              (window.innerWidth * Math.min(window.devicePixelRatio, 2),
+              window.innerHeight * Math.min(window.devicePixelRatio, 2))
+            }
           />
         </points>
 

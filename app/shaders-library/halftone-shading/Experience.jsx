@@ -17,19 +17,10 @@ import * as THREE from "three";
 import halftoneVertexShader from "../../shaders-glsl/halftone/vertex.glsl";
 import halftoneFragmentShader from "../../shaders-glsl/halftone/fragment.glsl";
 
-const sizes = {
-  width: window.innerWidth,
-  height: window.innerHeight,
-  pixelRatio: Math.min(window.devicePixelRatio, 2),
-};
-
 const HalftoneMaterial = shaderMaterial(
   {
     uColor: new THREE.Color("#fe794d"),
-    uResolution: new THREE.Vector2(
-      sizes.width * sizes.pixelRatio,
-      sizes.height * sizes.pixelRatio
-    ),
+    uResolution: new THREE.Vector2(),
     uShadowRepetitions: 100,
     uShadowColor: new THREE.Color("#8e19b8"),
     uLightRepetitions: 130,
@@ -83,6 +74,10 @@ export function Model(props) {
           uShadowColor={uShadowColor}
           uLightRepetitions={uLightRepetitions}
           uLightColor={uLightColor}
+          uResolution={
+            (window.innerWidth * Math.min(window.devicePixelRatio, 2),
+            window.innerHeight * Math.min(window.devicePixelRatio, 2))
+          }
         />
       </mesh>
     </group>
@@ -102,12 +97,24 @@ export default function Experience() {
       <Center>
         <mesh position={[-3, 0, 0]}>
           <sphereGeometry />
-          <halftoneMaterial ref={sphereMaterial} />
+          <halftoneMaterial
+            ref={sphereMaterial}
+            uResolution={
+              (window.innerWidth * Math.min(window.devicePixelRatio, 2),
+              window.innerHeight * Math.min(window.devicePixelRatio, 2))
+            }
+          />
         </mesh>
 
         <mesh position={[3, 0, 0]}>
           <torusKnotGeometry args={[0.6, 0.25, 128, 32]} />
-          <halftoneMaterial ref={torusMaterial} />
+          <halftoneMaterial
+            ref={torusMaterial}
+            uResolution={
+              (window.innerWidth * Math.min(window.devicePixelRatio, 2),
+              window.innerHeight * Math.min(window.devicePixelRatio, 2))
+            }
+          />
         </mesh>
 
         <Model position={[0, 0, 0]} />

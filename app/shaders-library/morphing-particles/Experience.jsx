@@ -20,10 +20,7 @@ const MorphingParticlesMaterial = shaderMaterial(
   {
     //to ask on discord => why is always my particles size bigger than in lessons 0.4 lesson => 0.2 my project
     uSize: 0.07,
-    uResolution: new THREE.Vector2(
-      window.innerWidth * Math.min(window.devicePixelRatio, 2),
-      window.innerHeight * Math.min(window.devicePixelRatio, 2)
-    ),
+    uResolution: new THREE.Vector2(),
     uProgress: 0,
   },
   morphingParticlesVertexShader,
@@ -168,6 +165,10 @@ export default function Experience() {
             blending={THREE.AdditiveBlending}
             depthWrite={false}
             uProgress={progress}
+            uResolution={
+              (window.innerWidth * Math.min(window.devicePixelRatio, 2),
+              window.innerHeight * Math.min(window.devicePixelRatio, 2))
+            }
           />
         </points>
       </Center>
