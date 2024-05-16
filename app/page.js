@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Head from "next/head";
 
 import { Canvas } from "@react-three/fiber";
 import {
@@ -18,6 +19,10 @@ export default function Homepage() {
       <h1 className="text-2xl text-left">
         <Link href="./shaders-library">SHADER WIZARDRY</Link>
       </h1>
+
+      <Head>
+        <link rel="icon" href="/favicon.png" />
+      </Head>
 
       <Canvas
         gl={{ toneMapping: NoToneMapping }}

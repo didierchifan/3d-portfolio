@@ -24,7 +24,7 @@ export default function Shader() {
           width: "100%",
           height: "100%",
         }}
-        camera={{ position: [8, 0, -15] }}
+        camera={{ position: [8, 0, 0] }}
       >
         <color args={["#181818"]} attach="background" />
         <Experience />

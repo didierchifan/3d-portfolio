@@ -18,10 +18,12 @@
     "gsap": "^3.12.5",
     "leva": "^0.9.35",
     "next": "14.2.2",
+    "r3f-perf": "^7.2.1",
     "raw-loader": "^4.0.2",
     "react": "^18",
     "react-dom": "^18",
     "three": "^0.163.0",
+    "three-custom-shader-material": "5.4",
     "zustand": "^4.5.2"
   },
   "devDependencies": {

@@ -24,13 +24,9 @@ export default function Model({ ...props }) {
   const { nodes, materials } = useGLTF(
     "/isometric-room/3d-model/room-components.glb"
   );
-
   //load texture calling the custom hook
   const loadedTexture = useLoadedTexture();
-
-  const bakedTexture = useMemo(() => {
-    return new THREE.MeshStandardMaterial({ map: loadedTexture });
-  });
+  const bakedTexture = new THREE.MeshStandardMaterial({ map: loadedTexture });
 
   //make sure the texture is properly loaded before rendering the model
   if (!loadedTexture) return null;
