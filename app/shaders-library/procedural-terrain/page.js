@@ -15,7 +15,7 @@ export default function Shader() {
     <>
       <div className="text-7xl text-center pt-10">PROCEDURAL TERRAIN</div>
       <Canvas
-        gl={{ toneMapping: NoToneMapping }}
+        gl={{ toneMapping: ACESFilmicToneMapping }}
         shadows
         style={{
           position: "fixed",
@@ -23,6 +23,13 @@ export default function Shader() {
           left: 0,
           width: "100%",
           height: "100%",
+        }}
+        camera={{
+          fov: 45,
+          near: 0.1,
+          far: 100,
+          position: [0, 10, 0],
+          zoom: 0.6,
         }}
       >
         <color args={["#181818"]} attach="background" />

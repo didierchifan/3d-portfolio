@@ -54,20 +54,6 @@ export default function Experience() {
         backgroundBlurriness={0.5}
         intensity={5}
       />
-      <directionalLight
-        intensity={4}
-        color={"#ffffff"}
-        position={[6.25, 3, 4]}
-        castShadow={true}
-        shadow-mapSize={new THREE.Vector2(1024, 1024)}
-        shadow-cameraNear={0.1}
-        shadow-cameraFar={30}
-        shadow-normalBias={0.05}
-        shadow-cameraTop={8}
-        shadow-cameraRight={8}
-        shadow-cameraBottom={-8}
-        shadow-cameraLeft={-8}
-      />
       <Center>
         <mesh castShadow ref={modelRef}>
           <group dispose={null}>

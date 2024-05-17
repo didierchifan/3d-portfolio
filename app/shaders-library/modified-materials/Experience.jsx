@@ -143,20 +143,49 @@ import {
   useGLTF,
   Environment,
   useHelper,
+  MeshWobbleMaterial,
 } from "@react-three/drei";
 import { useControls } from "leva";
 import { DirectionalLightHelper } from "three";
+import { color } from "framer-motion";
+
+function useLoadedTexture(texture) {
+  const loadedTexture = useTexture(texture);
+  if (loadedTexture) {
+    loadedTexture.colorSpace = THREE.SRGBColorSpace; // Set the correct encoding
+    loadedTexture.flipY = "false";
+  }
+  return loadedTexture;
+}
 
 export default function Experience() {
+  const { nodes, materials } = useGLTF(
+    "../3dModels/LeePerrySmith/LeePerrySmith.glb"
+  );
+
+  const colorTexture = useLoadedTexture("../3dModels/LeePerrySmith/color.jpg");
+  const material = new THREE.MeshStandardMaterial({ map: colorTexture });
+
+  const normalTexture = useLoadedTexture(
+    "../3dModels/LeePerrySmith/normal.jpg"
+  );
+
   return (
     <>
       <CameraControls />
+      <ambientLight intensity={0.8} />
       <Center>
-        <mesh>
-          <boxGeometry />
-          <meshBasicMaterial side={THREE.DoubleSide} />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.LeePerrySmith.geometry}
+          material={material}
+          normalTexture={normalTexture}
+        >
+          <MeshWobbleMaterial />
         </mesh>
       </Center>
     </>
   );
 }
+useGLTF.preload("../3dModels/LeePerrySmith/LeePerrySmith.glb");
