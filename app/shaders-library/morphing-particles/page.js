@@ -9,6 +9,7 @@ import {
   NoToneMapping,
   ReinhardToneMapping,
 } from "three";
+import { useControls } from "leva";
 
 export default function Shader() {
   return (
