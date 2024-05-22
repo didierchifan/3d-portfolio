@@ -43,6 +43,13 @@ export const shadersData = [
   },
 
   {
+    name: "Galaxy-generator",
+    description: "act like god",
+    link: "/shaders-library/galaxy-generator",
+    image: "/shaders-cards/galaxy.webp",
+  },
+
+  {
     name: "Smoke",
     description: "good morning",
     link: "/shaders-library/coffee-smoke",

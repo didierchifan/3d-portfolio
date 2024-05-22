@@ -3,7 +3,7 @@
 import * as THREE from "three";
 import { shaderMaterial, CameraControls, Center } from "@react-three/drei";
 import useGuiControls from "./hooks/useGuiControls";
-import { useFrame } from "@react-three/fiber";
+import { useFrame, extend, useThree } from "@react-three/fiber";
 
 import { useControls } from "leva";
 
@@ -11,24 +11,41 @@ import { useEffect, useMemo, useRef } from "react";
 import { random } from "gsap";
 import { color } from "framer-motion";
 
+import galaxyVertexShader from "../../shaders-glsl/galaxy/vertex.glsl";
+import galaxyFragmentShader from "../../shaders-glsl/galaxy/fragment.glsl";
+
+const GalaxyMaterial = shaderMaterial(
+  {
+    uSize: 1,
+    uTime: 0,
+  },
+  galaxyVertexShader,
+  galaxyFragmentShader
+);
+
+extend({ GalaxyMaterial: GalaxyMaterial });
+
 export default function Experience() {
   const {
     count,
-    size,
     radius,
     branches,
-    spin,
     randomness,
     randomnessPower,
     insideColor,
     outsideColor,
+    uSize,
   } = useGuiControls();
 
   const pointsRef = useRef(null);
+  const pointsMaterialRef = useRef(null);
+  const { gl } = useThree();
 
-  const { positions, colors } = useMemo(() => {
+  const { positions, colors, scales, randomnessAttribute } = useMemo(() => {
     const positions = new Float32Array(count * 3);
     const colors = new Float32Array(count * 3);
+    const randomnessAttribute = new Float32Array(count * 3);
+    const scales = new Float32Array(count * 1);
 
     const colorInside = new THREE.Color(insideColor);
     const colorOutside = new THREE.Color(outsideColor);
@@ -38,7 +55,7 @@ export default function Experience() {
 
       //particles positions attribute
       const randomRadius = Math.random() * radius;
-      const spinAngle = randomRadius * spin;
+
       const branchAngle = ((i % branches) / branches) * Math.PI * 2;
 
       const randomX =
@@ -57,28 +74,31 @@ export default function Experience() {
         randomness *
         randomRadius;
 
-      positions[i3] =
-        Math.cos(branchAngle + spinAngle) * randomRadius + randomX;
-      positions[i3 + 1] = randomY;
-      positions[i3 + 2] =
-        Math.sin(branchAngle + spinAngle) * randomRadius + randomZ;
+      positions[i3] = Math.cos(branchAngle) * randomRadius;
+      positions[i3 + 1] = 0;
+      positions[i3 + 2] = Math.sin(branchAngle) * randomRadius;
+
+      randomnessAttribute[i3] = randomX;
+      randomnessAttribute[i3 + 1] = randomY;
+      randomnessAttribute[i3 + 2] = randomZ;
 
       //particles colors attribute
-
       const mixedColor = colorInside.clone();
       mixedColor.lerp(colorOutside, randomRadius / radius);
 
       colors[i3] = mixedColor.r;
       colors[i3 + 1] = mixedColor.g;
       colors[i3 + 2] = mixedColor.b;
+
+      //scale attribute
+      scales[i] = Math.random();
     }
 
-    return { positions, colors };
+    return { positions, colors, scales, randomnessAttribute };
   }, [
     count,
     radius,
     branches,
-    spin,
     randomness,
     randomnessPower,
     outsideColor,
@@ -94,43 +114,71 @@ export default function Experience() {
       );
 
       pointsRef.current.geometry.setAttribute(
+        "aRandomness",
+        new THREE.BufferAttribute(randomnessAttribute, 3)
+      );
+
+      pointsRef.current.geometry.setAttribute(
         "color",
         new THREE.BufferAttribute(colors, 3)
       );
+
+      pointsRef.current.geometry.setAttribute(
+        "aScale",
+        new THREE.BufferAttribute(scales, 1)
+      );
+
       //very important to set the needUpdate to true
       pointsRef.current.geometry.attributes.position.needsUpdate = true;
+      pointsRef.current.geometry.attributes.aRandomness.needsUpdate = true;
       pointsRef.current.geometry.attributes.color.needsUpdate = true;
+      pointsRef.current.geometry.attributes.aScale.needsUpdate = true;
     }
-  }, [positions, colors]);
+  }, [positions, colors, scales, randomnessAttribute]);
+
+  useFrame((state, delta) => {
+    pointsMaterialRef.current.uTime += delta;
+  });
 
   return (
     <>
       <CameraControls />
-      <Center>
-        <points ref={pointsRef}>
-          <bufferGeometry>
-            <bufferAttribute
-              attach="attributes-position"
-              count={count}
-              array={positions}
-              itemSize={3}
-            />
-            <bufferAttribute
-              attach="attributes-color"
-              count={count}
-              array={colors}
-              itemSize={3}
-            />
-          </bufferGeometry>
-          <pointsMaterial
-            size={size}
-            sizeAttenuation
-            depthWrite={false}
-            blending={THREE.AdditiveBlending}
-            vertexColors={true}
+
+      <points ref={pointsRef}>
+        <bufferGeometry>
+          <bufferAttribute
+            attach="attributes-position"
+            count={count}
+            array={positions}
+            itemSize={3}
           />
-        </points>
-      </Center>
+          <bufferAttribute
+            attach="attributes-color"
+            count={count}
+            array={colors}
+            itemSize={3}
+          />
+          <bufferAttribute
+            attach="attributes-aScale"
+            count={count}
+            array={scales}
+            itemSize={1}
+          />
+          <bufferAttribute
+            attach="attributes-aRandomness"
+            count={count}
+            array={randomnessAttribute}
+            itemSize={3}
+          />
+        </bufferGeometry>
+        <galaxyMaterial
+          ref={pointsMaterialRef}
+          uSize={uSize * gl.getPixelRatio()}
+          depthWrite={false}
+          blending={THREE.AdditiveBlending}
+          vertexColors={true}
+        />
+      </points>
     </>
   );
 }

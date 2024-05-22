@@ -8,13 +8,13 @@ export default function useGuiControls() {
       max: 100000,
       step: 1,
     },
-    uSize: {
-      value: 20,
-      min: 0.1,
-      max: 50,
+    size: {
+      value: 0.02,
+      min: 0.001,
+      max: 0.1,
     },
     radius: {
-      value: 5,
+      value: 10,
       min: 0.1,
       max: 30,
     },
@@ -23,6 +23,11 @@ export default function useGuiControls() {
       min: 2,
       max: 20,
       step: 1,
+    },
+    spin: {
+      value: 1,
+      min: -5,
+      max: 5,
     },
     randomness: {
       value: 0.2,
@@ -37,7 +42,7 @@ export default function useGuiControls() {
       step: 1,
     },
     insideColor: {
-      value: "#ff6030",
+      value: "#ffffff",
     },
     outsideColor: {
       value: "#5786F5",
