@@ -25,7 +25,7 @@ export default function Shader() {
           height: "100%",
         }}
       >
-        <color args={["#181818"]} attach="background" />
+        {/* <color args={["#181818"]} attach="background" /> */}
         <Experience />
       </Canvas>
     </>

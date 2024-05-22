@@ -32,7 +32,7 @@ export default function Shader() {
           zoom: 0.6,
         }}
       >
-        <color args={["#181818"]} attach="background" />
+        {/* <color args={["#181818"]} attach="background" /> */}
         <Experience />
       </Canvas>
     </>

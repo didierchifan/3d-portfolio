@@ -26,7 +26,7 @@ export default function Shader() {
         }}
         camera={{ position: [8, 0, 0] }}
       >
-        <color args={["#181818"]} attach="background" />
+        {/* <color args={["#181818"]} attach="background" /> */}
         <Experience />
       </Canvas>
     </>
