@@ -12,39 +12,39 @@ import {
 } from "three";
 
 import Experience from "./isometric-room/Experience";
+import Navigation from "./isometric-room/components/NavBar";
 
 export default function Homepage() {
   return (
     <>
-      <h1 className="text-2xl text-left">
-        <Link href="./shaders-library">SHADER WIZARDRY</Link>
-      </h1>
-
       <Head>
         <link rel="icon" href="/favicon.png" />
       </Head>
 
-      <Canvas
-        gl={{ toneMapping: NoToneMapping }}
-        shadows
-        orthographic
-        style={{
-          position: "fixed",
-          top: 50,
-          left: 0,
-          width: "100%",
-          height: "100%",
-        }}
-        camera={{
-          fov: 45,
-          near: 0.1,
-          far: 100,
-          position: [-2.5, 1, 2.5],
-          zoom: 200,
-        }}
-      >
-        <Experience />
-      </Canvas>
+      {/* wrapper div */}
+      <div className="flex h-screen">
+        <Navigation />
+        <div className="flex-grow">
+          <Canvas
+            gl={{ toneMapping: NoToneMapping }}
+            shadows
+            orthographic
+            style={{
+              width: "100%",
+              height: "100%",
+            }}
+            camera={{
+              fov: 45,
+              near: 0.1,
+              far: 100,
+              position: [-2.5, 1, 2.5],
+              zoom: 200,
+            }}
+          >
+            <Experience />
+          </Canvas>
+        </div>
+      </div>
     </>
   );
 }

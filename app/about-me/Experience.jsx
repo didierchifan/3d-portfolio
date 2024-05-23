@@ -11,8 +11,8 @@ import { useEffect, useRef, useState } from "react";
 
 import { extend, useFrame } from "@react-three/fiber";
 
-import particlesVertexShader from "../../shaders-glsl/particleCursorAnimation/vertex.glsl";
-import particlesFragmentShader from "../../shaders-glsl/particleCursorAnimation/fragment.glsl";
+import particlesVertexShader from "../shaders-glsl/particleCursorAnimation/vertex.glsl";
+import particlesFragmentShader from "../shaders-glsl/particleCursorAnimation/fragment.glsl";
 
 const ParticlesMaterial = shaderMaterial(
   {

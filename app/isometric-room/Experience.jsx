@@ -1,7 +1,10 @@
 "use client";
 
+import { useMemo } from "react";
 import { CameraControls, Center } from "@react-three/drei";
+
 import Model from "./Model";
+import Lights from "./Lights";
 
 export default function Experience() {
   return (
@@ -19,7 +22,7 @@ export default function Experience() {
         minAzimuthAngle={Math.PI * 2 - 1.57}
         maxAzimuthAngle={Math.PI * 2}
       />
-      <ambientLight intensity={2.3} />
+      <Lights />
       <Center>
         <Model />
       </Center>
