@@ -9,8 +9,7 @@ import Lights from "./Lights";
 export default function Experience() {
   return (
     <>
-      {/* background color */}
-      <color args={["#181818"]} attach="background" />
+    
 
       <CameraControls
         makeDefault={true}

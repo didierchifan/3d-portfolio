@@ -19,6 +19,9 @@ export default function Lights() {
 
   return (
     <>
+      {/* background color */}
+      <color args={[bgcolor]} attach="background" />
+
       <ambientLight intensity={2.3} />
 
       {/* tv ambient light */}

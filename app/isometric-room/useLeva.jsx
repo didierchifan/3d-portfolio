@@ -4,7 +4,7 @@ export default function useLeva() {
   const controls = useControls({
     "main controls": folder({
       goToSleep: false,
-      bgcolor: { value: "#fcc5c5" },
+      bgcolor: { value: "#181818" },
     }),
     "lamp lights": folder({
       donutLight: {
