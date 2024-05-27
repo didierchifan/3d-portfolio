@@ -15,6 +15,7 @@ import Experience from "./isometric-room/Experience";
 import Navigation from "./isometric-room/components/NavBar";
 
 export default function Homepage() {
+
   return (
     <>
       <Head>

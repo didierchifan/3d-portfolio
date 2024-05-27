@@ -9,8 +9,6 @@ import Lights from "./Lights";
 export default function Experience() {
   return (
     <>
-    
-
       <CameraControls
         makeDefault={true}
         //up-down limits

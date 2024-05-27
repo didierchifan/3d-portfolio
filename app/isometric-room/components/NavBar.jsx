@@ -9,6 +9,41 @@ import TvLight from "../navigation-icons/tv.svg";
 import ChairNav from "../navigation-icons/chair.svg";
 
 export default function Navigation() {
+  const handleAmbientLightClick = (e) => {
+    const event = new CustomEvent("mainLightButtonClick", {
+      detail: { mainLightClicked: true },
+    });
+    window.dispatchEvent(event);
+  };
+
+  const handleDonutLightClick = (e) => {
+    const event = new CustomEvent("donutLightButtonClick", {
+      detail: { donutLightClicked: true },
+    });
+    window.dispatchEvent(event);
+  };
+
+  const handleLampLight = (e) => {
+    const event = new CustomEvent("lampLightButtonClick", {
+      detail: { lampLightClicked: true },
+    });
+    window.dispatchEvent(event);
+  };
+
+  const handlePaintLampLight = (e) => {
+    const event = new CustomEvent("paintLampLightButtonClick", {
+      detail: { paintLampLightClicked: true },
+    });
+    window.dispatchEvent(event);
+  };
+
+  const handleTvLight = (e) => {
+    const event = new CustomEvent("tvLightButtonClick", {
+      detail: { tvLightClicked: true },
+    });
+    window.dispatchEvent(event);
+  };
+
   return (
     <div
       style={{ backgroundColor: "#181818" }}
@@ -37,31 +72,36 @@ export default function Navigation() {
       {/* experience tweaks */}
       <div
         style={{ backgroundColor: "#F5F5F7" }}
-        className="w-12 h-12 ml-8 mr-8 rounded-md flex items-center justify-center "
+        className="w-12 h-12 ml-8 mr-8 rounded-md flex items-center justify-center"
+        onClick={handleAmbientLightClick}
       >
         <MainLight fill="#181818" className="w-10 h-10" />
       </div>
       <div
         style={{ backgroundColor: "#F5F5F7" }}
         className="w-12 h-12 ml-8 mr-8 rounded-md flex items-center justify-center "
+        onClick={handleDonutLightClick}
       >
         <DonutLight fill="#181818" className="w-10 h-10" />
       </div>
       <div
         style={{ backgroundColor: "#F5F5F7" }}
         className="w-12 h-12 ml-8 mr-8 rounded-md flex items-center justify-center "
+        onClick={handleLampLight}
       >
         <AckjaLight fill="#181818" className="w-10 h-10" />
       </div>
       <div
         style={{ backgroundColor: "#F5F5F7" }}
         className="w-12 h-12 ml-8 mr-8 rounded-md flex items-center justify-center "
+        onClick={handlePaintLampLight}
       >
         <WallLight fill="#181818" className="w-10 h-10 " />
       </div>
       <div
         style={{ backgroundColor: "#F5F5F7" }}
         className="w-12 h-12 ml-8 mr-8 rounded-md flex items-center justify-center "
+        onClick={handleTvLight}
       >
         <TvLight fill="#181818" className="w-10 h-10 " />
       </div>
