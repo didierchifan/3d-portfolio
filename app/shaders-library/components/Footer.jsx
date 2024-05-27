@@ -1,16 +1,17 @@
 "use client";
-import Link from "next/link";
+import Content from "./Content";
 
 export default function Footer() {
   return (
     <div
-      style={{ backgroundColor: "#E6E6E8" }}
-      className="flex justify-center items-center h-96"
+      className="relative h-[800px]"
+      style={{ clipPath: "polygon(0% 0, 100% 0%, 100% 100%, 0 100%)" }}
     >
-      <Link href="./shaders-library/about-me">
-        {" "}
-        <h1 className="text-7xl text-black font-bold">DIDIER CHIFAN</h1>
-      </Link>
+      <div className="relative h-[calc(100vh+800px)] -top-[100vh]">
+        <div className="h-[800px] sticky top-[calc(100vh-800px)]">
+          <Content />
+        </div>
+      </div>
     </div>
   );
 }

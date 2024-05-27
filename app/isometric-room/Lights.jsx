@@ -5,7 +5,7 @@ import useLeva from "./useLeva";
 
 export default function Lights() {
   // painting spotlight
-  const spotlight = useMemo(() => new THREE.SpotLight("#fff"), []);
+  const spotlight = useMemo(() => new THREE.SpotLight("#ffffff"), []);
 
   //lights on / off events
   const [ambientLight, setAmbientLight] = useState(2.3);
