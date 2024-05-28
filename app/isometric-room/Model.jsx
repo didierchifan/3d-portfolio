@@ -8,6 +8,7 @@ import {
   useCursor,
   shaderMaterial,
 } from "@react-three/drei";
+import { ROOM_OBJECTS } from "./tooltipData";
 
 // custom hook for texture loading
 function useLoadedTexture() {
@@ -27,6 +28,31 @@ export default function Model({ ...props }) {
   //load texture calling the custom hook
   const loadedTexture = useLoadedTexture();
   const bakedTexture = new THREE.MeshStandardMaterial({ map: loadedTexture });
+
+  //active tooltip state
+  const [activeToolTip, setActiveTooltip] = useState(null);
+
+  const handleActiveToolTip = (id) => {
+    if (activeToolTip === id) {
+      setActiveTooltip(null);
+    } else {
+      setActiveTooltip(id);
+    }
+  };
+
+  //handle click outside tooltip
+  const handleDocumentClick = () => {
+    if (activeToolTip) {
+      setActiveTooltip(null);
+    }
+  };
+  useEffect(() => {
+    document.addEventListener("click", handleDocumentClick);
+
+    return () => {
+      document.removeEventListener("click", handleDocumentClick);
+    };
+  }, [activeToolTip]);
 
   //make sure the texture is properly loaded before rendering the model
   if (!loadedTexture) return null;
@@ -169,7 +195,40 @@ export default function Model({ ...props }) {
         geometry={nodes.tv.geometry}
         material={bakedTexture}
         position={[-0.257, 1.248, -1.841]}
-      ></mesh>
+      >
+        {activeToolTip != "tv" ? (
+          <Html
+            center
+            position={ROOM_OBJECTS.tv.buttonPosition}
+            distanceFactor={0.003}
+          >
+            <div
+              onClick={() => handleActiveToolTip("tv")}
+              className="w-5 h-5 rounded-full bg-orange-500"
+            ></div>
+          </Html>
+        ) : (
+          <Html
+            center
+            position={ROOM_OBJECTS.tv.buttonPosition}
+            distanceFactor={0.003}
+          >
+            <div
+              onClick={() => handleActiveToolTip("tv")}
+              className="w-5 h-5 rounded-full bg-blue-500"
+            ></div>
+          </Html>
+        )}
+
+        <Html
+          center
+          position={ROOM_OBJECTS.tv.tooltipPosition}
+          distanceFactor={0.003}
+          wrapperClass={activeToolTip === "tv" ? "label" : "hidden"}
+        >
+          {ROOM_OBJECTS.tv.description}
+        </Html>
+      </mesh>
 
       {/* up | tv */}
       {/* down | couch area */}

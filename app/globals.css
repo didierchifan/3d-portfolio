@@ -84,3 +84,67 @@ body {
   top: 25%;
   left: 38%;
 }
+
+/* tooltips */
+.label > div {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  color: aliceblue;
+  font-weight: 500;
+  position: absolute;
+  background-color: #00000088;
+  padding: 15px;
+  white-space: nowrap;
+  overflow: hidden;
+  border-radius: 30px;
+  user-select: none;
+  width: 250px;
+  text-wrap: wrap;
+  text-decoration: none;
+  /* fade in animation in css */
+  opacity: 0;
+  animation: fadeIn 0.5s ease-in forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.link > div {
+  text-decoration: none;
+}
+
+.hidden {
+  display: none;
+}
+
+/* tooltip */
+.tooltip-container {
+  position: relative; /* Required for absolute positioning of the tooltip */
+}
+
+.tooltip-container::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  left: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #181818;
+  color: #f5f5f7;
+  padding: 5px 10px;
+  border-radius: 4px;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+  z-index: 9;
+}
+
+.tooltip-container:hover::after {
+  opacity: 1;
+}

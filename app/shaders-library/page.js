@@ -88,7 +88,7 @@ export default function Home() {
         <div>
           <TextReveal />
         </div>
-        <Footer />
+        <Footer backgroundColor="#181818" color="#F5F5F7" />
       </div>
     </>
   );

@@ -33,7 +33,7 @@ export default function AboutMe() {
           </Canvas>
         </div>
       </div>
-      <Footer />
+      <Footer backgroundColor="#F5F5F7" color="#181818" />
     </div>
   );
 }

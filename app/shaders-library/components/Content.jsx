@@ -1,45 +1,54 @@
-export default function Content() {
+export default function Content({ backgroundColor, color }) {
   return (
-    <div className="bg-[#181818] py-8 px-12 h-full w-full flex flex-col justify-between">
-      <Section1 />
-      <Section2 />
+    <div
+      style={{ backgroundColor }}
+      className="py-8 px-12 h-full w-full flex flex-col justify-between"
+    >
+      <Section1 color={color} />
+      <Section2 color={color} />
     </div>
   );
 }
 
-const Section1 = () => {
+const Section1 = ({ color }) => {
   return (
     <div>
-      <Nav />
+      <Nav color={color} />
     </div>
   );
 };
 
-const Section2 = () => {
+const Section2 = ({ color }) => {
   return (
     <div className="flex justify-between items-end">
-      <h1 className="text-[10vw] leading-[0.8] mt-10">DIDIER CHIFAN</h1>
-      <p>©copyright</p>
+      <h1 style={{ color }} className="text-[10vw] leading-[0.8] mt-10">
+        DIDIER CHIFAN
+      </h1>
+      <p style={{ color }}>©copyright</p>
     </div>
   );
 };
 
-const Nav = () => {
+const Nav = ({ color }) => {
   return (
     <div className="flex shrink-0 gap-20">
       <div className="flex flex-col gap-2">
-        <h3 className="mb-2 uppercase text-[#ffffff90]">About</h3>
-        <p>Home</p>
-        <p>Projects</p>
-        <p>Our Mission</p>
-        <p>Contact Us</p>
+        <h3 style={{ color }} className="mb-2 uppercase ">
+          About
+        </h3>
+        <p style={{ color }}>Home</p>
+        <p style={{ color }}>Projects</p>
+        <p style={{ color }}>Our Mission</p>
+        <p style={{ color }}>Contact Us</p>
       </div>
       <div className="flex flex-col gap-2">
-        <h3 className="mb-2 uppercase text-[#ffffff90]">Education</h3>
-        <p>News</p>
-        <p>Learn</p>
-        <p>Certification</p>
-        <p>Publications</p>
+        <h3 style={{ color }} className="mb-2 uppercase ">
+          Education
+        </h3>
+        <p style={{ color }}>News</p>
+        <p style={{ color }}>Learn</p>
+        <p style={{ color }}>Certification</p>
+        <p style={{ color }}>Publications</p>
       </div>
     </div>
   );

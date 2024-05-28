@@ -15,7 +15,6 @@ import Experience from "./isometric-room/Experience";
 import Navigation from "./isometric-room/components/NavBar";
 
 export default function Homepage() {
-
   return (
     <>
       <Head>
@@ -31,7 +30,7 @@ export default function Homepage() {
             shadows
             orthographic
             style={{
-              width: "100%",
+              // width: "100%",
               height: "100%",
             }}
             camera={{
