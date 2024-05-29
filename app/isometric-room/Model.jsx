@@ -189,7 +189,7 @@ export default function Model({ ...props }) {
             rotation-z={Math.PI}
             flipZ={true} // Changed to a boolean instead of a string
           >
-            <iframe src="https://didierchifan.com/" />
+            {/* <iframe src="https://didierchifan.com/" /> */}
           </Html>
         </mesh>
         {/* displays with iframe on it */}
