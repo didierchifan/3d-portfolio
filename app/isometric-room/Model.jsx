@@ -157,6 +157,7 @@ export default function Model({ ...props }) {
             distanceFactor={0.107}
             position={[0, 0, -0.001]}
             rotation-x={-1.57}
+            className="hidden md:block"
           >
             <div className="hidden md:block" wrapperclass="iframe--div">
               <iframe src="https://punctoranj.ro/" />
