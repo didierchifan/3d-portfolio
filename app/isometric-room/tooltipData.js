@@ -26,6 +26,7 @@ export const ROOM_OBJECTS = {
     description: `
       DEVICES:
       MacBookPro M3 max 16
+      Apple Ipad Pro M4
       Apple Studio Display
       Aaaaaple sheep, checking in again!
       FURNITURE:
@@ -33,8 +34,8 @@ export const ROOM_OBJECTS = {
       Eames Style Lobby Chair
       Poldina Pro Lamp
     `,
-    buttonPosition: [-0.2, 0.8, -0.95],
-    tooltipPosition: [-0.2, 1.25, -0.95],
+    buttonPosition: [-0.2, 0.8, -0.25],
+    tooltipPosition: [-0.2, 1.25, -0.25],
   },
 
   //double KALLAX

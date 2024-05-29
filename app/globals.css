@@ -149,3 +149,30 @@ body {
 .tooltip-container:hover::after {
   opacity: 1;
 }
+
+/* htmlscreen */
+
+.htmlScreen iframe {
+  width: 1280px;
+  height: 720px;
+  border: none;
+  border-radius: 10px;
+  background: #000000;
+  overflow: hidden;
+  z-index: -9999;
+}
+
+.htmlLaptopScreen iframe {
+  width: 1280px;
+  height: 800px;
+  border: none;
+  border-radius: 20px;
+  background: #000000;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.iframe--div {
+  z-index: 0;
+  position: relative;
+}

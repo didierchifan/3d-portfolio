@@ -1,6 +1,8 @@
 import { useRef, useMemo, useState, useEffect } from "react";
 import * as THREE from "three";
 
+import { useFrame } from "@react-three/fiber";
+
 import {
   Html,
   useGLTF,
@@ -53,6 +55,18 @@ export default function Model({ ...props }) {
       document.removeEventListener("click", handleDocumentClick);
     };
   }, [activeToolTip]);
+
+  //chair animation
+  const topChairRef = useRef();
+  useFrame((state, delta) => {
+    const frequency = 1; // Adjust the frequency of oscillation
+    const magnitude = -2; // Adjust the magnitude of rotation
+
+    const rotationDelta =
+      Math.sin(state.clock.elapsedTime * frequency) * magnitude * delta * 0.3;
+
+    topChairRef.current.rotation.y += rotationDelta * 0.8;
+  });
 
   //make sure the texture is properly loaded before rendering the model
   if (!loadedTexture) return null;
@@ -130,7 +144,16 @@ export default function Model({ ...props }) {
         >
           <Html
             transform
-            wrapperclass="htmlLaptopScreen"
+            wrapperClass="htmlLaptopScreen"
+            style={{
+              width: "1280px",
+              height: "800px",
+              border: "none",
+              borderRadius: "20px",
+              background: "#000000",
+              overflow: "hidden",
+              zIndex: 0,
+            }}
             distanceFactor={0.107}
             position={[0, 0, -0.001]}
             rotation-x={-1.57}
@@ -150,14 +173,23 @@ export default function Model({ ...props }) {
         >
           <Html
             transform
-            wrapperclass="htmlScreen"
+            wrapperClass="htmlScreen"
+            style={{
+              width: "1280px",
+              height: "720px",
+              border: "none",
+              borderRadius: "10px",
+              background: "#000000",
+              overflow: "hidden",
+              zIndex: -9999,
+            }}
             distanceFactor={0.19}
             position={[0.0, 0.241, -0.03]}
             rotation-x={Math.PI}
             rotation-z={Math.PI}
-            flipZ="true"
+            flipZ={true} // Changed to a boolean instead of a string
           >
-            <iframe src="https://iso-room.netlify.app/" />
+            <iframe src="https://didierchifan.com/" />
           </Html>
         </mesh>
         {/* displays with iframe on it */}
@@ -167,20 +199,20 @@ export default function Model({ ...props }) {
           position={[1.449, 0.782, -0.502]}
           rotation={[0, -1.571, 0]}
         />
-        {/* ipad
+        {/* ipad */}
         <mesh
           geometry={nodes.ipadScreen.geometry}
           material={new THREE.MeshBasicMaterial({ color: "black" })}
-          position={[1.438, 0.997, -0.04]}
+          position={[1.438, 0.997, -0.95]}
           rotation={[0, 0, 1.194]}
         />
         <mesh
           geometry={nodes.appleIpad.geometry}
           material={bakedTexture}
-          position={[1.444, 0.997, -0.042]}
+          position={[1.444, 0.997, -0.95]}
           rotation={[0, 0, 1.194]}
         />
-        <mesh
+        {/* <mesh
           geometry={nodes.appleIphone.geometry}
           material={bakedTexture}
           position={[1.437, 0.93, -0.862]}
@@ -204,6 +236,7 @@ export default function Model({ ...props }) {
 
       {/* down| OBJECT WITH DESCRIPTIONS */}
       <mesh
+        ref={topChairRef}
         geometry={nodes.eamsChair.geometry}
         material={bakedTexture}
         position={[0.85, 0.556, -0.515]}
@@ -927,7 +960,7 @@ export default function Model({ ...props }) {
       <mesh
         geometry={nodes.blueLamp.geometry}
         material={bakedTexture}
-        position={[1.759, 1.08, 0.083]}
+        position={[1.759, 1.08, -0.04]}
       />
       <mesh
         geometry={nodes.desk.geometry}
@@ -1162,7 +1195,7 @@ export default function Model({ ...props }) {
       <mesh
         geometry={nodes.blueLampLight.geometry}
         material={bakedTexture}
-        position={[1.759, 1.117, 0.083]}
+        position={[1.759, 1.117, -0.04]}
       />
       <mesh
         geometry={nodes.emissivePaintingLamp.geometry}
