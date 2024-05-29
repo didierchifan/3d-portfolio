@@ -158,7 +158,7 @@ export default function Model({ ...props }) {
             position={[0, 0, -0.001]}
             rotation-x={-1.57}
           >
-            <div wrapperclass="iframe--div">
+            <div wrapperclass="iframe--div sm:hidden">
               <iframe src="https://punctoranj.ro/" />
             </div>
           </Html>
@@ -171,7 +171,7 @@ export default function Model({ ...props }) {
           position={[1.773, 0.943, -0.502]}
           rotation={[0, 1.571, 0]}
         >
-          <Html
+          {/* <Html
             transform
             wrapperClass="htmlScreen"
             style={{
@@ -189,8 +189,8 @@ export default function Model({ ...props }) {
             rotation-z={Math.PI}
             flipZ={true} // Changed to a boolean instead of a string
           >
-            {/* <iframe src="https://didierchifan.com/" /> */}
-          </Html>
+            <iframe src="https://didierchifan.com/" />
+          </Html> */}
         </mesh>
         {/* displays with iframe on it */}
         <mesh
