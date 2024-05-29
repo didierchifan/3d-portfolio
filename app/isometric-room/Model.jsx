@@ -70,7 +70,40 @@ export default function Model({ ...props }) {
         geometry={nodes.paintingIrlo.geometry}
         material={bakedTexture}
         position={[1.986, 1.638, -0.502]}
-      ></mesh>
+      >
+        {activeToolTip != "irlo" ? (
+          <Html
+            center
+            position={ROOM_OBJECTS.irlo.buttonPosition}
+            distanceFactor={0.003}
+          >
+            <div
+              onClick={() => handleActiveToolTip("irlo")}
+              className="w-5 h-5 rounded-full bg-orange-500"
+            ></div>
+          </Html>
+        ) : (
+          <Html
+            center
+            position={ROOM_OBJECTS.irlo.buttonPosition}
+            distanceFactor={0.003}
+          >
+            <div
+              onClick={() => handleActiveToolTip("irlo")}
+              className="w-5 h-5 rounded-full bg-blue-600"
+            ></div>
+          </Html>
+        )}
+
+        <Html
+          center
+          position={ROOM_OBJECTS.irlo.tooltipPosition}
+          distanceFactor={0.003}
+          wrapperClass={activeToolTip === "irlo" ? "label" : "hidden"}
+        >
+          {ROOM_OBJECTS.irlo.description}
+        </Html>
+      </mesh>
       {/* up | irlo painting */}
 
       {/* DESK GROUP FOR CLICK TO ZOOM */}
@@ -215,7 +248,7 @@ export default function Model({ ...props }) {
           >
             <div
               onClick={() => handleActiveToolTip("tv")}
-              className="w-5 h-5 rounded-full bg-blue-500"
+              className="w-5 h-5 rounded-full bg-blue-600"
             ></div>
           </Html>
         )}
@@ -237,7 +270,40 @@ export default function Model({ ...props }) {
         material={bakedTexture}
         position={[-1.849, 0.097, 1.422]}
         rotation={[0, Math.PI / 2, 0]}
-      ></mesh>
+      >
+        {activeToolTip != "couch" ? (
+          <Html
+            center
+            position={ROOM_OBJECTS.ikeaCouch.buttonPosition}
+            distanceFactor={0.003}
+          >
+            <div
+              onClick={() => handleActiveToolTip("couch")}
+              className="w-5 h-5 rounded-full bg-orange-500"
+            ></div>
+          </Html>
+        ) : (
+          <Html
+            center
+            position={ROOM_OBJECTS.ikeaCouch.buttonPosition}
+            distanceFactor={0.003}
+          >
+            <div
+              onClick={() => handleActiveToolTip("couch")}
+              className="w-5 h-5 rounded-full bg-blue-600"
+            ></div>
+          </Html>
+        )}
+
+        <Html
+          center
+          position={ROOM_OBJECTS.ikeaCouch.tooltipPosition}
+          distanceFactor={0.003}
+          wrapperClass={activeToolTip === "couch" ? "label" : "hidden"}
+        >
+          {ROOM_OBJECTS.ikeaCouch.description}
+        </Html>
+      </mesh>
       <mesh
         geometry={nodes.appleRemote.geometry}
         material={bakedTexture}
@@ -262,7 +328,40 @@ export default function Model({ ...props }) {
         geometry={nodes.enetriShelf.geometry}
         material={bakedTexture}
         position={[-2.021, 0.829, -0.526]}
-      ></mesh>
+      >
+        {activeToolTip != "enetri" ? (
+          <Html
+            center
+            position={ROOM_OBJECTS.enetriShelf.buttonPosition}
+            distanceFactor={0.003}
+          >
+            <div
+              onClick={() => handleActiveToolTip("enetri")}
+              className="w-5 h-5 rounded-full bg-orange-500"
+            ></div>
+          </Html>
+        ) : (
+          <Html
+            center
+            position={ROOM_OBJECTS.enetriShelf.buttonPosition}
+            distanceFactor={0.003}
+          >
+            <div
+              onClick={() => handleActiveToolTip("enetri")}
+              className="w-5 h-5 rounded-full bg-blue-600"
+            ></div>
+          </Html>
+        )}
+
+        <Html
+          center
+          position={ROOM_OBJECTS.enetriShelf.tooltipPosition}
+          distanceFactor={0.003}
+          wrapperClass={activeToolTip === "enetri" ? "label" : "hidden"}
+        >
+          {ROOM_OBJECTS.enetriShelf.description}
+        </Html>
+      </mesh>
       <mesh
         geometry={nodes.ikeaLamp.geometry}
         material={bakedTexture}
@@ -273,7 +372,40 @@ export default function Model({ ...props }) {
         material={bakedTexture}
         position={[-2.03, 0.566, -0.487]}
         rotation={[0, 1.571, 0]}
-      ></mesh>
+      >
+        {" "}
+        {activeToolTip != "snowboard" ? (
+          <Html
+            center
+            position={ROOM_OBJECTS.snowboard.buttonPosition}
+            distanceFactor={0.003}
+          >
+            <div
+              onClick={() => handleActiveToolTip("snowboard")}
+              className="w-5 h-5 rounded-full bg-orange-500"
+            ></div>
+          </Html>
+        ) : (
+          <Html
+            center
+            position={ROOM_OBJECTS.snowboard.buttonPosition}
+            distanceFactor={0.003}
+          >
+            <div
+              onClick={() => handleActiveToolTip("snowboard")}
+              className="w-5 h-5 rounded-full bg-blue-600"
+            ></div>
+          </Html>
+        )}
+        <Html
+          center
+          position={ROOM_OBJECTS.snowboard.tooltipPosition}
+          distanceFactor={0.003}
+          wrapperClass={activeToolTip === "snowboard" ? "label" : "hidden"}
+        >
+          {ROOM_OBJECTS.snowboard.description}
+        </Html>
+      </mesh>
       <mesh
         geometry={nodes.decor.geometry}
         material={bakedTexture}
@@ -316,7 +448,40 @@ export default function Model({ ...props }) {
         geometry={nodes.booksChess.geometry}
         material={bakedTexture}
         position={[1.356, 1.243, -1.708]}
-      ></mesh>
+      >
+        {activeToolTip != "chessbooks" ? (
+          <Html
+            center
+            position={ROOM_OBJECTS.chessBooks.buttonPosition}
+            distanceFactor={0.003}
+          >
+            <div
+              onClick={() => handleActiveToolTip("chessbooks")}
+              className="w-5 h-5 rounded-full bg-orange-500"
+            ></div>
+          </Html>
+        ) : (
+          <Html
+            center
+            position={ROOM_OBJECTS.chessBooks.buttonPosition}
+            distanceFactor={0.003}
+          >
+            <div
+              onClick={() => handleActiveToolTip("chessbooks")}
+              className="w-5 h-5 rounded-full bg-blue-600"
+            ></div>
+          </Html>
+        )}
+
+        <Html
+          center
+          position={ROOM_OBJECTS.chessBooks.tooltipPosition}
+          distanceFactor={0.003}
+          wrapperClass={activeToolTip === "chessbooks" ? "label" : "hidden"}
+        >
+          {ROOM_OBJECTS.chessBooks.description}
+        </Html>
+      </mesh>
       {/* up | chessbooks */}
 
       {/* down | architecture books */}
@@ -324,7 +489,40 @@ export default function Model({ ...props }) {
         geometry={nodes.booksArchitecture.geometry}
         material={bakedTexture}
         position={[1.216, 0.924, -1.707]}
-      ></mesh>
+      >
+        {activeToolTip != "architecture" ? (
+          <Html
+            center
+            position={ROOM_OBJECTS.architectureBooks.buttonPosition}
+            distanceFactor={0.003}
+          >
+            <div
+              onClick={() => handleActiveToolTip("architecture")}
+              className="w-5 h-5 rounded-full bg-orange-500"
+            ></div>
+          </Html>
+        ) : (
+          <Html
+            center
+            position={ROOM_OBJECTS.architectureBooks.buttonPosition}
+            distanceFactor={0.003}
+          >
+            <div
+              onClick={() => handleActiveToolTip("architecture")}
+              className="w-5 h-5 rounded-full bg-blue-600"
+            ></div>
+          </Html>
+        )}
+
+        <Html
+          center
+          position={ROOM_OBJECTS.architectureBooks.tooltipPosition}
+          distanceFactor={0.003}
+          wrapperClass={activeToolTip === "architecture" ? "label" : "hidden"}
+        >
+          {ROOM_OBJECTS.architectureBooks.description}
+        </Html>
+      </mesh>
       {/* up | architecture books */}
 
       {/* down | philosofy,biofrafy books */}
@@ -332,7 +530,40 @@ export default function Model({ ...props }) {
         geometry={nodes.booksPhilosofy.geometry}
         material={bakedTexture}
         position={[1.178, 0.54, -1.708]}
-      ></mesh>
+      >
+        {activeToolTip != "books" ? (
+          <Html
+            center
+            position={ROOM_OBJECTS.allBooks.buttonPosition}
+            distanceFactor={0.003}
+          >
+            <div
+              onClick={() => handleActiveToolTip("books")}
+              className="w-5 h-5 rounded-full bg-orange-500"
+            ></div>
+          </Html>
+        ) : (
+          <Html
+            center
+            position={ROOM_OBJECTS.allBooks.buttonPosition}
+            distanceFactor={0.003}
+          >
+            <div
+              onClick={() => handleActiveToolTip("books")}
+              className="w-5 h-5 rounded-full bg-blue-600"
+            ></div>
+          </Html>
+        )}
+
+        <Html
+          center
+          position={ROOM_OBJECTS.allBooks.tooltipPosition}
+          distanceFactor={0.003}
+          wrapperClass={activeToolTip === "books" ? "label" : "hidden"}
+        >
+          {ROOM_OBJECTS.allBooks.description}
+        </Html>
+      </mesh>
       <mesh
         geometry={nodes.booksBiographies.geometry}
         material={bakedTexture}
@@ -345,7 +576,40 @@ export default function Model({ ...props }) {
         geometry={nodes.turntable.geometry}
         material={bakedTexture}
         position={[-1.34, 0.837, -1.849]}
-      ></mesh>
+      >
+        {activeToolTip != "music" ? (
+          <Html
+            center
+            position={ROOM_OBJECTS.music.buttonPosition}
+            distanceFactor={0.003}
+          >
+            <div
+              onClick={() => handleActiveToolTip("music")}
+              className="w-5 h-5 rounded-full bg-orange-500"
+            ></div>
+          </Html>
+        ) : (
+          <Html
+            center
+            position={ROOM_OBJECTS.music.buttonPosition}
+            distanceFactor={0.003}
+          >
+            <div
+              onClick={() => handleActiveToolTip("music")}
+              className="w-5 h-5 rounded-full bg-blue-600"
+            ></div>
+          </Html>
+        )}
+
+        <Html
+          center
+          position={ROOM_OBJECTS.music.tooltipPosition}
+          distanceFactor={0.003}
+          wrapperClass={activeToolTip === "music" ? "label" : "hidden"}
+        >
+          {ROOM_OBJECTS.music.description}
+        </Html>
+      </mesh>
 
       <mesh
         geometry={nodes.vinyls.geometry}
@@ -359,7 +623,40 @@ export default function Model({ ...props }) {
         geometry={nodes.appleHomepod.geometry}
         material={bakedTexture}
         position={[-0.693, 0.449, -1.846]}
-      ></mesh>
+      >
+        {activeToolTip != "tvStand" ? (
+          <Html
+            center
+            position={ROOM_OBJECTS.tvStand.buttonPosition}
+            distanceFactor={0.003}
+          >
+            <div
+              onClick={() => handleActiveToolTip("tvStand")}
+              className="w-5 h-5 rounded-full bg-orange-500"
+            ></div>
+          </Html>
+        ) : (
+          <Html
+            center
+            position={ROOM_OBJECTS.tvStand.buttonPosition}
+            distanceFactor={0.003}
+          >
+            <div
+              onClick={() => handleActiveToolTip("tvStand")}
+              className="w-5 h-5 rounded-full bg-blue-600"
+            ></div>
+          </Html>
+        )}
+
+        <Html
+          center
+          position={ROOM_OBJECTS.tvStand.tooltipPosition}
+          distanceFactor={0.003}
+          wrapperClass={activeToolTip === "tvStand" ? "label" : "hidden"}
+        >
+          {ROOM_OBJECTS.tvStand.description}
+        </Html>
+      </mesh>
       <mesh
         geometry={nodes.appleTV.geometry}
         material={bakedTexture}
@@ -374,7 +671,40 @@ export default function Model({ ...props }) {
         material={bakedTexture}
         position={[-0.038, 0.46, -1.817]}
         rotation={[0, -1.571, 0]}
-      ></mesh>
+      >
+        {activeToolTip != "f1" ? (
+          <Html
+            center
+            position={ROOM_OBJECTS.mcLaren.buttonPosition}
+            distanceFactor={0.003}
+          >
+            <div
+              onClick={() => handleActiveToolTip("f1")}
+              className="w-5 h-5 rounded-full bg-orange-500"
+            ></div>
+          </Html>
+        ) : (
+          <Html
+            center
+            position={ROOM_OBJECTS.mcLaren.buttonPosition}
+            distanceFactor={0.003}
+          >
+            <div
+              onClick={() => handleActiveToolTip("f1")}
+              className="w-5 h-5 rounded-full bg-blue-600"
+            ></div>
+          </Html>
+        )}
+
+        <Html
+          center
+          position={ROOM_OBJECTS.mcLaren.tooltipPosition}
+          distanceFactor={0.003}
+          wrapperClass={activeToolTip === "f1" ? "label" : "hidden"}
+        >
+          {ROOM_OBJECTS.mcLaren.description}
+        </Html>
+      </mesh>
 
       <mesh
         castShadow
@@ -392,10 +722,46 @@ export default function Model({ ...props }) {
         geometry={nodes.catan.geometry}
         material={bakedTexture}
         position={[1.028, 1.257, -1.688]}
-      ></mesh>
+      >
+        {activeToolTip != "catan" ? (
+          <Html
+            center
+            position={ROOM_OBJECTS.catan.buttonPosition}
+            distanceFactor={0.003}
+          >
+            <div
+              onClick={() => handleActiveToolTip("catan")}
+              className="w-5 h-5 rounded-full bg-orange-500 z-0"
+            ></div>
+          </Html>
+        ) : (
+          <Html
+            center
+            position={ROOM_OBJECTS.catan.buttonPosition}
+            distanceFactor={0.003}
+          >
+            <div
+              onClick={() => handleActiveToolTip("catan")}
+              className="w-5 h-5 rounded-full bg-blue-600 z-0"
+            ></div>
+          </Html>
+        )}
+
+        <Html
+          center
+          position={ROOM_OBJECTS.catan.tooltipPosition}
+          distanceFactor={0.003}
+          wrapperClass={activeToolTip === "catan" ? "label" : "hidden"}
+        >
+          {ROOM_OBJECTS.catan.description}
+        </Html>
+      </mesh>
       {/* up | catan */}
 
-      <mesh geometry={nodes.paintingsPacea.geometry} material={bakedTexture} />
+      <mesh
+        geometry={nodes.paintingsPacea.geometry}
+        material={bakedTexture}
+      ></mesh>
 
       <mesh
         geometry={nodes.ikeaTable.geometry}
@@ -416,14 +782,80 @@ export default function Model({ ...props }) {
         material={bakedTexture}
         position={[-0.211, 0.191, -1.733]}
         rotation={[0, Math.PI / 2, 0]}
-      ></mesh>
+      >
+        {activeToolTip != "boardgames" ? (
+          <Html
+            center
+            position={ROOM_OBJECTS.boardgames.buttonPosition}
+            distanceFactor={0.003}
+          >
+            <div
+              onClick={() => handleActiveToolTip("boardgames")}
+              className="w-5 h-5 rounded-full bg-orange-500"
+            ></div>
+          </Html>
+        ) : (
+          <Html
+            center
+            position={ROOM_OBJECTS.boardgames.buttonPosition}
+            distanceFactor={0.003}
+          >
+            <div
+              onClick={() => handleActiveToolTip("boardgames")}
+              className="w-5 h-5 rounded-full bg-blue-600"
+            ></div>
+          </Html>
+        )}
+
+        <Html
+          center
+          position={ROOM_OBJECTS.boardgames.tooltipPosition}
+          distanceFactor={0.003}
+          wrapperClass={activeToolTip === "boardgames" ? "label" : "hidden"}
+        >
+          {ROOM_OBJECTS.boardgames.description}
+        </Html>
+      </mesh>
 
       <mesh
         geometry={nodes.oziCat.geometry}
         material={bakedTexture}
         position={[-0.579, 0.174, -0.477]}
         rotation={[0, -0.557, 0]}
-      ></mesh>
+      >
+        {activeToolTip != "ozi" ? (
+          <Html
+            center
+            position={ROOM_OBJECTS.ozi.buttonPosition}
+            distanceFactor={0.003}
+          >
+            <div
+              onClick={() => handleActiveToolTip("ozi")}
+              className="w-5 h-5 rounded-full bg-orange-500"
+            ></div>
+          </Html>
+        ) : (
+          <Html
+            center
+            position={ROOM_OBJECTS.ozi.buttonPosition}
+            distanceFactor={0.003}
+          >
+            <div
+              onClick={() => handleActiveToolTip("ozi")}
+              className="w-5 h-5 rounded-full bg-blue-600"
+            ></div>
+          </Html>
+        )}
+
+        <Html
+          center
+          position={ROOM_OBJECTS.ozi.tooltipPosition}
+          distanceFactor={0.003}
+          wrapperClass={activeToolTip === "ozi" ? "label" : "hidden"}
+        >
+          {ROOM_OBJECTS.ozi.description}
+        </Html>
+      </mesh>
 
       <mesh
         geometry={nodes.floor.geometry}
@@ -446,7 +878,40 @@ export default function Model({ ...props }) {
         geometry={nodes.ikeaDoubleShelf008.geometry}
         material={bakedTexture}
         position={[1.19, 0.75, -1.801]}
-      ></mesh>
+      >
+        {activeToolTip != "chessboard" ? (
+          <Html
+            center
+            position={ROOM_OBJECTS.chessboard.buttonPosition}
+            distanceFactor={0.003}
+          >
+            <div
+              onClick={() => handleActiveToolTip("chessboard")}
+              className="w-5 h-5 rounded-full bg-orange-500"
+            ></div>
+          </Html>
+        ) : (
+          <Html
+            center
+            position={ROOM_OBJECTS.chessboard.buttonPosition}
+            distanceFactor={0.003}
+          >
+            <div
+              onClick={() => handleActiveToolTip("chessboard")}
+              className="w-5 h-5 rounded-full bg-blue-600"
+            ></div>
+          </Html>
+        )}
+
+        <Html
+          center
+          position={ROOM_OBJECTS.chessboard.tooltipPosition}
+          distanceFactor={0.003}
+          wrapperClass={activeToolTip === "chessboard" ? "label" : "hidden"}
+        >
+          {ROOM_OBJECTS.chessboard.description}
+        </Html>
+      </mesh>
       <mesh
         geometry={nodes.turntableSpeakers.geometry}
         material={bakedTexture}
@@ -468,7 +933,40 @@ export default function Model({ ...props }) {
         geometry={nodes.desk.geometry}
         material={bakedTexture}
         position={[1.794, 0.053, 0.129]}
-      ></mesh>
+      >
+        {" "}
+        {activeToolTip != "desk" ? (
+          <Html
+            center
+            position={ROOM_OBJECTS.desk.buttonPosition}
+            distanceFactor={0.003}
+          >
+            <div
+              onClick={() => handleActiveToolTip("desk")}
+              className="w-5 h-5 rounded-full bg-orange-500"
+            ></div>
+          </Html>
+        ) : (
+          <Html
+            center
+            position={ROOM_OBJECTS.desk.buttonPosition}
+            distanceFactor={0.003}
+          >
+            <div
+              onClick={() => handleActiveToolTip("desk")}
+              className="w-5 h-5 rounded-full bg-blue-600"
+            ></div>
+          </Html>
+        )}
+        <Html
+          center
+          position={ROOM_OBJECTS.desk.tooltipPosition}
+          distanceFactor={0.003}
+          wrapperClass={activeToolTip === "desk" ? "label" : "hidden"}
+        >
+          {ROOM_OBJECTS.desk.description}
+        </Html>
+      </mesh>
       <mesh
         geometry={nodes.ikeaMonitorStand.geometry}
         material={bakedTexture}
@@ -489,7 +987,40 @@ export default function Model({ ...props }) {
         geometry={nodes.darts001.geometry}
         material={bakedTexture}
         position={[1.973, 1.836, 0.744]}
-      ></mesh>
+      >
+        {" "}
+        {activeToolTip != "pacea" ? (
+          <Html
+            center
+            position={ROOM_OBJECTS.pacea.buttonPosition}
+            distanceFactor={0.003}
+          >
+            <div
+              onClick={() => handleActiveToolTip("pacea")}
+              className="w-5 h-5 rounded-full bg-orange-500"
+            ></div>
+          </Html>
+        ) : (
+          <Html
+            center
+            position={ROOM_OBJECTS.pacea.buttonPosition}
+            distanceFactor={0.003}
+          >
+            <div
+              onClick={() => handleActiveToolTip("pacea")}
+              className="w-5 h-5 rounded-full bg-blue-600"
+            ></div>
+          </Html>
+        )}
+        <Html
+          center
+          position={ROOM_OBJECTS.pacea.tooltipPosition}
+          distanceFactor={0.003}
+          wrapperClass={activeToolTip === "pacea" ? "label" : "hidden"}
+        >
+          {ROOM_OBJECTS.pacea.description}
+        </Html>{" "}
+      </mesh>
 
       <mesh
         geometry={nodes.sectionPlanes002.geometry}
@@ -509,7 +1040,40 @@ export default function Model({ ...props }) {
         material={bakedTexture}
         position={[0.142, 0.605, 0.696]}
         rotation={[-Math.PI, 0.546, -Math.PI]}
-      ></mesh>
+      >
+        {activeToolTip != "table" ? (
+          <Html
+            center
+            position={ROOM_OBJECTS.coffeeTable.buttonPosition}
+            distanceFactor={0.003}
+          >
+            <div
+              onClick={() => handleActiveToolTip("table")}
+              className="w-5 h-5 rounded-full bg-orange-500"
+            ></div>
+          </Html>
+        ) : (
+          <Html
+            center
+            position={ROOM_OBJECTS.coffeeTable.buttonPosition}
+            distanceFactor={0.003}
+          >
+            <div
+              onClick={() => handleActiveToolTip("table")}
+              className="w-5 h-5 rounded-full bg-blue-600"
+            ></div>
+          </Html>
+        )}
+
+        <Html
+          center
+          position={ROOM_OBJECTS.coffeeTable.tooltipPosition}
+          distanceFactor={0.003}
+          wrapperClass={activeToolTip === "table" ? "label" : "hidden"}
+        >
+          {ROOM_OBJECTS.coffeeTable.description}
+        </Html>
+      </mesh>
       <mesh
         geometry={nodes.tableBooks.geometry}
         material={bakedTexture}
@@ -555,7 +1119,40 @@ export default function Model({ ...props }) {
         geometry={nodes.turntableStand.geometry}
         material={bakedTexture}
         position={[-1.34, 0.147, -1.76]}
-      ></mesh>
+      >
+        {activeToolTip != "donut" ? (
+          <Html
+            center
+            position={ROOM_OBJECTS.donut.buttonPosition}
+            distanceFactor={0.003}
+          >
+            <div
+              onClick={() => handleActiveToolTip("donut")}
+              className="w-5 h-5 rounded-full bg-orange-500"
+            ></div>
+          </Html>
+        ) : (
+          <Html
+            center
+            position={ROOM_OBJECTS.donut.buttonPosition}
+            distanceFactor={0.003}
+          >
+            <div
+              onClick={() => handleActiveToolTip("donut")}
+              className="w-5 h-5 rounded-full bg-blue-600"
+            ></div>
+          </Html>
+        )}
+
+        <Html
+          center
+          position={ROOM_OBJECTS.donut.tooltipPosition}
+          distanceFactor={0.003}
+          wrapperClass={activeToolTip === "donut" ? "label" : "hidden"}
+        >
+          {ROOM_OBJECTS.donut.description}
+        </Html>
+      </mesh>
       <mesh
         geometry={nodes.plinta.geometry}
         material={bakedTexture}

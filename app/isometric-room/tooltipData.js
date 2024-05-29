@@ -45,7 +45,7 @@ export const ROOM_OBJECTS = {
       CHESSBOARD signed by 10 of the best players in the world:
       Ian Nepomniachtchi | Alireza Firouzja | Fabiano Caruana | Anish Giri | Ding Liren | Wesley So | Maxime Vachier-Lagrave | Jan-Krysztof Duda | Richard Rapport | Bogdan-Daniel Deac,
       `,
-    buttonPosition: [0, 1.4, -0.1],
+    buttonPosition: [0, 1.37, -0.1],
     tooltipPosition: [0, 1.8, -0.1],
   },
 
@@ -57,8 +57,8 @@ export const ROOM_OBJECTS = {
       Next to chess, it's my ultimate favorite game, no contest
       Play with me on colonist.io: @ddrchf
       `,
-    buttonPosition: [0, 0.27, 0],
-    tooltipPosition: [0, 0.65, 0],
+    buttonPosition: [0, 0.26, 0],
+    tooltipPosition: [0, 0.55, 0],
   },
 
   chessBooks: {
@@ -67,8 +67,8 @@ export const ROOM_OBJECTS = {
       FAVOURITE CHESS BOOKS:
       The Woodpecker Method | Art of Attack in Chess | Amateur to IM | Simple Chess | Chess Structures | Mayhem in the Morra | Dvoretsky's Endgame Manual | 100 Endgames You Must Know
       `,
-    buttonPosition: [0, 0.1, 0],
-    tooltipPosition: [0, 0.5, 0],
+    buttonPosition: [0.0, 0.27, 0.02],
+    tooltipPosition: [0, 0.7, 0],
   },
 
   architectureBooks: {
@@ -79,8 +79,8 @@ export const ROOM_OBJECTS = {
       Remarks on 21 Works by RAFAEL MONEO
       Notations by BERNARD TSCHUMI
       `,
-    buttonPosition: [0.4, 0, 0.15],
-    tooltipPosition: [0.4, 0.33, 0.15],
+    buttonPosition: [0.15, 0.0, 0.0],
+    tooltipPosition: [0.15, 0.5, 0.3],
   },
 
   allBooks: {
@@ -120,7 +120,7 @@ export const ROOM_OBJECTS = {
       Aaaaaple sheep, checking in!
       `,
     buttonPosition: [-0.1, 0.15, 0],
-    tooltipPosition: [-0.1, 0.5, 0],
+    tooltipPosition: [-0.1, 0.4, 0],
   },
 
   mcLaren: {
@@ -130,7 +130,7 @@ export const ROOM_OBJECTS = {
       I'll be honest with you, it's been sitting unfinished for the past six months.
       `,
     buttonPosition: [-0.1, 0.13, -0.1],
-    tooltipPosition: [-0.1, 0.5, -0.1],
+    tooltipPosition: [-0.1, 0.4, -0.1],
   },
 
   boardgames: {
@@ -192,7 +192,7 @@ export const ROOM_OBJECTS = {
       RANDOM BOOKS that I never finished reading
       `,
     buttonPosition: [0, 0.8, 0],
-    tooltipPosition: [0, 1.2, 0],
+    tooltipPosition: [0, 1.1, 0],
   },
 
   // couch area
