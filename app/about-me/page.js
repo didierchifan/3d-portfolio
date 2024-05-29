@@ -13,14 +13,14 @@ export default function AboutMe() {
         {/* 2d canvas api */}
         <div
           style={{ backgroundColor: "#181818" }}
-          className=" flex w-1/2 h-screen items-center justify-center"
+          className="hidden lg:flex w-1/2 h-screen items-center justify-center"
         >
           <Text />
           <Scene />
         </div>
 
         {/* react three fiber canvas */}
-        <div style={{ backgroundColor: "#181818" }} className="w-1/2">
+        <div style={{ backgroundColor: "#181818" }} className="w-full lg:w-1/2">
           <Canvas
             style={{
               top: 0,

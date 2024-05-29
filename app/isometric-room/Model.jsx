@@ -158,7 +158,7 @@ export default function Model({ ...props }) {
             position={[0, 0, -0.001]}
             rotation-x={-1.57}
           >
-            <div wrapperclass="iframe--div sm:hidden">
+            <div className="hidden md:block" wrapperclass="iframe--div">
               <iframe src="https://punctoranj.ro/" />
             </div>
           </Html>
