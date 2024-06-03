@@ -12,7 +12,7 @@ export default function Experience() {
   const cameraControlsRef = useRef();
   return (
     <>
-      <Perf />
+      {/* <Perf /> */}
       <CameraControls
         ref={cameraControlsRef}
         makeDefault={true}
@@ -29,7 +29,7 @@ export default function Experience() {
         size={3}
         scale={[0.4, 0.4, 0.4]}
         position-y={-1}
-        position-x={-0.3}
+        position-x={-0.5}
         position-z={-0.6}
         speed={0.3}
         count={50}

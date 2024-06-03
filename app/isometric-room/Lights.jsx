@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState, useMemo, useRef } from "react";
 
 import * as THREE from "three";
 import useLeva from "./useLeva";
@@ -20,7 +20,7 @@ export default function Lights() {
   const [paintLamp, setPaintLamp] = useState(80);
   const [paintLampLightClicked, setPaintLampLightClicked] = useState(false);
 
-  const [tvLight, setTVLight] = useState(30);
+  const [tvLight, setTVLight] = useState(25);
   const [tvLightClicked, setTvLightClicked] = useState(false);
 
   function handleMainLight() {
@@ -67,7 +67,7 @@ export default function Lights() {
     setDonutLight(donutLightClicked ? 0 : 12.5);
     setLamp(lampLightClicked ? 0 : 5);
     setPaintLamp(paintLampLightClicked ? 0 : 80);
-    setTVLight(tvLightClicked ? 0 : 30);
+    setTVLight(tvLightClicked ? 0 : 20);
   }, [
     mainLightClicked,
     donutLightClicked,
@@ -85,13 +85,11 @@ export default function Lights() {
 
       {/* tv ambient light */}
       <rectAreaLight
-        width={1.0}
+        width={1}
         height={0.5}
         intensity={tvLight}
         color={"#ffffff"}
-        position-x={-0.08}
-        position-y={-0.11}
-        position-z={-1.92}
+        position={[-0.18, -0.17, -1.4]}
         rotation-x={3.12}
         rotation-y={3.15}
         rotation-z={0}
@@ -99,26 +97,26 @@ export default function Lights() {
 
       {/* ikea donut light */}
       <rectAreaLight
-        width={0.3}
-        height={0.3}
-        position={[-1.14, 0.53, -1.75]}
+        width={0.5}
+        height={0.5}
+        position={[-1.28, 0.55, -1.6]}
         intensity={donutLight}
         color={"#ff8f00"}
       />
 
       {/* akja light */}
       <pointLight
-        position-x={-1.88}
+        position-x={-2}
         position-y={0.9}
         position-z={-0.43}
         intensity={lamp}
-        color={"#fff59f"}
+        color={"#ffffff"}
         distance={1.5}
         decay={0.5}
       />
 
       {/* painting spotlight */}
-      <group position-z={-0.55}>
+      <group position={[-0.05, -0.35, -0.55]}>
         <primitive
           object={spotlight}
           position-x={2.03}

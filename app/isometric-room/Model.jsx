@@ -37,6 +37,10 @@ export default function Model({ cameraControlsRef, ...props }) {
   //load the painting as separate texture
   const paintingTexture = useTexture("/isometric-room/3d-model/irlo.webp");
 
+  //cv texture on ipad
+  const cvImage = useTexture("/isometric-room/3d-model/cv.webp");
+  cvImage.colorSpace = THREE.SRGBColorSpace;
+
   //active tooltip state
   const [activeToolTip, setActiveTooltip] = useState(null);
 
@@ -118,7 +122,7 @@ export default function Model({ cameraControlsRef, ...props }) {
         <planeGeometry args={[1.29, 0.78]} />
         <meshBasicMaterial />
 
-        <Html
+        {/* <Html
           transform
           distanceFactor={0.107}
           position={[0, 0, 0]}
@@ -143,7 +147,7 @@ export default function Model({ cameraControlsRef, ...props }) {
               src="https://didierchifan.com/shaders-library"
             />
           </div>
-        </Html>
+        </Html> */}
       </mesh>
       {/* down | irlo painting */}
       <mesh
@@ -156,7 +160,7 @@ export default function Model({ cameraControlsRef, ...props }) {
       />
       <mesh position={[1.977, 1.638, -0.502]} rotation={[0, -Math.PI / 2, 0]}>
         <planeGeometry args={[1.49, 1.49, 1.49]} />
-        <meshBasicMaterial side={THREE.DoubleSide} map={paintingTexture} />
+        <meshStandardMaterial side={THREE.DoubleSide} map={paintingTexture} />
       </mesh>
       <mesh
         geometry={nodes.paintingIrlo.geometry}
@@ -282,15 +286,19 @@ export default function Model({ cameraControlsRef, ...props }) {
         {/* ipad */}
         <mesh
           geometry={nodes.ipadScreen.geometry}
-          material={new THREE.MeshBasicMaterial({ color: "black" })}
-          position={[1.438, 0.997, -0.95]}
+          position={[1.444, 0.997, -1]}
           rotation={[0, 0, 1.194]}
-        />
+          visible={true}
+        >
+          <meshStandardMaterial map={cvImage} />
+        </mesh>
+
         <mesh
           geometry={nodes.appleIpad.geometry}
           material={bakedTexture}
-          position={[1.444, 0.997, -0.95]}
+          position={[1.444, 0.997, -1]}
           rotation={[0, 0, 1.194]}
+          visible={true}
         />
         {/* <mesh
           geometry={nodes.appleIphone.geometry}
@@ -538,10 +546,11 @@ export default function Model({ cameraControlsRef, ...props }) {
       {/* down | ikea donut */}
       <mesh
         geometry={nodes.ikeaDonut.geometry}
-        material={bakedTexture}
         position={[-1.326, 1.924, -1.933]}
         rotation={[Math.PI / 2, 0, 0]}
-      ></mesh>
+      >
+        <meshStandardMaterial color={"orange"} />
+      </mesh>
       {/* up | ikea donut */}
       {/* down | snowboarding setup */}
       <mesh
@@ -549,6 +558,7 @@ export default function Model({ cameraControlsRef, ...props }) {
         material={bakedTexture}
         position={[-1.902, 1.325, -1.963]}
         rotation={[Math.PI / 2, Math.PI / 2, 0]}
+        visible
       ></mesh>
       {/* up | snowboarding setup */}
       {/* down | chessboard  */}
