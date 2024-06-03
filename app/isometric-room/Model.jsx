@@ -19,10 +19,7 @@ function useLoadedTexture(textureUrl) {
   const loadedTexture = useTexture(textureUrl);
   if (loadedTexture) {
     loadedTexture.colorSpace = THREE.SRGBColorSpace; // Set the correct encoding
-    loadedTexture.flipY = "true";
-    loadedTexture.wrapS = THREE.RepeatWrapping;
-    loadedTexture.wrapT = THREE.RepeatWrapping;
-    loadedTexture.repeat.set(1, 1);
+    loadedTexture.flipY = "false";
   }
   return loadedTexture;
 }
@@ -38,10 +35,7 @@ export default function Model({ cameraControlsRef, ...props }) {
   const bakedTexture = new THREE.MeshStandardMaterial({ map: loadedTexture });
 
   //load the painting as separate texture
-  const loadedPainting = useLoadedTexture("/isometric-room/3d-model/irlo.webp");
-  const paintingTexture = new THREE.MeshStandardMaterial({
-    map: loadedPainting,
-  });
+  const paintingTexture = useTexture("/isometric-room/3d-model/irlo.webp");
 
   //active tooltip state
   const [activeToolTip, setActiveTooltip] = useState(null);
@@ -116,7 +110,6 @@ export default function Model({ cameraControlsRef, ...props }) {
 
   //make sure the texture is properly loaded before rendering the model
   if (!loadedTexture) return null;
-  if (!loadedPainting) return null;
 
   return (
     <group {...props} dispose={null}>
@@ -161,14 +154,9 @@ export default function Model({ cameraControlsRef, ...props }) {
         position={[1.986, 1.638, -0.502]}
         visible={false}
       />
-
-      <mesh
-        position={[1.977, 1.638, -0.502]}
-        rotation={[Math.PI, -Math.PI / 2, 0]}
-        material={paintingTexture}
-      >
+      <mesh position={[1.977, 1.638, -0.502]} rotation={[0, -Math.PI / 2, 0]}>
         <planeGeometry args={[1.49, 1.49, 1.49]} />
-        <meshStandardMaterial side={THREE.DoubleSide} color={"white"} />
+        <meshBasicMaterial side={THREE.DoubleSide} map={paintingTexture} />
       </mesh>
       <mesh
         geometry={nodes.paintingIrlo.geometry}
