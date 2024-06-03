@@ -20,10 +20,7 @@ export default function AboutMe() {
         </div>
 
         {/* react three fiber canvas */}
-        <div
-          style={{ backgroundColor: "#181818" }}
-          className="w-full h-full lg:w-1/2"
-        >
+        <div style={{ backgroundColor: "#181818" }} className="w-full lg:w-1/2">
           <Canvas
             style={{
               top: 0,
