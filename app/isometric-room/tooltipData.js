@@ -34,7 +34,7 @@ export const ROOM_OBJECTS = {
       Eames Style Lobby Chair
       Poldina Pro Lamp
     `,
-    buttonPosition: [-0.2, 0.8, -0.25],
+    buttonPosition: [-0.2, 0.8, -0.33],
     tooltipPosition: [-0.2, 1.25, -0.25],
   },
 
@@ -167,7 +167,7 @@ export const ROOM_OBJECTS = {
     id: 14,
     description: `Favourite Lamp: IKEA VARMBLIXT`,
     buttonPosition: [0.012, 2.1, -0.18],
-    tooltipPosition: [0.012, 2.25, -0.18],
+    tooltipPosition: [0.012, 2.35, -0.18],
   },
 
   snowboard: {
@@ -180,7 +180,7 @@ export const ROOM_OBJECTS = {
       SEE YOU ON THE SLOPES!
       `,
     buttonPosition: [1.45, 1.68, 0.14],
-    tooltipPosition: [1.2, 2.2, 0],
+    tooltipPosition: [1.2, 2.1, 0],
   },
 
   // enetri shelf

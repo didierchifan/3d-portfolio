@@ -12,28 +12,74 @@ import {
 } from "@react-three/drei";
 import { ROOM_OBJECTS } from "./tooltipData";
 
+import { ChairContext } from "./context";
+
 // custom hook for texture loading
-function useLoadedTexture() {
-  const loadedTexture = useTexture("/isometric-room/3d-model/baked.jpg");
+function useLoadedTexture(textureUrl) {
+  const loadedTexture = useTexture(textureUrl);
   if (loadedTexture) {
     loadedTexture.colorSpace = THREE.SRGBColorSpace; // Set the correct encoding
-    loadedTexture.flipY = "false";
+    loadedTexture.flipY = "true";
+    loadedTexture.wrapS = THREE.RepeatWrapping;
+    loadedTexture.wrapT = THREE.RepeatWrapping;
+    loadedTexture.repeat.set(1, 1);
   }
   return loadedTexture;
 }
 
-export default function Model({ ...props }) {
+export default function Model({ cameraControlsRef, ...props }) {
   //loading the model
   const { nodes, materials } = useGLTF(
     "/isometric-room/3d-model/room-components.glb"
   );
-  //load texture calling the custom hook
-  const loadedTexture = useLoadedTexture();
+
+  //load the baked texture
+  const loadedTexture = useLoadedTexture("/isometric-room/3d-model/baked.webp");
   const bakedTexture = new THREE.MeshStandardMaterial({ map: loadedTexture });
+
+  //load the painting as separate texture
+  const loadedPainting = useLoadedTexture("/isometric-room/3d-model/irlo.webp");
+  const paintingTexture = new THREE.MeshStandardMaterial({
+    map: loadedPainting,
+  });
 
   //active tooltip state
   const [activeToolTip, setActiveTooltip] = useState(null);
 
+  //change cursor on hover
+  const [hovered, setHover] = useState();
+  useCursor(hovered);
+
+  // HAVE A SIT functionality
+
+  //state
+  const [isSeated, setIsSeated] = useState();
+
+  //the box I want to fit the camera on
+  const meshRef = useRef();
+
+  //handle sit down
+  useEffect(() => {
+    if (isSeated === null) {
+      //do nothing
+    } else if (!isSeated) {
+      cameraControlsRef.current?.reset(true);
+    } else {
+      cameraControlsRef.current?.fitToBox(meshRef.current).then(() => {
+        cameraControlsRef.current?.setPosition(-6.9, 2.3, -0.5, true);
+      });
+    }
+  }, [isSeated]);
+
+  const handleClickChair = () => {
+    setIsSeated(!isSeated);
+  };
+
+  const handleClickDesk = () => {
+    if (isSeated) setIsSeated(!isSeated);
+  };
+
+  //tooltips functionality
   const handleActiveToolTip = (id) => {
     if (activeToolTip === id) {
       setActiveTooltip(null);
@@ -59,8 +105,8 @@ export default function Model({ ...props }) {
   //chair animation
   const topChairRef = useRef();
   useFrame((state, delta) => {
-    const frequency = 1; // Adjust the frequency of oscillation
-    const magnitude = -2; // Adjust the magnitude of rotation
+    const frequency = 1;
+    const magnitude = -2;
 
     const rotationDelta =
       Math.sin(state.clock.elapsedTime * frequency) * magnitude * delta * 0.3;
@@ -70,6 +116,7 @@ export default function Model({ ...props }) {
 
   //make sure the texture is properly loaded before rendering the model
   if (!loadedTexture) return null;
+  if (!loadedPainting) return null;
 
   return (
     <group {...props} dispose={null}>
@@ -77,13 +124,57 @@ export default function Model({ ...props }) {
       <mesh position={[-0.257, 1.248, -1.838]}>
         <planeGeometry args={[1.29, 0.78]} />
         <meshBasicMaterial />
-      </mesh>
 
+        <Html
+          transform
+          distanceFactor={0.107}
+          position={[0, 0, 0]}
+          rotation={[0, 0, 0]}
+          style={{
+            width: "1920px",
+            height: "1150px",
+            transform: "scale(2.5)",
+          }}
+        >
+          <div
+            className="hidden md:block"
+            style={{ width: "100%", height: "100%", zIndex: "-1" }}
+          >
+            <iframe
+              style={{
+                width: "100%",
+                height: "100%",
+                border: "none",
+                zIndex: "-1",
+              }}
+              src="https://didierchifan.com/shaders-library"
+            />
+          </div>
+        </Html>
+      </mesh>
       {/* down | irlo painting */}
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={nodes.paintingIrlo001.geometry}
+        material={paintingTexture}
+        position={[1.986, 1.638, -0.502]}
+        visible={false}
+      />
+
+      <mesh
+        position={[1.977, 1.638, -0.502]}
+        rotation={[Math.PI, -Math.PI / 2, 0]}
+        material={paintingTexture}
+      >
+        <planeGeometry args={[1.49, 1.49, 1.49]} />
+        <meshStandardMaterial side={THREE.DoubleSide} color={"white"} />
+      </mesh>
       <mesh
         geometry={nodes.paintingIrlo.geometry}
         material={bakedTexture}
         position={[1.986, 1.638, -0.502]}
+        visible={true}
       >
         {activeToolTip != "irlo" ? (
           <Html
@@ -93,6 +184,7 @@ export default function Model({ ...props }) {
           >
             <div
               onClick={() => handleActiveToolTip("irlo")}
+              style={{ cursor: "pointer" }}
               className="w-5 h-5 rounded-full bg-orange-500"
             ></div>
           </Html>
@@ -104,6 +196,7 @@ export default function Model({ ...props }) {
           >
             <div
               onClick={() => handleActiveToolTip("irlo")}
+              style={{ cursor: "pointer" }}
               className="w-5 h-5 rounded-full bg-blue-600"
             ></div>
           </Html>
@@ -119,10 +212,8 @@ export default function Model({ ...props }) {
         </Html>
       </mesh>
       {/* up | irlo painting */}
-
       {/* DESK GROUP FOR CLICK TO ZOOM */}
-
-      <group>
+      <group onClick={handleClickDesk} ref={meshRef}>
         {/* displays with iframe on it */}
         <mesh
           position-x={1.5}
@@ -227,20 +318,21 @@ export default function Model({ ...props }) {
         />
       </group>
       {/* up| DESK GROUP FOR CLICK TO ZOOM */}
-
       <mesh
         geometry={nodes.plantVase.geometry}
         material={bakedTexture}
         position={[1.705, 0.81, -1.02]}
         scale={0.077}
       ></mesh>
-
       {/* down| OBJECT WITH DESCRIPTIONS */}
       <mesh
+        onClick={handleClickChair}
         ref={topChairRef}
         geometry={nodes.eamsChair.geometry}
         material={bakedTexture}
         position={[0.85, 0.556, -0.515]}
+        onPointerOver={() => setHover(true)}
+        onPointerOut={() => setHover(false)}
       ></mesh>
       <mesh
         castShadow
@@ -257,7 +349,6 @@ export default function Model({ ...props }) {
         rotation={[0, 0, 1.288]}
       ></mesh> */}
       {/* tv description*/}
-
       <mesh
         geometry={nodes.tv.geometry}
         material={bakedTexture}
@@ -271,6 +362,7 @@ export default function Model({ ...props }) {
           >
             <div
               onClick={() => handleActiveToolTip("tv")}
+              style={{ cursor: "pointer" }}
               className="w-5 h-5 rounded-full bg-orange-500"
             ></div>
           </Html>
@@ -282,6 +374,7 @@ export default function Model({ ...props }) {
           >
             <div
               onClick={() => handleActiveToolTip("tv")}
+              style={{ cursor: "pointer" }}
               className="w-5 h-5 rounded-full bg-blue-600"
             ></div>
           </Html>
@@ -296,7 +389,6 @@ export default function Model({ ...props }) {
           {ROOM_OBJECTS.tv.description}
         </Html>
       </mesh>
-
       {/* up | tv */}
       {/* down | couch area */}
       <mesh
@@ -313,6 +405,7 @@ export default function Model({ ...props }) {
           >
             <div
               onClick={() => handleActiveToolTip("couch")}
+              style={{ cursor: "pointer" }}
               className="w-5 h-5 rounded-full bg-orange-500"
             ></div>
           </Html>
@@ -324,6 +417,7 @@ export default function Model({ ...props }) {
           >
             <div
               onClick={() => handleActiveToolTip("couch")}
+              style={{ cursor: "pointer" }}
               className="w-5 h-5 rounded-full bg-blue-600"
             ></div>
           </Html>
@@ -362,6 +456,7 @@ export default function Model({ ...props }) {
         geometry={nodes.enetriShelf.geometry}
         material={bakedTexture}
         position={[-2.021, 0.829, -0.526]}
+        visible={true}
       >
         {activeToolTip != "enetri" ? (
           <Html
@@ -371,6 +466,7 @@ export default function Model({ ...props }) {
           >
             <div
               onClick={() => handleActiveToolTip("enetri")}
+              style={{ cursor: "pointer" }}
               className="w-5 h-5 rounded-full bg-orange-500"
             ></div>
           </Html>
@@ -382,6 +478,7 @@ export default function Model({ ...props }) {
           >
             <div
               onClick={() => handleActiveToolTip("enetri")}
+              style={{ cursor: "pointer" }}
               className="w-5 h-5 rounded-full bg-blue-600"
             ></div>
           </Html>
@@ -406,8 +503,8 @@ export default function Model({ ...props }) {
         material={bakedTexture}
         position={[-2.03, 0.566, -0.487]}
         rotation={[0, 1.571, 0]}
+        visible={true}
       >
-        {" "}
         {activeToolTip != "snowboard" ? (
           <Html
             center
@@ -416,6 +513,7 @@ export default function Model({ ...props }) {
           >
             <div
               onClick={() => handleActiveToolTip("snowboard")}
+              style={{ cursor: "pointer" }}
               className="w-5 h-5 rounded-full bg-orange-500"
             ></div>
           </Html>
@@ -427,6 +525,7 @@ export default function Model({ ...props }) {
           >
             <div
               onClick={() => handleActiveToolTip("snowboard")}
+              style={{ cursor: "pointer" }}
               className="w-5 h-5 rounded-full bg-blue-600"
             ></div>
           </Html>
@@ -445,6 +544,7 @@ export default function Model({ ...props }) {
         material={bakedTexture}
         position={[-2.017, 0.75, -0.337]}
         rotation={[0, 0.426, 0]}
+        material-side={THREE.DoubleSide}
       />
       {/* up | bookshelf area */}
       {/* down | ikea donut */}
@@ -491,6 +591,7 @@ export default function Model({ ...props }) {
           >
             <div
               onClick={() => handleActiveToolTip("chessbooks")}
+              style={{ cursor: "pointer" }}
               className="w-5 h-5 rounded-full bg-orange-500"
             ></div>
           </Html>
@@ -502,6 +603,7 @@ export default function Model({ ...props }) {
           >
             <div
               onClick={() => handleActiveToolTip("chessbooks")}
+              style={{ cursor: "pointer" }}
               className="w-5 h-5 rounded-full bg-blue-600"
             ></div>
           </Html>
@@ -517,7 +619,6 @@ export default function Model({ ...props }) {
         </Html>
       </mesh>
       {/* up | chessbooks */}
-
       {/* down | architecture books */}
       <mesh
         geometry={nodes.booksArchitecture.geometry}
@@ -532,6 +633,7 @@ export default function Model({ ...props }) {
           >
             <div
               onClick={() => handleActiveToolTip("architecture")}
+              style={{ cursor: "pointer" }}
               className="w-5 h-5 rounded-full bg-orange-500"
             ></div>
           </Html>
@@ -543,6 +645,7 @@ export default function Model({ ...props }) {
           >
             <div
               onClick={() => handleActiveToolTip("architecture")}
+              style={{ cursor: "pointer" }}
               className="w-5 h-5 rounded-full bg-blue-600"
             ></div>
           </Html>
@@ -558,7 +661,6 @@ export default function Model({ ...props }) {
         </Html>
       </mesh>
       {/* up | architecture books */}
-
       {/* down | philosofy,biofrafy books */}
       <mesh
         geometry={nodes.booksPhilosofy.geometry}
@@ -573,6 +675,7 @@ export default function Model({ ...props }) {
           >
             <div
               onClick={() => handleActiveToolTip("books")}
+              style={{ cursor: "pointer" }}
               className="w-5 h-5 rounded-full bg-orange-500"
             ></div>
           </Html>
@@ -584,6 +687,7 @@ export default function Model({ ...props }) {
           >
             <div
               onClick={() => handleActiveToolTip("books")}
+              style={{ cursor: "pointer" }}
               className="w-5 h-5 rounded-full bg-blue-600"
             ></div>
           </Html>
@@ -604,7 +708,6 @@ export default function Model({ ...props }) {
         position={[1.167, 0.201, -1.708]}
       />
       {/* up | philosofy, biography books  */}
-
       {/* down | turntable  */}
       <mesh
         geometry={nodes.turntable.geometry}
@@ -619,6 +722,7 @@ export default function Model({ ...props }) {
           >
             <div
               onClick={() => handleActiveToolTip("music")}
+              style={{ cursor: "pointer" }}
               className="w-5 h-5 rounded-full bg-orange-500"
             ></div>
           </Html>
@@ -630,6 +734,7 @@ export default function Model({ ...props }) {
           >
             <div
               onClick={() => handleActiveToolTip("music")}
+              style={{ cursor: "pointer" }}
               className="w-5 h-5 rounded-full bg-blue-600"
             ></div>
           </Html>
@@ -644,14 +749,12 @@ export default function Model({ ...props }) {
           {ROOM_OBJECTS.music.description}
         </Html>
       </mesh>
-
       <mesh
         geometry={nodes.vinyls.geometry}
         material={bakedTexture}
         position={[-1.32, 0.38, -1.76]}
       />
       {/* up | turntable  */}
-
       {/* down | apple homepod */}
       <mesh
         geometry={nodes.appleHomepod.geometry}
@@ -666,6 +769,7 @@ export default function Model({ ...props }) {
           >
             <div
               onClick={() => handleActiveToolTip("tvStand")}
+              style={{ cursor: "pointer" }}
               className="w-5 h-5 rounded-full bg-orange-500"
             ></div>
           </Html>
@@ -677,6 +781,7 @@ export default function Model({ ...props }) {
           >
             <div
               onClick={() => handleActiveToolTip("tvStand")}
+              style={{ cursor: "pointer" }}
               className="w-5 h-5 rounded-full bg-blue-600"
             ></div>
           </Html>
@@ -696,9 +801,7 @@ export default function Model({ ...props }) {
         material={bakedTexture}
         position={[-0.864, 0.416, -1.856]}
       />
-
       {/* up | apple homepod */}
-
       {/* down | f1 lego */}
       <mesh
         geometry={nodes.legoF1.geometry}
@@ -714,6 +817,7 @@ export default function Model({ ...props }) {
           >
             <div
               onClick={() => handleActiveToolTip("f1")}
+              style={{ cursor: "pointer" }}
               className="w-5 h-5 rounded-full bg-orange-500"
             ></div>
           </Html>
@@ -725,6 +829,7 @@ export default function Model({ ...props }) {
           >
             <div
               onClick={() => handleActiveToolTip("f1")}
+              style={{ cursor: "pointer" }}
               className="w-5 h-5 rounded-full bg-blue-600"
             ></div>
           </Html>
@@ -739,7 +844,6 @@ export default function Model({ ...props }) {
           {ROOM_OBJECTS.mcLaren.description}
         </Html>
       </mesh>
-
       <mesh
         castShadow
         receiveShadow
@@ -750,7 +854,6 @@ export default function Model({ ...props }) {
         scale={[0.045, 0.022, 0.045]}
       />
       {/* up | f1 lego */}
-
       {/* down | catan */}
       <mesh
         geometry={nodes.catan.geometry}
@@ -765,6 +868,7 @@ export default function Model({ ...props }) {
           >
             <div
               onClick={() => handleActiveToolTip("catan")}
+              style={{ cursor: "pointer" }}
               className="w-5 h-5 rounded-full bg-orange-500 z-0"
             ></div>
           </Html>
@@ -776,6 +880,7 @@ export default function Model({ ...props }) {
           >
             <div
               onClick={() => handleActiveToolTip("catan")}
+              style={{ cursor: "pointer" }}
               className="w-5 h-5 rounded-full bg-blue-600 z-0"
             ></div>
           </Html>
@@ -791,19 +896,16 @@ export default function Model({ ...props }) {
         </Html>
       </mesh>
       {/* up | catan */}
-
       <mesh
         geometry={nodes.paintingsPacea.geometry}
         material={bakedTexture}
       ></mesh>
-
       <mesh
         geometry={nodes.ikeaTable.geometry}
         material={bakedTexture}
         position={[-0.224, 0.023, 0.408]}
         rotation={[0.132, -0.445, -0.121]}
       ></mesh>
-
       <mesh
         geometry={nodes.legoVan.geometry}
         material={bakedTexture}
@@ -825,6 +927,7 @@ export default function Model({ ...props }) {
           >
             <div
               onClick={() => handleActiveToolTip("boardgames")}
+              style={{ cursor: "pointer" }}
               className="w-5 h-5 rounded-full bg-orange-500"
             ></div>
           </Html>
@@ -836,6 +939,7 @@ export default function Model({ ...props }) {
           >
             <div
               onClick={() => handleActiveToolTip("boardgames")}
+              style={{ cursor: "pointer" }}
               className="w-5 h-5 rounded-full bg-blue-600"
             ></div>
           </Html>
@@ -850,7 +954,6 @@ export default function Model({ ...props }) {
           {ROOM_OBJECTS.boardgames.description}
         </Html>
       </mesh>
-
       <mesh
         geometry={nodes.oziCat.geometry}
         material={bakedTexture}
@@ -865,6 +968,7 @@ export default function Model({ ...props }) {
           >
             <div
               onClick={() => handleActiveToolTip("ozi")}
+              style={{ cursor: "pointer" }}
               className="w-5 h-5 rounded-full bg-orange-500"
             ></div>
           </Html>
@@ -876,6 +980,7 @@ export default function Model({ ...props }) {
           >
             <div
               onClick={() => handleActiveToolTip("ozi")}
+              style={{ cursor: "pointer" }}
               className="w-5 h-5 rounded-full bg-blue-600"
             ></div>
           </Html>
@@ -890,7 +995,6 @@ export default function Model({ ...props }) {
           {ROOM_OBJECTS.ozi.description}
         </Html>
       </mesh>
-
       <mesh
         geometry={nodes.floor.geometry}
         material={bakedTexture}
@@ -906,8 +1010,8 @@ export default function Model({ ...props }) {
         geometry={nodes.enetriShelf001.geometry}
         material={bakedTexture}
         position={[-2.021, 1.75, -0.526]}
+        visible={true}
       />
-
       <mesh
         geometry={nodes.ikeaDoubleShelf008.geometry}
         material={bakedTexture}
@@ -921,6 +1025,7 @@ export default function Model({ ...props }) {
           >
             <div
               onClick={() => handleActiveToolTip("chessboard")}
+              style={{ cursor: "pointer" }}
               className="w-5 h-5 rounded-full bg-orange-500"
             ></div>
           </Html>
@@ -932,6 +1037,7 @@ export default function Model({ ...props }) {
           >
             <div
               onClick={() => handleActiveToolTip("chessboard")}
+              style={{ cursor: "pointer" }}
               className="w-5 h-5 rounded-full bg-blue-600"
             ></div>
           </Html>
@@ -951,13 +1057,11 @@ export default function Model({ ...props }) {
         material={bakedTexture}
         position={[0.257, 0.184, -1.606]}
       />
-
       <mesh
         geometry={nodes.ikeaSimpleShelf.geometry}
         material={bakedTexture}
         position={[-0.311, 0.2, -1.772]}
       />
-
       <mesh
         geometry={nodes.blueLamp.geometry}
         material={bakedTexture}
@@ -968,7 +1072,6 @@ export default function Model({ ...props }) {
         material={bakedTexture}
         position={[1.794, 0.053, 0.129]}
       >
-        {" "}
         {activeToolTip != "desk" ? (
           <Html
             center
@@ -977,6 +1080,7 @@ export default function Model({ ...props }) {
           >
             <div
               onClick={() => handleActiveToolTip("desk")}
+              style={{ cursor: "pointer" }}
               className="w-5 h-5 rounded-full bg-orange-500"
             ></div>
           </Html>
@@ -988,6 +1092,7 @@ export default function Model({ ...props }) {
           >
             <div
               onClick={() => handleActiveToolTip("desk")}
+              style={{ cursor: "pointer" }}
               className="w-5 h-5 rounded-full bg-blue-600"
             ></div>
           </Html>
@@ -1016,13 +1121,11 @@ export default function Model({ ...props }) {
         material={bakedTexture}
         position={[-0.464, 0.004, -0.497]}
       />
-
       <mesh
         geometry={nodes.darts001.geometry}
         material={bakedTexture}
         position={[1.973, 1.836, 0.744]}
       >
-        {" "}
         {activeToolTip != "pacea" ? (
           <Html
             center
@@ -1031,6 +1134,7 @@ export default function Model({ ...props }) {
           >
             <div
               onClick={() => handleActiveToolTip("pacea")}
+              style={{ cursor: "pointer" }}
               className="w-5 h-5 rounded-full bg-orange-500"
             ></div>
           </Html>
@@ -1042,6 +1146,7 @@ export default function Model({ ...props }) {
           >
             <div
               onClick={() => handleActiveToolTip("pacea")}
+              style={{ cursor: "pointer" }}
               className="w-5 h-5 rounded-full bg-blue-600"
             ></div>
           </Html>
@@ -1053,9 +1158,8 @@ export default function Model({ ...props }) {
           wrapperClass={activeToolTip === "pacea" ? "label" : "hidden"}
         >
           {ROOM_OBJECTS.pacea.description}
-        </Html>{" "}
+        </Html>
       </mesh>
-
       <mesh
         geometry={nodes.sectionPlanes002.geometry}
         material={bakedTexture}
@@ -1066,7 +1170,6 @@ export default function Model({ ...props }) {
         material={bakedTexture}
         position={[1.973, 1.836, 0.744]}
       />
-
       <mesh
         castShadow
         receiveShadow
@@ -1083,6 +1186,7 @@ export default function Model({ ...props }) {
           >
             <div
               onClick={() => handleActiveToolTip("table")}
+              style={{ cursor: "pointer" }}
               className="w-5 h-5 rounded-full bg-orange-500"
             ></div>
           </Html>
@@ -1094,6 +1198,7 @@ export default function Model({ ...props }) {
           >
             <div
               onClick={() => handleActiveToolTip("table")}
+              style={{ cursor: "pointer" }}
               className="w-5 h-5 rounded-full bg-blue-600"
             ></div>
           </Html>
@@ -1124,13 +1229,13 @@ export default function Model({ ...props }) {
         geometry={nodes.monstera.geometry}
         material={bakedTexture}
         position={[1.587, 0.222, 1.673]}
+        material-side={THREE.DoubleSide}
       />
       <mesh
         geometry={nodes.coffeeShader.geometry}
         material={bakedTexture}
         position={[-1.771, 0.586, 1.355]}
       />
-
       <mesh
         geometry={nodes.emissivePaintingLamp.geometry}
         material={bakedTexture}
@@ -1142,7 +1247,6 @@ export default function Model({ ...props }) {
         position={[-1.306, 0.712, -1.98]}
         rotation={[0, 0, -1.58]}
       />
-
       <mesh
         geometry={nodes.dartsArrows.geometry}
         material={bakedTexture}
@@ -1162,6 +1266,7 @@ export default function Model({ ...props }) {
           >
             <div
               onClick={() => handleActiveToolTip("donut")}
+              style={{ cursor: "pointer" }}
               className="w-5 h-5 rounded-full bg-orange-500"
             ></div>
           </Html>
@@ -1173,6 +1278,7 @@ export default function Model({ ...props }) {
           >
             <div
               onClick={() => handleActiveToolTip("donut")}
+              style={{ cursor: "pointer" }}
               className="w-5 h-5 rounded-full bg-blue-600"
             ></div>
           </Html>
@@ -1192,7 +1298,6 @@ export default function Model({ ...props }) {
         material={bakedTexture}
         position={[1.989, 0.12, 2.14]}
       />
-
       <mesh
         geometry={nodes.blueLampLight.geometry}
         material={bakedTexture}
@@ -1203,7 +1308,6 @@ export default function Model({ ...props }) {
         material={bakedTexture}
         position={[1.854, 2.636, -0.503]}
       />
-
       <mesh
         geometry={nodes.lamp.geometry}
         material={bakedTexture}

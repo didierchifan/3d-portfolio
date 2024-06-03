@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo } from "react";
+import { useRef } from "react";
 import { CameraControls, Center, Sparkles } from "@react-three/drei";
 
 import Model from "./Model";
@@ -9,10 +9,12 @@ import Lights from "./Lights";
 import { Perf } from "r3f-perf";
 
 export default function Experience() {
+  const cameraControlsRef = useRef();
   return (
     <>
       <Perf />
       <CameraControls
+        ref={cameraControlsRef}
         makeDefault={true}
         //up-down limits
         minPolarAngle={-0.5}
@@ -34,8 +36,9 @@ export default function Experience() {
       />
 
       <Lights />
+
       <Center>
-        <Model />
+        <Model cameraControlsRef={cameraControlsRef} />
       </Center>
     </>
   );

@@ -88,7 +88,7 @@ export default function Lights() {
         width={1.0}
         height={0.5}
         intensity={tvLight}
-        color={"#0099ff"}
+        color={"#ffffff"}
         position-x={-0.08}
         position-y={-0.11}
         position-z={-1.92}
@@ -106,6 +106,7 @@ export default function Lights() {
         color={"#ff8f00"}
       />
 
+      {/* akja light */}
       <pointLight
         position-x={-1.88}
         position-y={0.9}

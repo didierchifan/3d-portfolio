@@ -176,3 +176,12 @@ body {
   z-index: 0;
   position: relative;
 }
+
+.htmlTvScreen iframe {
+  width: 1920px;
+  height: 2000px;
+  border: none;
+  background: #000000;
+  overflow: hidden;
+  z-index: 0;
+}

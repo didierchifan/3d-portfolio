@@ -47,14 +47,14 @@ export default function Navigation() {
   return (
     <div
       style={{ backgroundColor: "#181818" }}
-      className="flex flex-col justify-center items-center gap-10"
+      className="flex flex-col gap-10"
     >
       {/* about me + shaders sections */}
-      <div className="mb-auto self-start flex flex-col gap-10 mt-10">
+      <div className="mb-auto self-start flex flex-col gap-10 mt-10 pl-5">
         <div
           // style={{ backgroundColor: "#F5F5F7" }}
           data-tooltip="About me"
-          className="tooltip-container bg-white hover:bg-orange-500 w-12 h-12 ml-8 mr-3 rounded-md flex items-center justify-center "
+          className="tooltip-container bg-white hover:bg-orange-500 w-12 h-12 rounded-md flex items-center justify-center "
         >
           <Link href="./about-me">
             <AboutMe fill="#181818" className="w-10 h-10" />
@@ -63,7 +63,7 @@ export default function Navigation() {
         <div
           // style={{ backgroundColor: "#F5F5F7" }}
           data-tooltip="Shaders"
-          className="tooltip-container bg-white hover:bg-orange-500 w-12 h-12 ml-8 mr-3 rounded-md flex items-center justify-center"
+          className="tooltip-container bg-white hover:bg-orange-500 w-12 h-12 rounded-md flex items-center justify-center"
         >
           <Link href="./shaders-library">
             <Shaders fill="#181818" className="w-10 h-10" />
@@ -72,52 +72,54 @@ export default function Navigation() {
       </div>
 
       {/* experience tweaks */}
-      <div
-        // style={{ backgroundColor: "#F5F5F7" }}
-        data-tooltip="Light Switch"
-        className="tooltip-container bg-white hover:bg-orange-500 w-12 h-12 ml-8 mr-8 rounded-md flex items-center justify-center"
-        onClick={handleAmbientLightClick}
-      >
-        <MainLight fill="#181818" className="w-10 h-10" />
-      </div>
-      <div
-        // style={{ backgroundColor: "#F5F5F7" }}
-        data-tooltip="Donut Lamp"
-        className="tooltip-container bg-white hover:bg-orange-500 w-12 h-12 ml-8 mr-8 rounded-md flex items-center justify-center "
-        onClick={handleDonutLightClick}
-      >
-        <DonutLight fill="#181818" className="w-10 h-10" />
-      </div>
-      <div
-        // style={{ backgroundColor: "#F5F5F7" }}
-        data-tooltip="Akja Lamp"
-        className="tooltip-container bg-white hover:bg-orange-500 w-12 h-12 ml-8 mr-8 rounded-md flex items-center justify-center "
-        onClick={handleLampLight}
-      >
-        <AckjaLight fill="#181818" className="w-10 h-10" />
-      </div>
-      <div
-        // style={{ backgroundColor: "#F5F5F7" }}
-        data-tooltip="Wall Lamp"
-        className="tooltip-container bg-white hover:bg-orange-500 w-12 h-12 ml-8 mr-8 rounded-md flex items-center justify-center "
-        onClick={handlePaintLampLight}
-      >
-        <WallLight fill="#181818" className="w-10 h-10 " />
-      </div>
-      <div
-        // style={{ backgroundColor: "#F5F5F7" }}
-        data-tooltip="TV Ambient Light"
-        className="tooltip-container bg-white hover:bg-orange-500 w-12 h-12 ml-8 mr-8 rounded-md flex items-center justify-center "
-        onClick={handleTvLight}
-      >
-        <TvLight fill="#181818" className="w-10 h-10 " />
-      </div>
-      <div
-        // style={{ backgroundColor: "#F5F5F7" }}
-        data-tooltip="Have a sit!"
-        className="tooltip-container bg-white hover:bg-orange-500 w-12 h-12 ml-8 mr-8 mb-8 rounded-md flex items-center justify-center"
-      >
-        <ChairNav fill="#181818" className="w-10 h-10 " />
+      <div className="flex flex-col gap-10 pl-5 pr-5">
+        <div
+          // style={{ backgroundColor: "#F5F5F7" }}
+          data-tooltip="Light Switch"
+          className="tooltip-container bg-white hover:bg-orange-500 w-12 h-12 rounded-md flex items-center justify-center"
+          onClick={handleAmbientLightClick}
+        >
+          <MainLight fill="#181818" className="w-10 h-10" />
+        </div>
+        <div
+          // style={{ backgroundColor: "#F5F5F7" }}
+          data-tooltip="Donut Lamp"
+          className="tooltip-container bg-white hover:bg-orange-500 w-12 h-12  rounded-md flex items-center justify-center "
+          onClick={handleDonutLightClick}
+        >
+          <DonutLight fill="#181818" className="w-10 h-10" />
+        </div>
+        <div
+          // style={{ backgroundColor: "#F5F5F7" }}
+          data-tooltip="Akja Lamp"
+          className="tooltip-container bg-white hover:bg-orange-500 w-12 h-12  rounded-md flex items-center justify-center "
+          onClick={handleLampLight}
+        >
+          <AckjaLight fill="#181818" className="w-10 h-10" />
+        </div>
+        <div
+          // style={{ backgroundColor: "#F5F5F7" }}
+          data-tooltip="Wall Lamp"
+          className="tooltip-container bg-white hover:bg-orange-500 w-12 h-12  rounded-md flex items-center justify-center "
+          onClick={handlePaintLampLight}
+        >
+          <WallLight fill="#181818" className="w-10 h-10 " />
+        </div>
+        <div
+          // style={{ backgroundColor: "#F5F5F7" }}
+          data-tooltip="TV Ambient Light"
+          className="tooltip-container bg-white hover:bg-orange-500 w-12 h-12  rounded-md flex items-center justify-center "
+          onClick={handleTvLight}
+        >
+          <TvLight fill="#181818" className="w-10 h-10 " />
+        </div>
+        <div
+          // style={{ backgroundColor: "#F5F5F7" }}
+          data-tooltip="Have a sit!"
+          className="tooltip-container bg-white hover:bg-orange-500 w-12 h-12 mb-8 rounded-md flex items-center justify-center"
+        >
+          <ChairNav fill="#181818" className="w-10 h-10 " />
+        </div>
       </div>
     </div>
   );
