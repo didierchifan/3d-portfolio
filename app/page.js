@@ -50,6 +50,15 @@ export default function Homepage() {
         >
           <span style={{ color: "#181818", fontWeight: "bold" }}>CV</span>
         </div>
+        <div
+          style={{ right: "1.25rem" }}
+          className="w-36 h-20 fixed bottom-2 right-10 rounded-md text-xs text-justify"
+        >
+          <p>
+            Build with Next.js, React Three Fiber and Blender 3D model: Didier
+            Chifan Sound: Vincent Iulian{" "}
+          </p>
+        </div>
       </div>
     </>
   );
