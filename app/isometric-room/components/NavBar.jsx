@@ -8,6 +8,8 @@ import WallLight from "../navigation-icons/wall-lamp.svg";
 import TvLight from "../navigation-icons/tv.svg";
 import ChairNav from "../navigation-icons/chair.svg";
 
+// import sound from "../navigation-icons/test-loop.wav";
+
 export default function Navigation() {
   const handleAmbientLightClick = (e) => {
     const event = new CustomEvent("mainLightButtonClick", {
@@ -43,6 +45,10 @@ export default function Navigation() {
     });
     window.dispatchEvent(event);
   };
+
+  function play() {
+    new Audio(sound).play();
+  }
 
   return (
     <div
@@ -117,6 +123,7 @@ export default function Navigation() {
           // style={{ backgroundColor: "#F5F5F7" }}
           data-tooltip="Have a sit!"
           className="tooltip-container bg-white hover:bg-orange-500 w-12 h-12 mb-8 rounded-md flex items-center justify-center"
+          onClick={play}
         >
           <ChairNav fill="#181818" className="w-10 h-10 " />
         </div>

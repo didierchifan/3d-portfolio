@@ -65,27 +65,29 @@ export default function ShaderCard({ name, description, image, link }) {
         className="absolute inset-4 bg-black rounded-2xl shadow-lg flex flex-col justify-between"
       >
         {/* background image */}
-        <div
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-          }}
-        >
-          <Image
-            alt="shader-name"
-            fill
-            src={image}
+        <Link href={link}>
+          <div
             style={{
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-              borderRadius: "1rem",
+              position: "absolute",
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
             }}
-          />
-        </div>
+          >
+            <Image
+              alt="shader-name"
+              fill
+              src={image}
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+                borderRadius: "1rem",
+              }}
+            />
+          </div>
+        </Link>
 
         {/* title and description */}
         <div className="absolute top-4 left-4 right-4">

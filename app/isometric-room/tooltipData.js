@@ -34,7 +34,7 @@ export const ROOM_OBJECTS = {
       Eames Style Lobby Chair
       Poldina Pro Lamp
     `,
-    buttonPosition: [-0.2, 0.8, -0.33],
+    buttonPosition: [-0.2, 0.88, -0.33],
     tooltipPosition: [-0.2, 1.25, -0.25],
   },
 

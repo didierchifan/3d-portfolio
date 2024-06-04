@@ -1,9 +1,13 @@
 import { useEffect, useState, useMemo, useRef } from "react";
 
+import { useHelper } from "@react-three/drei";
+
 import * as THREE from "three";
 import useLeva from "./useLeva";
 
 export default function Lights() {
+  const lightRef = useRef();
+  useHelper(lightRef, THREE.RectAreaLightHelper, "red");
   // painting spotlight
   const spotlight = useMemo(() => new THREE.SpotLight("#ffffff"), []);
 
@@ -85,6 +89,7 @@ export default function Lights() {
 
       {/* tv ambient light */}
       <rectAreaLight
+        ref={lightRef}
         width={1}
         height={0.5}
         intensity={tvLight}

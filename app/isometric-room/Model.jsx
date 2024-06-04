@@ -11,8 +11,8 @@ import {
   shaderMaterial,
 } from "@react-three/drei";
 import { ROOM_OBJECTS } from "./tooltipData";
-
-import { ChairContext } from "./context";
+import ShadersVideo from "./components/VideoTv";
+import { useControls } from "leva";
 
 // custom hook for texture loading
 function useLoadedTexture(textureUrl) {
@@ -25,6 +25,11 @@ function useLoadedTexture(textureUrl) {
 }
 
 export default function Model({ cameraControlsRef, ...props }) {
+  // const { rotationX, rotationY, rotationZ } = useControls({
+  //   rotationX: { value: Math.PI, min: 0, max: 2 * Math.PI, step: 0.001 },
+  //   rotationY: { value: Math.PI, min: 0, max: 2 * Math.PI, step: 0.001 },
+  //   rotationZ: { value: Math.PI, min: 0, max: 2 * Math.PI, step: 0.001 },
+  // });
   //loading the model
   const { nodes, materials } = useGLTF(
     "/isometric-room/3d-model/room-components.glb"
@@ -38,8 +43,9 @@ export default function Model({ cameraControlsRef, ...props }) {
   const paintingTexture = useTexture("/isometric-room/3d-model/irlo.webp");
 
   //cv texture on ipad
-  const cvImage = useTexture("/isometric-room/3d-model/cv.webp");
+  const cvImage = useTexture("/isometric-room/3d-model/cv.jpg");
   cvImage.colorSpace = THREE.SRGBColorSpace;
+  cvImage.flipY = "true";
 
   //active tooltip state
   const [activeToolTip, setActiveTooltip] = useState(null);
@@ -117,39 +123,46 @@ export default function Model({ cameraControlsRef, ...props }) {
 
   return (
     <group {...props} dispose={null}>
-      {/* tv screen shader material  */}
+      {/* TV SCREEN - custom plane */}
       <mesh position={[-0.257, 1.248, -1.838]}>
         <planeGeometry args={[1.29, 0.78]} />
-        <meshBasicMaterial />
-
-        {/* <Html
-          transform
-          distanceFactor={0.107}
-          position={[0, 0, 0]}
-          rotation={[0, 0, 0]}
-          style={{
-            width: "1920px",
-            height: "1150px",
-            transform: "scale(2.5)",
-          }}
-        >
-          <div
-            className="hidden md:block"
-            style={{ width: "100%", height: "100%", zIndex: "-1" }}
-          >
-            <iframe
-              style={{
-                width: "100%",
-                height: "100%",
-                border: "none",
-                zIndex: "-1",
-              }}
-              src="https://didierchifan.com/shaders-library"
-            />
-          </div>
-        </Html> */}
+        <ShadersVideo src={"./video/text-video.webm"} />
       </mesh>
-      {/* down | irlo painting */}
+
+      {/* monitor - custom plane */}
+      <mesh position={[1.74, 1.19, -0.502]} rotation={[0, -Math.PI / 2, 0]}>
+        <planeGeometry args={[0.6, 0.35]} />
+        <meshBasicMaterial color={"red"} />
+      </mesh>
+
+      {/* ipad */}
+
+      {/* ipad screen - custom plane */}
+      <mesh position={[1.444, 0.997, -1]} rotation={[1.57, 1.19, 6.28]}>
+        <planeGeometry args={[0.273, 0.213]} />
+        <meshBasicMaterial map={cvImage} side={THREE.DoubleSide} />
+      </mesh>
+
+      {/* screen */}
+      <mesh
+        geometry={nodes.ipadScreen.geometry}
+        position={[1.444, 0.997, -1]}
+        rotation={[0, 0, 1.194]}
+        visible={false}
+      >
+        <meshBasicMaterial color={"blue"} />
+      </mesh>
+
+      {/* geometry */}
+      <mesh
+        geometry={nodes.appleIpad.geometry}
+        material={bakedTexture}
+        position={[1.444, 0.997, -1]}
+        rotation={[0, 0, 1.194]}
+        visible={true}
+      />
+
+      {/* irlo painting - custom texture */}
       <mesh
         castShadow
         receiveShadow
@@ -254,28 +267,9 @@ export default function Model({ cameraControlsRef, ...props }) {
           material={new THREE.MeshBasicMaterial({ color: "black" })}
           position={[1.773, 0.943, -0.502]}
           rotation={[0, 1.571, 0]}
-        >
-          {/* <Html
-            transform
-            wrapperClass="htmlScreen"
-            style={{
-              width: "1280px",
-              height: "720px",
-              border: "none",
-              borderRadius: "10px",
-              background: "#000000",
-              overflow: "hidden",
-              zIndex: -9999,
-            }}
-            distanceFactor={0.19}
-            position={[0.0, 0.241, -0.03]}
-            rotation-x={Math.PI}
-            rotation-z={Math.PI}
-            flipZ={true} // Changed to a boolean instead of a string
-          >
-            <iframe src="https://didierchifan.com/" />
-          </Html> */}
-        </mesh>
+          visible={false}
+        />
+
         {/* displays with iframe on it */}
         <mesh
           geometry={nodes.appleMacbookpro.geometry}
@@ -283,23 +277,7 @@ export default function Model({ cameraControlsRef, ...props }) {
           position={[1.449, 0.782, -0.502]}
           rotation={[0, -1.571, 0]}
         />
-        {/* ipad */}
-        <mesh
-          geometry={nodes.ipadScreen.geometry}
-          position={[1.444, 0.997, -1]}
-          rotation={[0, 0, 1.194]}
-          visible={true}
-        >
-          <meshStandardMaterial map={cvImage} />
-        </mesh>
 
-        <mesh
-          geometry={nodes.appleIpad.geometry}
-          material={bakedTexture}
-          position={[1.444, 0.997, -1]}
-          rotation={[0, 0, 1.194]}
-          visible={true}
-        />
         {/* <mesh
           geometry={nodes.appleIphone.geometry}
           material={bakedTexture}
