@@ -9,11 +9,12 @@ import {
   NoToneMapping,
   ReinhardToneMapping,
 } from "three";
+import BackButton from "@/app/isometric-room/components/BackButton";
+import { Leva } from "leva";
 
 export default function Shader() {
   return (
     <>
-      <div className="text-7xl text-center pt-10">WOBBLE SPHERE</div>
       <Canvas
         gl={{ toneMapping: NoToneMapping }}
         shadows
@@ -29,6 +30,8 @@ export default function Shader() {
         {/* <color args={["#181818"]} attach="background" /> */}
         <Experience />
       </Canvas>
+      <Leva collapsed />
+      <BackButton />
     </>
   );
 }

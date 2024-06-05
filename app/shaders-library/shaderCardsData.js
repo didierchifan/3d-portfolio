@@ -81,12 +81,12 @@ export const shadersData = [
     image: "/shaders-cards/halftone.webp",
   },
 
-  {
-    name: "Modified materials",
-    description: "moving face",
-    link: "/shaders-library/modified-materials",
-    image: "/shaders-cards/modified-materials.webp",
-  },
+  // {
+  //   name: "Modified materials",
+  //   description: "moving face",
+  //   link: "/shaders-library/modified-materials",
+  //   image: "/shaders-cards/modified-materials.webp",
+  // },
 
   // {
   //   name: "Galaxy-generator",
@@ -102,10 +102,10 @@ export const shadersData = [
     image: "/shaders-cards/sliced-model.webp",
   },
 
-  {
-    name: "Earth",
-    description: "Beautiful sphere, brimming with life",
-    link: "/shaders-library/earth",
-    image: "/shaders-cards/earth.webp",
-  },
+  // {
+  //   name: "Earth",
+  //   description: "Beautiful sphere, brimming with life",
+  //   link: "/shaders-library/earth",
+  //   image: "/shaders-cards/earth.webp",
+  // },
 ];

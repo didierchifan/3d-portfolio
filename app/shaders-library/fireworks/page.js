@@ -5,6 +5,8 @@ import Experience from "./Experience";
 import useStore from "./stores/useStore";
 
 import { useEffect } from "react";
+import BackButton from "@/app/isometric-room/components/BackButton";
+import { Leva } from "leva";
 
 export default function Shader() {
   const setClicked = useStore((state) => state.setClicked);
@@ -15,7 +17,6 @@ export default function Shader() {
 
   return (
     <>
-      <div className="text-7xl text-center pt-10">FIREWORKS</div>
       <Canvas
         onPointerDown={() => setClicked(true)}
         onPointerUp={() => setClicked(false)}
@@ -29,6 +30,11 @@ export default function Shader() {
       >
         <Experience />
       </Canvas>
+      <Leva collapsed />
+      <BackButton />
+      <div className="fixed top-10 right-8  ">
+        <h1>click to sparkle</h1>
+      </div>
     </>
   );
 }

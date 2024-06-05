@@ -2,11 +2,12 @@
 
 import { Canvas } from "@react-three/fiber";
 import Experience from "./Experience";
+import BackButton from "@/app/isometric-room/components/BackButton";
+import { Leva } from "leva";
 
 export default function Shader() {
   return (
     <>
-      <div className="text-7xl text-center pt-10">LIGHTS SHADING</div>
       <Canvas
         style={{
           position: "fixed",
@@ -18,6 +19,8 @@ export default function Shader() {
       >
         <Experience />
       </Canvas>
+      <Leva collapsed />
+      <BackButton />
     </>
   );
 }

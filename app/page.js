@@ -22,7 +22,7 @@ export default function Homepage() {
       </Head>
 
       {/* wrapper div */}
-      <div className="flex h-screen">
+      <div className="md:flex flex-row h-screen">
         <Navigation />
         <div className="flex-grow">
           <Canvas
@@ -46,13 +46,15 @@ export default function Homepage() {
         </div>
         <div
           style={{ right: "1.25rem" }}
-          className="fixed top-10 bg-white hover:bg-orange-500 w-12 h-12 rounded-md flex items-center justify-center"
+          className=" hidden md:fixed top-10 bg-white hover:bg-orange-500 w-12 h-12 rounded-md flex items-center justify-center"
         >
           <span style={{ color: "#181818", fontWeight: "bold" }}>CV</span>
         </div>
         <div
           style={{ right: "1.25rem" }}
-          className="w-36 h-20 fixed bottom-2 right-10 rounded-md text-xs text-justify"
+          className="
+          md: fixed w-36 h-20 bottom-2 right-10 rounded-md text-xs text-justify
+          "
         >
           <p>
             Build with Next.js, React Three Fiber and Blender 3D model: Didier
@@ -63,3 +65,4 @@ export default function Homepage() {
     </>
   );
 }
+// fixed w-36 h-20 top-6 left-6 rounded-md text-xs text-justify

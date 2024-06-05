@@ -9,10 +9,11 @@ import {
   ReinhardToneMapping,
 } from "three";
 
+import { Leva } from "leva";
+import BackButton from "@/app/isometric-room/components/BackButton";
 export default function Shader() {
   return (
     <>
-      <div className="text-7xl text-center pt-10">HALFTONE SHADING</div>
       <Canvas
         gl={{ toneMapping: NoToneMapping }}
         flat
@@ -26,6 +27,8 @@ export default function Shader() {
       >
         <Experience />
       </Canvas>
+      <Leva collapsed />
+      <BackButton />
     </>
   );
 }

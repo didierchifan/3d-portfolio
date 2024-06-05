@@ -39,11 +39,11 @@ export function Model(props) {
     }
   });
 
-  const { color } = useControls({
-    color: {
-      value: "#ffffff",
-    },
-  });
+  // const { color } = useControls({
+  //   color: {
+  //     value: "#ffffff",
+  //   },
+  // });
 
   return (
     <group {...props} dispose={null}>
@@ -53,7 +53,7 @@ export function Model(props) {
         receiveShadow
         geometry={nodes.Suzanne.geometry}
       >
-        <shadingMaterial ref={monkeyMaterial} uColor={color} />
+        <shadingMaterial ref={monkeyMaterial} uColor={"#ffffff"} />
       </mesh>
     </group>
   );

@@ -5,11 +5,7 @@ import { shaderMaterial, CameraControls, Center } from "@react-three/drei";
 import useGuiControls from "./hooks/useGuiControls";
 import { useFrame, extend, useThree } from "@react-three/fiber";
 
-import { useControls } from "leva";
-
 import { useEffect, useMemo, useRef } from "react";
-import { random } from "gsap";
-import { color } from "framer-motion";
 
 import galaxyVertexShader from "../../shaders-glsl/galaxy/vertex.glsl";
 import galaxyFragmentShader from "../../shaders-glsl/galaxy/fragment.glsl";

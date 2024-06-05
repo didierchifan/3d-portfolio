@@ -43,7 +43,7 @@ export default function Model({ cameraControlsRef, ...props }) {
   const paintingTexture = useTexture("/isometric-room/3d-model/irlo.webp");
 
   //cv texture on ipad
-  const cvImage = useTexture("/isometric-room/3d-model/cv.jpg");
+  const cvImage = useTexture("/isometric-room/3d-model/ipad-resume.jpg");
   cvImage.colorSpace = THREE.SRGBColorSpace;
   cvImage.flipY = "true";
 

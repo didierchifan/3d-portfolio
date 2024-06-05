@@ -8,11 +8,12 @@ import {
   NoToneMapping,
   ReinhardToneMapping,
 } from "three";
+import BackButton from "@/app/isometric-room/components/BackButton";
+import { Leva } from "leva";
 
 export default function Shader() {
   return (
     <>
-      <div className="text-7xl text-center pt-10">GALAXY</div>
       <Canvas
         //no tone mapping has to be set to override the default R3f tonemapping
         gl={{ toneMapping: NoToneMapping }}
@@ -23,9 +24,14 @@ export default function Shader() {
           width: "100%",
           height: "100%",
         }}
+        camera={{
+          position: [0, 2, 4],
+        }}
       >
         <Experience />
       </Canvas>
+      <Leva collapsed />
+      <BackButton />
     </>
   );
 }

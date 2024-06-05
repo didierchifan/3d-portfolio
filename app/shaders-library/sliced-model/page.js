@@ -9,11 +9,11 @@ import {
   NoToneMapping,
   ReinhardToneMapping,
 } from "three";
+import BackButton from "@/app/isometric-room/components/BackButton";
 
 export default function Shader() {
   return (
     <>
-      <div className="text-7xl text-center pt-10">SLICED MODEL</div>
       <Canvas
         gl={{ toneMapping: NoToneMapping }}
         shadows
@@ -24,10 +24,14 @@ export default function Shader() {
           width: "100%",
           height: "100%",
         }}
+        camera={{
+          position: [0, 1, 8],
+        }}
       >
         {/* <color args={["#181818"]} attach="background" /> */}
         <Experience />
       </Canvas>
+      <BackButton />
     </>
   );
 }
