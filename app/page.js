@@ -13,16 +13,18 @@ import {
 
 import Experience from "./isometric-room/Experience";
 import Navigation from "./isometric-room/components/NavBar";
-import MobileNavBar from "./isometric-room/components/MobileNavBar";
+
 import LoadingScreen from "./isometric-room/components/LoadingScreen";
 import useMediaQuery from "./isometric-room/components/useQuery";
+import MobileNavBar from "./isometric-room/components/MobileNavBar";
+import MobileNavTopBar from "./isometric-room/components/MobileNavTopBar";
 
 export default function Homepage() {
   // @TODO Add an useEffect withouth a dependency so that you render the loading component once.
   // however if you come back to the homepage and this renders again, you can always set a session storage variable and check it
 
   const isMobile = useMediaQuery("(max-width: 768px)");
-  console.log(isMobile);
+
   return (
     <>
       <Head>
@@ -30,7 +32,9 @@ export default function Homepage() {
       </Head>
       {/* <LoadingScreen /> */}
       {/* wrapper div */}
-      <div className="flex flex-row h-screen">
+
+      <div className="flex flex-col md:flex-row h-screen">
+        {isMobile ? <MobileNavTopBar /> : <></>}
         {isMobile ? <MobileNavBar /> : <Navigation />}
         <div className="flex-grow">
           <Canvas
@@ -46,7 +50,7 @@ export default function Homepage() {
               near: 0.1,
               far: 100,
               position: [-2.5, 1, 2.5],
-              zoom: 200,
+              zoom: isMobile ? 60 : 200,
             }}
           >
             <Experience />
@@ -54,7 +58,7 @@ export default function Homepage() {
         </div>
         <div
           style={{ right: "1.25rem" }}
-          className=" fixed top-10 bg-white hover:bg-orange-500 w-12 h-12 rounded-md flex items-center justify-center"
+          className="fixed top-10 bg-white hover:bg-orange-500 w-12 h-12 rounded-md flex items-center justify-center"
         >
           <span style={{ color: "#181818", fontWeight: "bold" }}>CV</span>
         </div>
