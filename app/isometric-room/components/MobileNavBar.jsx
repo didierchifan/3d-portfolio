@@ -59,7 +59,7 @@ export default function Navigation() {
       {/* experience tweaks */}
       <div
         style={{ backgroundColor: "#181818" }}
-        className="flex gap-10 pl-5 pr-5 order-2 pb-5 pt-5"
+        className="flex gap-10 pl-5 pr-5 order-2 pb-5 pt-5 z-10"
       >
         <div
           // style={{ backgroundColor: "#F5F5F7" }}
