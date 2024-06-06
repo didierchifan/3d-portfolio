@@ -9,7 +9,7 @@ export default function MobileNavTopBar() {
   return (
     <div
       style={{ minWidth: "100vw", backgroundColor: "#181818" }}
-      className="fixed top-0 p-5 flex gap-10 z-10 justify-between"
+      className="fixed top-0 flex gap-10 justify-between p-5 z-10"
     >
       <div className="flex gap-10">
         <div
