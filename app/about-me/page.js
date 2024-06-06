@@ -9,7 +9,9 @@ import Footer from "../shaders-library/components/Footer";
 export default function AboutMe() {
   return (
     <div>
-      <div className=" lg:flex">
+      {/* text on mobile */}
+      <div className="min-h-screen w-full bg-orange-600"></div>
+      <div className="flex">
         {/* 2d canvas api */}
         <div
           style={{ backgroundColor: "#181818" }}
@@ -18,9 +20,6 @@ export default function AboutMe() {
           <Text />
           <Scene />
         </div>
-
-        {/* text on mobile */}
-        <div className="min-h-screen w-full bg-orange-600 lg:hidden"></div>
 
         {/* react three fiber canvas */}
         <div
