@@ -24,6 +24,7 @@ export default function Homepage() {
   // however if you come back to the homepage and this renders again, you can always set a session storage variable and check it
 
   const isMobile = useMediaQuery("(max-width: 768px)");
+  console.log(isMobile);
 
   return (
     <>
@@ -34,7 +35,7 @@ export default function Homepage() {
       {/* wrapper div */}
 
       <div className="flex flex-col md:flex-row h-screen">
-        {isMobile ? <MobileNavTopBar /> : <></>}
+        {/* {isMobile ? <MobileNavTopBar /> : <></>} */}
         {isMobile ? <MobileNavBar /> : <Navigation />}
         <div className="flex-grow">
           <Canvas
