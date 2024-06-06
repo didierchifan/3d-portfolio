@@ -73,7 +73,7 @@ export default function Model({ cameraControlsRef, ...props }) {
         cameraControlsRef.current?.setPosition(-6.9, 2.3, -0.5, true);
       });
     }
-  }, [isSeated]);
+  }, [isSeated, cameraControlsRef]);
 
   const handleClickChair = () => {
     setIsSeated(!isSeated);
@@ -105,6 +105,14 @@ export default function Model({ cameraControlsRef, ...props }) {
       document.removeEventListener("click", handleDocumentClick);
     };
   }, [activeToolTip]);
+
+  useEffect(() => {
+    document.addEventListener("sitOnTheChair", handleClickChair);
+    console.log("event added");
+    return () => {
+      document.removeEventListener("sitOnTheChair", handleClickChair);
+    };
+  }, [isSeated]);
 
   //chair animation
   const topChairRef = useRef();

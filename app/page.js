@@ -13,17 +13,25 @@ import {
 
 import Experience from "./isometric-room/Experience";
 import Navigation from "./isometric-room/components/NavBar";
+import MobileNavBar from "./isometric-room/components/MobileNavBar";
+import LoadingScreen from "./isometric-room/components/LoadingScreen";
+import useMediaQuery from "./isometric-room/components/useQuery";
 
 export default function Homepage() {
+  // @TODO Add an useEffect withouth a dependency so that you render the loading component once.
+  // however if you come back to the homepage and this renders again, you can always set a session storage variable and check it
+
+  const isMobile = useMediaQuery("(max-width: 768px)");
+  console.log(isMobile);
   return (
     <>
       <Head>
         <link rel="icon" href="/favicon.png" />
       </Head>
-
+      {/* <LoadingScreen /> */}
       {/* wrapper div */}
       <div className="flex flex-row h-screen">
-        <Navigation />
+        {isMobile ? <MobileNavBar /> : <Navigation />}
         <div className="flex-grow">
           <Canvas
             gl={{ toneMapping: NoToneMapping }}
