@@ -65,7 +65,8 @@ export default function Homepage() {
         <div
           style={{ right: "1.25rem" }}
           className="
-          fixed w-36 h-20 bottom-2 right-10 rounded-md text-xs text-justify
+          hidden
+          md:fixed w-36 h-20 bottom-2 right-10 rounded-md text-xs text-justify
           "
         >
           <p>
