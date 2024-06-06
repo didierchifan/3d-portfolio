@@ -58,8 +58,8 @@ export default function Navigation() {
 
       {/* experience tweaks */}
       <div
-        style={{ backgroundColor: "#181818" }}
-        className="flex gap-10 p-5 order-2 z-10"
+        style={{ backgroundColor: "#181818", minWidth: "100vw" }}
+        className="fixed align-center justify-between bottom-0 p-5 flex gap-10 order-2 z-10"
       >
         <div
           // style={{ backgroundColor: "#F5F5F7" }}

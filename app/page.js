@@ -35,7 +35,7 @@ export default function Homepage() {
       {/* wrapper div */}
 
       <div className="flex flex-col md:flex-row h-screen">
-        {/* {isMobile ? <MobileNavTopBar /> : <></>} */}
+        {isMobile ? <MobileNavTopBar /> : <></>}
         {isMobile ? <MobileNavBar /> : <Navigation />}
         <div className="flex-grow">
           <Canvas
@@ -57,24 +57,30 @@ export default function Homepage() {
             <Experience />
           </Canvas>
         </div>
-        <div
-          style={{ right: "1.25rem" }}
-          className="fixed top-10 bg-white hover:bg-orange-500 w-12 h-12 rounded-md flex items-center justify-center"
-        >
-          <span style={{ color: "#181818", fontWeight: "bold" }}>CV</span>
-        </div>
-        <div
-          style={{ right: "1.25rem" }}
-          className="
-          hidden
-          md:fixed w-36 h-20 bottom-2 right-10 rounded-md text-xs text-justify
-          "
-        >
-          <p>
-            Build with Next.js, React Three Fiber and Blender 3D model: Didier
-            Chifan Sound: Vincent Iulian{" "}
-          </p>
-        </div>
+        {isMobile ? (
+          <></>
+        ) : (
+          <div
+            style={{ right: "1.25rem" }}
+            className="fixed top-10 bg-white hover:bg-orange-500 w-12 h-12 rounded-md flex items-center justify-center"
+          >
+            <span style={{ color: "#181818", fontWeight: "bold" }}>CV</span>
+          </div>
+        )}
+
+        {isMobile ? (
+          <></>
+        ) : (
+          <div
+            style={{ right: "1.25rem" }}
+            className="fixed w-36 h-20 bottom-2 right-10 rounded-md text-xs text-justify"
+          >
+            <p>
+              Build with Next.js, React Three Fiber and Blender 3D model: Didier
+              Chifan Sound: Vincent Iulian{" "}
+            </p>
+          </div>
+        )}
       </div>
     </>
   );
