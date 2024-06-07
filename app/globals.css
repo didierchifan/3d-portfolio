@@ -126,7 +126,7 @@ body {
 
 /* tooltip */
 .tooltip-container {
-  position: relative; /* Required for absolute positioning of the tooltip */
+  position: relative;
 }
 
 .tooltip-container::after {
@@ -144,6 +144,10 @@ body {
   transition: opacity 0.3s;
   pointer-events: none;
   z-index: 9;
+}
+
+.tooltip-left::after {
+  transform: translate(-150%, -50%);
 }
 
 .tooltip-container:hover::after {

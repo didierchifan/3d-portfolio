@@ -55,6 +55,14 @@ export default function Navigation() {
   return (
     <>
       {/* web nav */}
+
+      <div
+        style={{ right: "1.25rem", position: "absolute", zIndex: 1 }}
+        data-tooltip="Download CV"
+        className="tooltip-container tooltip-left top-10 right-10 bg-white hover:bg-orange-500 w-12 h-12 rounded-md flex items-center justify-center"
+      >
+        <span style={{ color: "#181818", fontWeight: "bold" }}>CV</span>
+      </div>
       <div
         style={{ backgroundColor: "#181818" }}
         className="flex flex-col gap-10"
@@ -82,7 +90,7 @@ export default function Navigation() {
         </div>
 
         {/* experience tweaks */}
-        <div className="flex flex-col gap-10 pl-5 pr-5">
+        <div className="flex flex-col gap-10 pl-5 pr-5 mb-10">
           <div
             // style={{ backgroundColor: "#F5F5F7" }}
             data-tooltip="Light Switch"
@@ -126,7 +134,7 @@ export default function Navigation() {
           <div
             // style={{ backgroundColor: "#F5F5F7" }}
             data-tooltip="Have a sit!"
-            className="tooltip-container bg-white hover:bg-orange-500 w-12 h-12 mb-8 rounded-md flex items-center justify-center"
+            className="tooltip-container bg-white hover:bg-orange-500 w-12 h-12 rounded-md flex items-center justify-center"
             onClick={() => {
               console.log("clickcassss");
               document.dispatchEvent(takeASeatEvent);

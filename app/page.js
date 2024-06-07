@@ -3,6 +3,8 @@
 import Link from "next/link";
 import Head from "next/head";
 
+import { useState } from "react";
+
 import { Canvas } from "@react-three/fiber";
 import {
   ACESFilmicToneMapping,
@@ -24,7 +26,6 @@ export default function Homepage() {
   // however if you come back to the homepage and this renders again, you can always set a session storage variable and check it
 
   const isMobile = useMediaQuery("(max-width: 768px)");
-  console.log(isMobile);
 
   return (
     <>
@@ -57,16 +58,17 @@ export default function Homepage() {
             <Experience />
           </Canvas>
         </div>
-        {isMobile ? (
+        {/* {isMobile ? (
           <></>
         ) : (
           <div
             style={{ right: "1.25rem" }}
-            className="fixed top-10 bg-white hover:bg-orange-500 w-12 h-12 rounded-md flex items-center justify-center"
+            data-tooltip="Download CV"
+            className="tooltip-container tooltip-left fixed top-10 bg-white hover:bg-orange-500 w-12 h-12 rounded-md flex items-center justify-center"
           >
             <span style={{ color: "#181818", fontWeight: "bold" }}>CV</span>
           </div>
-        )}
+        )} */}
 
         {isMobile ? (
           <></>

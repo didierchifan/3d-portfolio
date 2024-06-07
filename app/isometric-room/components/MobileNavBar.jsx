@@ -58,7 +58,7 @@ export default function Navigation() {
       >
         <div
           // style={{ backgroundColor: "#F5F5F7" }}
-          data-tooltip="Light Switch"
+
           className="tooltip-container bg-white hover:bg-orange-500 w-12 h-12 rounded-md flex items-center justify-center"
           onClick={handleAmbientLightClick}
         >
@@ -66,7 +66,7 @@ export default function Navigation() {
         </div>
         <div
           // style={{ backgroundColor: "#F5F5F7" }}
-          data-tooltip="Donut Lamp"
+
           className="tooltip-container bg-white hover:bg-orange-500 w-12 h-12  rounded-md flex items-center justify-center "
           onClick={handleDonutLightClick}
         >
@@ -74,7 +74,7 @@ export default function Navigation() {
         </div>
         <div
           // style={{ backgroundColor: "#F5F5F7" }}
-          data-tooltip="Akja Lamp"
+
           className="tooltip-container bg-white hover:bg-orange-500 w-12 h-12  rounded-md flex items-center justify-center "
           onClick={handleLampLight}
         >
@@ -82,7 +82,7 @@ export default function Navigation() {
         </div>
         <div
           // style={{ backgroundColor: "#F5F5F7" }}
-          data-tooltip="Wall Lamp"
+
           className="tooltip-container bg-white hover:bg-orange-500 w-12 h-12  rounded-md flex items-center justify-center "
           onClick={handlePaintLampLight}
         >
@@ -90,7 +90,7 @@ export default function Navigation() {
         </div>
         <div
           // style={{ backgroundColor: "#F5F5F7" }}
-          data-tooltip="TV Ambient Light"
+
           className="tooltip-container bg-white hover:bg-orange-500 w-12 h-12  rounded-md flex items-center justify-center "
           onClick={handleTvLight}
         >

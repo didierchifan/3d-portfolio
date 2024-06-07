@@ -2,24 +2,36 @@
 import Experience from "./Experience";
 import Scene from "./Scene";
 import Text from "./Text";
+import TextMobile from "./TextMobile.jsx";
 
 import { Canvas } from "@react-three/fiber";
 import Footer from "../shaders-library/components/Footer";
 
+import useMediaQuery from "../isometric-room/components/useQuery";
+
 export default function AboutMe() {
+  const isMobile = useMediaQuery("(max-width: 768px)");
+  console.log(isMobile);
   return (
     <div>
-      {/* text on mobile */}
-      <div className="min-h-screen w-full bg-orange-600"></div>
+      {/* text on mobile - without the 2d canvas */}
+      <div
+        style={{ backgroundColor: "#181818" }}
+        className="min-h-screen w-full md:hidden"
+      >
+        <TextMobile />
+      </div>
       <div className="flex">
         {/* 2d canvas api */}
-        <div
-          style={{ backgroundColor: "#181818" }}
-          className="hidden lg:flex w-1/2 h-screen items-center justify-center"
-        >
-          <Text />
-          <Scene />
-        </div>
+        {!isMobile && (
+          <div
+            style={{ backgroundColor: "#181818" }}
+            className="flex w-1/2 h-screen items-center justify-center"
+          >
+            <Text />
+            <Scene />
+          </div>
+        )}
 
         {/* react three fiber canvas */}
         <div
