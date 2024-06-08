@@ -12,7 +12,7 @@ import Link from "next/link";
 
 export default function Text() {
   return (
-    <div className="flex flex-col text-l items-center text-white text-center pt-14 pl-10 pr-10 h-screen">
+    <div className="flex flex-col text-l justify-between items-center text-white text-center pt-20 pb-20 pl-10 pr-10 h-screen">
       <p>
         As a <span className="font-bold">FRONTEND DEVELOPER</span> with a strong
         background in <span className="font-bold">DESIGN</span> and{" "}
@@ -20,7 +20,7 @@ export default function Text() {
         perspective to front-end development. 
       </p>
       <div>
-        <div className="flex flex-col gap-5 mt-10">
+        <div className="flex flex-col gap-5">
           <div className="flex gap-16 justify-between items-center">
             <div className="flex flex-col gap-2">
               <React className="w-12 h-12" />
@@ -64,13 +64,13 @@ export default function Text() {
       </div>
 
       <Link href="https://www.linkedin.com/in/didierchifan/">
-        <div className="flex justify-center mt-16">
+        <div className="flex justify-center items-center">
           <div className="bg-white text-black py-2 px-4 rounded-full cursor-pointer hover:bg-orange-600 font-medium">
             yes, I need a unicorn
           </div>
         </div>
       </Link>
-      <Unicorn className="w-14 h-14 mt-8" />
+      <Unicorn className="w-14 h-14" />
     </div>
   );
 }
