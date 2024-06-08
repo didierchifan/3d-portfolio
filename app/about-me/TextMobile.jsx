@@ -12,7 +12,7 @@ import Link from "next/link";
 
 export default function Text() {
   return (
-    <div className="flex flex-col text-l items-center text-white text-center pt-40 pl-10 pr-10">
+    <div className="flex flex-col text-l items-center text-white text-center pt-14 pl-10 pr-10 h-screen">
       <p>
         As a <span className="font-bold">FRONTEND DEVELOPER</span> with a strong
         background in <span className="font-bold">DESIGN</span> and{" "}
@@ -70,7 +70,7 @@ export default function Text() {
           </div>
         </div>
       </Link>
-      <Unicorn className="w-14 h-14 mt-4" />
+      <Unicorn className="w-14 h-14 mt-8" />
     </div>
   );
 }
