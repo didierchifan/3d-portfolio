@@ -5,7 +5,7 @@ import Text from "./Text";
 import TextMobile from "./TextMobile.jsx";
 
 import { Canvas } from "@react-three/fiber";
-import Footer from "../shaders-library/components/Footer";
+import Footer from "../components/Footer";
 
 import useMediaQuery from "../isometric-room/components/useQuery";
 

@@ -9,7 +9,7 @@ import { shadersData } from "./shaderCardsData";
 
 import HorizontalCarousel from "./components/HorizontalCarousel";
 import TextReveal from "./components/TextRevealWord";
-import Footer from "./components/Footer";
+import Footer from "../components/Footer";
 
 export default function Home() {
   return (

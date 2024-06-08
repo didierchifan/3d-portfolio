@@ -2,7 +2,7 @@
 
 import Blender from "./icons/blender.svg";
 import Figma from "./icons/figma.svg";
-import Next from "./icons/next.svg";
+import Next from "./icons/next-web.svg";
 import React from "./icons/react.svg";
 import Threejs from "./icons/threejs.svg";
 import Vercel from "./icons/vercel.svg";
@@ -25,9 +25,8 @@ export default function Text() {
           <Threejs className="w-12 h-12" />
           <p>react | three.js</p>
         </div>
-        <div className="flex gap-16 mt-10">
+        <div className="flex gap-16 mt-10 ">
           <Vercel className="w-12 h-12" />
-          {/* solve the next logo */}
           <Next className="w-12 h-12" />
           <p>vercel | next.js</p>
         </div>
