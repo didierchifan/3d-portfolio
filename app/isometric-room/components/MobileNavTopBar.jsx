@@ -29,12 +29,15 @@ export default function MobileNavTopBar() {
           atl="Didier Chifan resume for download"
           target="_blank"
         >
-          <div
-            style={{ right: "1.25rem", position: "absolute", zIndex: 1 }}
-            data-tooltip="Download CV"
-            className="tooltip-container tooltip-left top-10 right-10 bg-white hover:bg-orange-500 w-12 h-12 rounded-md flex items-center justify-center"
-          >
-            <span style={{ color: "#181818", fontWeight: "bold" }}>CV</span>
+          <div className="bg-white hover:bg-orange-500 w-12 h-12 rounded-md flex items-center justify-center">
+            <span
+              style={{
+                color: "#181818",
+                fontWeight: "bold",
+              }}
+            >
+              CV
+            </span>
           </div>
         </Link>
       </div>
