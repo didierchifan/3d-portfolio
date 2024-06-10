@@ -65,7 +65,7 @@ export default function Text() {
 
       <Link href="https://www.linkedin.com/in/didierchifan/">
         <div className="flex justify-center items-center">
-          <div className="bg-white bg-orange-600 py-2 px-4 rounded-full cursor-pointer hover:bg-white hover:text-black font-medium">
+          <div className="bg-white bg-orange-600 py-2 px-4 rounded-full cursor-pointer font-medium">
             CONTACT
           </div>
         </div>
