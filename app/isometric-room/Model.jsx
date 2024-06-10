@@ -140,7 +140,7 @@ export default function Model({ cameraControlsRef, ...props }) {
       {/* monitor - custom plane */}
       <mesh position={[1.74, 1.19, -0.502]} rotation={[0, -Math.PI / 2, 0]}>
         <planeGeometry args={[0.6, 0.35]} />
-        <meshBasicMaterial color={"red"} />
+        <meshBasicMaterial color={"black"} />
       </mesh>
 
       {/* ipad */}
@@ -236,7 +236,7 @@ export default function Model({ cameraControlsRef, ...props }) {
           visible={false}
         >
           <boxGeometry args={[0.7, 0.8, 1.2]} />
-          <meshStandardMaterial color={"red"} />
+          <meshStandardMaterial color={"black"} />
         </mesh>
 
         {/* macbook */}

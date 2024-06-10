@@ -55,14 +55,20 @@ export default function Navigation() {
   return (
     <>
       {/* web nav */}
-
-      <div
-        style={{ right: "1.25rem", position: "absolute", zIndex: 1 }}
-        data-tooltip="Download CV"
-        className="tooltip-container tooltip-left top-10 right-10 bg-white hover:bg-orange-500 w-12 h-12 rounded-md flex items-center justify-center"
+      <Link
+        href="https://drive.google.com/file/d/1HahMIX8tY6ao-LvL_BmYGU7sJRgr4P4Z/view"
+        atl="Didier Chifan resume for download"
+        target="_blank"
       >
-        <span style={{ color: "#181818", fontWeight: "bold" }}>CV</span>
-      </div>
+        <div
+          style={{ right: "1.25rem", position: "absolute", zIndex: 1 }}
+          data-tooltip="Download CV"
+          className="tooltip-container tooltip-left top-10 right-10 bg-white hover:bg-orange-500 w-12 h-12 rounded-md flex items-center justify-center"
+        >
+          <span style={{ color: "#181818", fontWeight: "bold" }}>CV</span>
+        </div>
+      </Link>
+
       <div
         style={{ backgroundColor: "#181818" }}
         className="flex flex-col gap-10"
