@@ -7,13 +7,16 @@ import Fiverr from "./footer-icons/fiverr.svg";
 
 import Link from "next/link";
 
-export default function Content({ backgroundColor, color }) {
+import useMediaQuery from "../isometric-room/components/useQuery";
+
+export default function Content({ backgroundColor, color, fill }) {
+  const isMobile = useMediaQuery("(max-width: 768px)");
   return (
     <div
       style={{ backgroundColor }}
       className="py-8 px-12 h-full w-full flex flex-col justify-between"
     >
-      <Logos />
+      <Logos fill={fill} />
       <Section1 color={color} />
       <Section2 color={color} />
     </div>
@@ -30,7 +33,7 @@ const Section1 = ({ color }) => {
 
 const Section2 = ({ color }) => {
   return (
-    <div className="flex justify-between items-end">
+    <div className="pb-8 md:flex justify-between items-end">
       <h1 style={{ color }} className="text-[10vw] leading-[0.8] mt-10">
         DIDIER CHIFAN
       </h1>
@@ -59,16 +62,16 @@ const Nav = ({ color }) => {
   );
 };
 
-const Logos = () => {
+const Logos = ({ fill }) => {
   return (
-    <div className="flex gap-12 cursor-pointer">
+    <div className="flex flex-wrap pb-8 md: flex gap-12 cursor-pointer">
       <Link href="https://www.linkedin.com/in/didierchifan/" legacyBehavior>
         <a
           target="_blank"
           rel="noopener noreferrer"
           alt="didier chifan linked in page"
         >
-          <Linkedin className="w-12 h-12" />
+          <Linkedin style={{ fill: fill }} className="w-12 h-12" />
         </a>
       </Link>
 
@@ -78,7 +81,7 @@ const Logos = () => {
           rel="noopener noreferrer"
           alt="didier chifan github page"
         >
-          <Git className="w-12 h-12" />
+          <Git style={{ fill: fill }} className="w-12 h-12" />
         </a>
       </Link>
 
@@ -88,13 +91,13 @@ const Logos = () => {
           rel="noopener noreferrer"
           alt="didier chifan instagram page"
         >
-          <Instagram className="w-12 h-12" />
+          <Instagram style={{ fill: fill }} className="w-12 h-12" />
         </a>
       </Link>
 
       <Link href="https://x.com/ddrchf" legacyBehavior>
         <a target="_blank" rel="noopener noreferrer" alt="didier chifan X page">
-          <X className="w-12 h-12" />
+          <X style={{ fill: fill }} className="w-12 h-12" />
         </a>
       </Link>
 
@@ -104,7 +107,7 @@ const Logos = () => {
           rel="noopener noreferrer"
           alt="didier chifan behance page"
         >
-          <Behance className="w-12 h-12" />
+          <Behance style={{ fill: fill }} className="w-12 h-12" />
         </a>
       </Link>
 
@@ -117,7 +120,7 @@ const Logos = () => {
           rel="noopener noreferrer"
           alt="didier chifan fiverr page"
         >
-          <Fiverr className="w-12 h-12" />
+          <Fiverr style={{ fill: fill }} className="w-12 h-12" />
         </a>
       </Link>
     </div>

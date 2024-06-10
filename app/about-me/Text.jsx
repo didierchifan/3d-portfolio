@@ -38,10 +38,10 @@ export default function Text() {
       </div>
 
       <div className="flex items-center z-50 mt-24 gap-8">
-        <Unicorn className="w-14 h-14" />
+        {/* <Unicorn className="w-14 h-14" /> */}
         <Link href="https://www.linkedin.com/in/didierchifan/">
-          <div className="flex bg-white text-black py-2 px-4 rounded-full cursor-pointer hover:bg-orange-600 font-medium">
-            yes, I need a unicorn
+          <div className="flex bg-orange-600 text-white text-base py-2 px-4 rounded-full cursor-pointer font-medium hover:bg-white hover:text-black ">
+            CONTACT
           </div>
         </Link>
       </div>

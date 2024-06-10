@@ -19,7 +19,7 @@ export default function TextReveal() {
     <div className="flex justify-center items-center h-screen">
       <p
         ref={element}
-        className="text-xl lg:w-3/4 text-black text-5xl font-bold flex flex-wrap leading-none"
+        className="text-base p-10 md:text-3xl w-3/4 text-black  font-bold flex flex-wrap leading-none"
       >
         {words.map((word, i) => {
           const start = i / words.length;

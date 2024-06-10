@@ -2,9 +2,7 @@
 <svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 32">
   <defs>
     <style>
-      .cls-1 {
-        fill: url(#radial-gradient);
-      }
+   
     </style>
     <radialGradient id="radial-gradient" cx="-374.12" cy="500.63" fx="-374.12" fy="500.63" r="1" gradientTransform="translate(12336.63 16515.78) scale(32.92 -32.92)" gradientUnits="userSpaceOnUse">
       <stop offset="1" stop-color="#181818"/>
