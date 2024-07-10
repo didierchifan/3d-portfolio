@@ -21,6 +21,8 @@ import useMediaQuery from "./isometric-room/components/useQuery";
 import MobileNavBar from "./isometric-room/components/MobileNavBar";
 import MobileNavTopBar from "./isometric-room/components/MobileNavTopBar";
 
+import AmbientSound from "./isometric-room/components/AmbientSound";
+
 export default function Homepage() {
   // @TODO Add an useEffect withouth a dependency so that you render the loading component once.
   // however if you come back to the homepage and this renders again, you can always set a session storage variable and check it
@@ -29,6 +31,7 @@ export default function Homepage() {
 
   return (
     <>
+      {/* <AmbientSound /> */}
       <Head>
         <link rel="icon" href="/favicon.png" />
       </Head>
@@ -58,17 +61,6 @@ export default function Homepage() {
             <Experience />
           </Canvas>
         </div>
-        {/* {isMobile ? (
-          <></>
-        ) : (
-          <div
-            style={{ right: "1.25rem" }}
-            data-tooltip="Download CV"
-            className="tooltip-container tooltip-left fixed top-10 bg-white hover:bg-orange-500 w-12 h-12 rounded-md flex items-center justify-center"
-          >
-            <span style={{ color: "#181818", fontWeight: "bold" }}>CV</span>
-          </div>
-        )} */}
 
         {isMobile ? (
           <></>
@@ -87,4 +79,3 @@ export default function Homepage() {
     </>
   );
 }
-// fixed w-36 h-20 top-6 left-6 rounded-md text-xs text-justify

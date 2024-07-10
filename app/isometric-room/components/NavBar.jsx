@@ -8,7 +8,8 @@ import WallLight from "../navigation-icons/wall-lamp.svg";
 import TvLight from "../navigation-icons/tv.svg";
 import ChairNav from "../navigation-icons/chair.svg";
 
-// import sound from "../navigation-icons/test-loop.wav";
+import { useRef } from "react";
+import { useRouter } from "next/navigation";
 
 export default function Navigation() {
   const handleAmbientLightClick = (e) => {
@@ -48,9 +49,39 @@ export default function Navigation() {
 
   const takeASeatEvent = new Event("sitOnTheChair");
 
-  function play() {
-    new Audio(sound).play();
-  }
+  // sounds
+  const shadersSound = useRef(null);
+  const neon = useRef(null);
+  const router = useRouter();
+
+  // async sound + routing
+  const playOnClick = () => {
+    const audio = shadersSound.current;
+    console.log("button clicked");
+    if (audio) {
+      audio
+        .play()
+        .then(() => {
+          // Wait for the audio to finish playing
+          audio.onended = () => {
+            router.push("./shaders-library");
+          };
+        })
+        .catch((error) => console.log("Playback prevented:", error));
+    }
+  };
+
+  // simple sound on click
+  const playSound = () => {
+    const sound = neon.current;
+    if (sound) {
+      sound.play().catch((error) => console.log("Playback prevented ", error));
+    }
+  };
+
+  const handlePaintLampLightandPlaySound = (e) => {
+    handlePaintLampLight(e), playSound(e);
+  };
 
   return (
     <>
@@ -84,11 +115,18 @@ export default function Navigation() {
               <AboutMe fill="#181818" className="w-10 h-10" />
             </Link>
           </div>
+
+          {/* SHADERS LIBRARY ROUTER => async sound */}
           <div
             // style={{ backgroundColor: "#F5F5F7" }}
             data-tooltip="Shaders"
             className="tooltip-container bg-white hover:bg-orange-500 w-12 h-12 rounded-md flex items-center justify-center"
+            onClick={playOnClick}
           >
+            <audio ref={shadersSound}>
+              <source src="sounds/ambient.mp3" type="audio/wav" />
+              Your browser does not support the audio file.
+            </audio>
             <Link href="./shaders-library">
               <Shaders fill="#181818" className="w-10 h-10" />
             </Link>
@@ -125,8 +163,12 @@ export default function Navigation() {
             // style={{ backgroundColor: "#F5F5F7" }}
             data-tooltip="Wall Lamp"
             className="tooltip-container bg-white hover:bg-orange-500 w-12 h-12  rounded-md flex items-center justify-center "
-            onClick={handlePaintLampLight}
+            onClick={handlePaintLampLightandPlaySound}
           >
+            <audio ref={neon}>
+              <source src="sounds/neon.wav" type="audio/wav" />
+              Your browser does not support the audio file.
+            </audio>
             <WallLight fill="#181818" className="w-10 h-10 " />
           </div>
           <div
