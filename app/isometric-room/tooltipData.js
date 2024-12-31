@@ -3,7 +3,7 @@ export const ROOM_OBJECTS = {
   irlo: {
     id: 1,
     description: `
-      COPS AND GRAFITTI ARTISTS
+      COPS AND GRAFITTI ARTISTS 
       146 x 146 cm
       by IRLO - Romanian Contemporary Artist,
     `,
@@ -187,9 +187,12 @@ export const ROOM_OBJECTS = {
   enetriShelf: {
     id: 16,
     description: `
-      IKEA VINTAGE ENETRI SHELF
+      IKEA VINTAGE ENETRI SHELF 
+      <br/>
       IKEA ACKJA LAMP
+      <br/>
       PROJECT-PARA SCULPTURE
+      <br/>
       RANDOM BOOKS that I never finished reading
       `,
     buttonPosition: [0, 0.8, 0],

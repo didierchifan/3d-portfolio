@@ -13,6 +13,8 @@ import {
   useGLTF,
   Environment,
   useHelper,
+  Text3D,
+  Float,
 } from "@react-three/drei";
 import { useControls, folder } from "leva";
 
@@ -130,9 +132,52 @@ export default function Experience() {
         castShadow={true}
         shadow-mapSize={new THREE.Vector2(1024, 1024)}
         shadow-camera-far={15}
-        shadow-camera-normalBias={0.05}
+        shadow-camera-nor
+        malBias={0.05}
       />
+
       <Center>
+        <Float
+          speed={2} // Animation speed, defaults to 1
+          rotationIntensity={1} // XYZ rotation intensity, defaults to 1
+          floatIntensity={1} // Up/down float intensity, works like a multiplier with floatingRange,defaults to 1
+          floatingRange={[0.1, 0.5]} // Range of y-axis values the object will float within, defaults to [-0.1,0.1]
+        >
+          <group position={[-1.5, 4.2, 0]}>
+            <Text3D font="../fonts/helvetiker_regular.typeface.json">
+              NYE25
+              <meshNormalMaterial />
+            </Text3D>
+          </group>
+
+          <group position={[-1.5, 2.5, 0]}>
+            <Text3D font="../fonts/helvetiker_regular.typeface.json">
+              VINCENT IULIAN
+              <meshNormalMaterial />
+            </Text3D>
+          </group>
+
+          <group position={[-1.5, -4.2, 0]}>
+            <Text3D font="../fonts/helvetiker_regular.typeface.json">
+              BIGU
+              <meshNormalMaterial />
+            </Text3D>
+          </group>
+
+          <group position={[-1.5, -5.7, 0]}>
+            <Text3D font="../fonts/helvetiker_regular.typeface.json">
+              DIDIER
+              <meshNormalMaterial />
+            </Text3D>
+          </group>
+
+          <group position={[-1.5, -7.2, 0]}>
+            <Text3D font="../fonts/helvetiker_regular.typeface.json">
+              POLEAK
+              <meshNormalMaterial />
+            </Text3D>
+          </group>
+        </Float>
         <mesh receiveShadow castShadow geometry={geometry}>
           <CustomShaderMaterial
             baseMaterial={THREE.MeshPhysicalMaterial}
@@ -155,6 +200,7 @@ export default function Experience() {
             silent={true}
           />
         </mesh>
+
         {/* <mesh
           rotation={[0, Math.PI, 0]}
           position={[planePosition.x, planePosition.y, planePosition.z]}

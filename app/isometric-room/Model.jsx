@@ -472,7 +472,13 @@ export default function Model({ cameraControlsRef, ...props }) {
           distanceFactor={0.003}
           wrapperClass={activeToolTip === "enetri" ? "label" : "hidden"}
         >
-          {ROOM_OBJECTS.enetriShelf.description}
+          IKEA VINTAGE ENETRI SHELF
+          <br />
+          IKEA ACKJA LAMP
+          <br />
+          PROJECT-PARA SCULPTURE
+          <br />
+          RANDOM BOOKS that I never finished reading
         </Html>
       </mesh>
       <mesh

@@ -10,8 +10,41 @@ import ChairNav from "../navigation-icons/chair.svg";
 
 import { useRef } from "react";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 export default function Navigation() {
+  // button hover timeout
+  const buttonRefs = useRef([]);
+
+  useEffect(() => {
+    const timeouts = [];
+    const startEffect = setTimeout(() => {
+      buttonRefs.current.forEach((button, index) => {
+        if (!button) return;
+
+        // Temporarily change background color
+        const timeout1 = setTimeout(() => {
+          button.classList.remove("bg-white"); // Remove white background
+          button.classList.add("bg-orange-500"); // Add orange background
+
+          // Revert background color after 500ms
+          const timeout2 = setTimeout(() => {
+            button.classList.remove("bg-orange-500"); // Remove orange background
+            button.classList.add("bg-white"); // Reapply white background
+          }, 500); // Duration of orange background
+          timeouts.push(timeout2);
+        }, index * 500); // Delay for each button
+        timeouts.push(timeout1);
+      });
+    }, 2000); // Delay useEffect by 2 seconds
+
+    // Cleanup timeouts on component unmount
+    return () => {
+      clearTimeout(startEffect); // Clear the start delay
+      timeouts.forEach((timeout) => clearTimeout(timeout)); // Clear the inner timeouts
+    };
+  }, []);
+
   const handleAmbientLightClick = (e) => {
     const event = new CustomEvent("mainLightButtonClick", {
       detail: { mainLightClicked: true },
@@ -146,6 +179,7 @@ export default function Navigation() {
       >
         <div
           style={{ right: "1.25rem", position: "absolute", zIndex: 1 }}
+          ref={(el) => (buttonRefs.current[8] = el)}
           data-tooltip="Download CV"
           className="tooltip-container tooltip-left top-10 right-10 bg-white hover:bg-orange-500 w-12 h-12 rounded-md flex items-center justify-center"
         >
@@ -161,6 +195,7 @@ export default function Navigation() {
         <div className="mb-auto self-start flex flex-col gap-10 mt-10 pl-5">
           <div
             // style={{ backgroundColor: "#F5F5F7" }}
+            ref={(el) => (buttonRefs.current[0] = el)}
             data-tooltip="About me"
             className="tooltip-container bg-white hover:bg-orange-500 w-12 h-12 rounded-md flex items-center justify-center "
           >
@@ -172,6 +207,7 @@ export default function Navigation() {
           {/* SHADERS LIBRARY ROUTER => async sound */}
           <div
             // style={{ backgroundColor: "#F5F5F7" }}
+            ref={(el) => (buttonRefs.current[1] = el)}
             data-tooltip="Shaders"
             className="tooltip-container bg-white hover:bg-orange-500 w-12 h-12 rounded-md flex items-center justify-center"
             onClick={playOnClick}
@@ -190,6 +226,7 @@ export default function Navigation() {
         <div className="flex flex-col gap-10 pl-5 pr-5 mb-10">
           <div
             // style={{ backgroundColor: "#F5F5F7" }}
+            ref={(el) => (buttonRefs.current[2] = el)}
             data-tooltip="Light Switch"
             className="tooltip-container bg-white hover:bg-orange-500 w-12 h-12 rounded-md flex items-center justify-center"
             onClick={handleAmbientLightandPlaySound}
@@ -203,6 +240,7 @@ export default function Navigation() {
           </div>
           <div
             // style={{ backgroundColor: "#F5F5F7" }}
+            ref={(el) => (buttonRefs.current[3] = el)}
             data-tooltip="Donut Lamp"
             className="tooltip-container bg-white hover:bg-orange-500 w-12 h-12  rounded-md flex items-center justify-center "
             onClick={handleDonutLightandPlayDonut}
@@ -216,6 +254,7 @@ export default function Navigation() {
           </div>
           <div
             // style={{ backgroundColor: "#F5F5F7" }}
+            ref={(el) => (buttonRefs.current[4] = el)}
             data-tooltip="Akja Lamp"
             className="tooltip-container bg-white hover:bg-orange-500 w-12 h-12  rounded-md flex items-center justify-center "
             onClick={handleLampSoundandPlayLampSound}
@@ -228,6 +267,7 @@ export default function Navigation() {
           </div>
           <div
             // style={{ backgroundColor: "#F5F5F7" }}
+            ref={(el) => (buttonRefs.current[5] = el)}
             data-tooltip="Wall Lamp"
             className="tooltip-container bg-white hover:bg-orange-500 w-12 h-12  rounded-md flex items-center justify-center "
             onClick={handleWallLampAndPlayWallLampSound}
@@ -242,6 +282,7 @@ export default function Navigation() {
           <div
             // style={{ backgroundColor: "#F5F5F7" }}
             data-tooltip="TV Ambient Light"
+            ref={(el) => (buttonRefs.current[6] = el)}
             className="tooltip-container bg-white hover:bg-orange-500 w-12 h-12  rounded-md flex items-center justify-center "
             onClick={handleTvAndPlayTvSound}
           >
@@ -255,6 +296,7 @@ export default function Navigation() {
           <div
             // style={{ backgroundColor: "#F5F5F7" }}
             data-tooltip="Have a sit!"
+            ref={(el) => (buttonRefs.current[7] = el)}
             className="tooltip-container bg-white hover:bg-orange-500 w-12 h-12 rounded-md flex items-center justify-center"
             onClick={() => {
               document.dispatchEvent(takeASeatEvent);
