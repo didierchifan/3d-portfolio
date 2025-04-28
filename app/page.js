@@ -16,6 +16,7 @@ import MobileNavBar from "./isometric-room/components/MobileNavBar";
 import MobileNavTopBar from "./isometric-room/components/MobileNavTopBar";
 
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Analytics } from "@vercel/analytics/react";
 
 import AmbientSound from "./isometric-room/components/AmbientSound";
 
@@ -35,6 +36,7 @@ export default function Homepage() {
       {/* wrapper div */}
 
       <SpeedInsights />
+      <Analytics />
 
       <div className="flex flex-col md:flex-row h-screen">
         {isMobile ? <MobileNavTopBar /> : <></>}
