@@ -1,17 +1,11 @@
 "use client";
 
-import Link from "next/link";
 import Head from "next/head";
 
 import { useState } from "react";
 
 import { Canvas } from "@react-three/fiber";
-import {
-  ACESFilmicToneMapping,
-  CineonToneMapping,
-  NoToneMapping,
-  ReinhardToneMapping,
-} from "three";
+import { NoToneMapping } from "three";
 
 import Experience from "./isometric-room/Experience";
 import Navigation from "./isometric-room/components/NavBar";
@@ -20,6 +14,8 @@ import LoadingScreen from "./isometric-room/components/LoadingScreen";
 import useMediaQuery from "./isometric-room/components/useQuery";
 import MobileNavBar from "./isometric-room/components/MobileNavBar";
 import MobileNavTopBar from "./isometric-room/components/MobileNavTopBar";
+
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 import AmbientSound from "./isometric-room/components/AmbientSound";
 
@@ -37,6 +33,8 @@ export default function Homepage() {
       </Head>
       {/* <LoadingScreen /> */}
       {/* wrapper div */}
+
+      <SpeedInsights />
 
       <div className="flex flex-col md:flex-row h-screen">
         {isMobile ? <MobileNavTopBar /> : <></>}
